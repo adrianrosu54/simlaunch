@@ -1,17 +1,17 @@
 import * as ty from "./simulationTypes.ts";
+import { rockyPreset, type Preset } from "./Presets.ts";
 
 const GRAVITY: number = 9.81;
 
 export class BallisticModel {
     public config: ty.LauncherConfig;
+    public sim: ty.SimulationSetup;
     public state: ty.RobotState;
 
-    constructor(
-        config: ty.LauncherConfig = ty.rockyPreset.config,
-        state: ty.RobotState = ty.rockyPreset.state
-    ) {
-        this.config = config;
-        this.state = state;
+    constructor(preset: Preset = rockyPreset) {
+        this.config = preset.config;
+        this.sim = preset.sim;
+        this.state = preset.state;
     }
 
     /**
@@ -21,12 +21,12 @@ export class BallisticModel {
      * @returns impact position in meters
      */
     public simulate(input: ty.ControlInput): {x: number, y: number} {
-        const ts = this.config.timeStep;
+        const ts = this.sim.timeStep;
         const drag = this.config.dragFactor;
 
         let x = this.state.x;
         let y = this.state.y;
-        let z = this.config.launchHeight;
+        let z = this.sim.launchHeight;
 
         let vel = input.flywheelVelocity * this.config.launchFactor;
 
@@ -40,7 +40,7 @@ export class BallisticModel {
         let accY = -vel*velY * drag;
         let accZ = -GRAVITY - vel*velZ * drag;
 
-        while (z > this.config.impactHeight || velZ >= 0) {
+        while (z > this.sim.impactHeight || velZ >= 0) {
             vel = Math.sqrt(velX*velX + velY*velY + velZ*velZ);
 
             accX = -vel*velX * drag;

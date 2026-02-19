@@ -1,15 +1,14 @@
 import { expect, test, describe } from "vitest";
 import { BallisticModel } from "./BallisticModel.ts";
-import { rockyPreset } from "./simulationTypes.ts";
+import { rockyPreset } from "./Presets.ts";
 
 describe('Ballistic Model Logic', () => {
     test("Should have an accurate impact point.", () => {
-        const config = rockyPreset.config;
-        const state = rockyPreset.state;
-        state.x = 0;
-        state.y = 0;
+        const preset = rockyPreset;
+        preset.state.x = 0;
+        preset.state.y = 0;
 
-        const model = new BallisticModel(config, state);
+        const model = new BallisticModel(preset);
         const {x, y} = model.simulate({turretAngle: 0, flywheelVelocity: 1800});
 
         // console.log(config);
@@ -22,12 +21,11 @@ describe('Ballistic Model Logic', () => {
     })
 
     test("Should handle 45 degree angles correctly", () => {
-        const config = rockyPreset.config;
-        const state = rockyPreset.state;
-        state.x = 0;
-        state.y = 0;
+        const preset = rockyPreset;
+        preset.state.x = 0;
+        preset.state.y = 0;
 
-        const model = new BallisticModel(config, state);
+        const model = new BallisticModel(preset);
         const {x, y} = model.simulate({turretAngle: 45*Math.PI/180, flywheelVelocity: 1800});
 
         expect(y).toBeCloseTo(x, 6);
