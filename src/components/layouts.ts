@@ -24,7 +24,7 @@ export const sideViewLayout: Partial<Layout> = {
     hovermode: "closest",
 }
 
-export const config: Partial<Config> = {
+export const plotConfig: Partial<Config> = {
     responsive: true, 
     displayModeBar: false
 };
