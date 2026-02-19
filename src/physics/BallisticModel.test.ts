@@ -1,6 +1,6 @@
 import { expect, test, describe } from "vitest";
-import { BallisticModel } from "./BallisticModel.ts";
-import { rockyPreset } from "./Presets.ts";
+import BallisticModel from "./BallisticModel.ts";
+import { rockyPreset } from "./presets.ts";
 
 describe('Ballistic Model Logic', () => {
     test("Should have an accurate impact point.", () => {
@@ -18,7 +18,7 @@ describe('Ballistic Model Logic', () => {
         expect(y).toBeCloseTo(0, 6);
         expect(x).toBeLessThan(1.45);
         expect(x).toBeGreaterThan(1.40);
-    })
+    });
 
     test("Should handle 45 degree angles correctly", () => {
         const preset = rockyPreset;
@@ -29,5 +29,17 @@ describe('Ballistic Model Logic', () => {
         const {x, y} = model.simulate({turretAngle: 45*Math.PI/180, flywheelVelocity: 1800});
 
         expect(y).toBeCloseTo(x, 6);
-    })
+    });
+
+    test("Should log height information", () => {        
+        const model = new BallisticModel(rockyPreset);
+        
+        let maxHeight = 0;
+        model.simulate({turretAngle: 0, flywheelVelocity: 1800}, (state) => {
+            if (state.z > maxHeight) maxHeight = state.z;
+        });
+
+        // console.log(`Max height reached:\t${maxHeight} m`);
+        expect(maxHeight).toBeCloseTo(1.1, 1);
+    });
 })

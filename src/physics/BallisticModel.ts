@@ -1,9 +1,10 @@
 import * as ty from "./simulationTypes.ts";
-import { rockyPreset, type Preset } from "./Presets.ts";
+import { rockyPreset, type Preset } from "./presets.ts";
+import type { SimulationLogger } from "./logger.ts";
 
 const GRAVITY: number = 9.81;
 
-export class BallisticModel {
+export default class BallisticModel {
     public config: ty.LauncherConfig;
     public sim: ty.SimulationSetup;
     public state: ty.RobotState;
@@ -18,9 +19,13 @@ export class BallisticModel {
      * Simulate the projectile trajectory
      * 
      * @param input control parameters of turret heading and flywheel velocity
+     * @param logger optional logging function for projectile state
      * @returns impact position in meters
      */
-    public simulate(input: ty.ControlInput): {x: number, y: number} {
+    public simulate(
+        input: ty.ControlInput,
+        logger?: SimulationLogger
+    ): {x: number, y: number} {
         const ts = this.sim.timeStep;
         const drag = this.config.dragFactor;
 
@@ -40,6 +45,14 @@ export class BallisticModel {
         let accY = -vel*velY * drag;
         let accZ = -GRAVITY - vel*velZ * drag;
 
+        let time = 0;
+        if (logger)
+            logger({
+                time, x, y, z, 
+                velX, velY, velZ, 
+                accX, accY, accZ
+            });
+
         while (z > this.sim.impactHeight || velZ >= 0) {
             vel = Math.sqrt(velX*velX + velY*velY + velZ*velZ);
 
@@ -47,13 +60,22 @@ export class BallisticModel {
             accY = -vel*velY * drag;
             accZ = -GRAVITY - vel*velZ * drag;
 
-            velX += accX * ts;            
-            velY += accY * ts;            
-            velZ += accZ * ts;            
+            velX += accX * ts;
+            velY += accY * ts;
+            velZ += accZ * ts;
 
             x += velX * ts;
             y += velY * ts;
             z += velZ * ts;
+
+            if (logger) {
+                time += ts;
+                logger({
+                    time, x, y, z,
+                    velX, velY, velZ,
+                    accX, accY, accZ
+                });
+            }
         }
 
         return {x, y};
