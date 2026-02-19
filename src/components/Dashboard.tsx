@@ -26,7 +26,7 @@ export default function Dashboard() {
   }, [model, input]);
 
   return (
-    <section>
+    <section className="max-w-360 bg-slate-900">
       <Plot
         data={[
           {
@@ -34,9 +34,18 @@ export default function Dashboard() {
             y: simData.map(p => p.height),
             type: "scatter",
             mode: "lines",
+            name: "Predicted trajectory",
+            line: {
+              color: "#2563eb",
+              width: 2,
+              shape: "spline"
+            },
           }
         ]}
-        layout={ sideViewLayout } config={ config } className="min-h-100"
+        layout={ sideViewLayout }
+        config={ config }
+        style={{height: "100%"}}
+        className="max-h-200"
       />
     </section>
   );

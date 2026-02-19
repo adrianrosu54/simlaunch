@@ -11,13 +11,7 @@ function App() {
             <h1 className="text-2xl font-bold text-center">FTC Decode Launcher Simulation</h1>
         </header>
         <div className="flex flex-row justify-center h-full" id="content">
-          <main className='max-w-340 bg-slate-800'>
-            <section>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit aut eum eos odio nesciunt dolorum quae ducimus assumenda beatae sit! Hic vero ab tempora provident voluptatem consectetur quia quaerat accusamus.</p>
-            </section>
-            <Dashboard/>
-
-          </main>
+          <Dashboard/>
         </div>
         <footer className="p-1 bg-slate-900 border-t-4 border-amber-700">
             <h2 className="text-right font-bold">Team #19075 Clockworks</h2>
