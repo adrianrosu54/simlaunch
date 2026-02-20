@@ -11,9 +11,9 @@ import SidePlots from "./SidePlots.tsx";
 import Controls from "./Controls.tsx";
 
 export default function Dashboard() {
-  const [config, setConfig]         = useState<LauncherConfig>(rockyPreset.config);
-  const [sim, setSim]               = useState<SimulationSetup>(rockyPreset.sim);
-  const [robotState, setRobotState] = useState<RobotState>(rockyPreset.state);
+  const [config]      = useState<LauncherConfig>(rockyPreset.config);
+  const [sim]         = useState<SimulationSetup>(rockyPreset.sim);
+  const [robotState]  = useState<RobotState>(rockyPreset.state);
 
   const [input, setInput] = useState<ControlInput>({turretAngle: 45*Math.PI/180, flywheelVelocity: 1800});
 
