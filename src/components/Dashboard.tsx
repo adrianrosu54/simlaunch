@@ -3,8 +3,10 @@ import { useMemo, useState } from "react";
 import type { LauncherConfig, ControlInput, SimulationSetup, RobotState } from "../physics/simulationTypes.ts";
 import { sidePlotLogger, type SidePlotData } from "../utils/plotData.ts";
 import BallisticModel from "../physics/BallisticModel.ts";
-import SidePlots from "./SidePlots.tsx";
 import { rockyPreset } from "../physics/presets.ts";
+
+import SidePlots from "./SidePlots.tsx";
+import FlywheelSlider from "./FlywheelSlider.tsx";
 
 export default function Dashboard() {
   const [config, setConfig]         = useState<LauncherConfig>(rockyPreset.config);
@@ -22,8 +24,12 @@ export default function Dashboard() {
   }, [config, sim, robotState, input]);
 
   return (
-    <main className="max-w-360 bg-slate-900">
+    <main className="relative max-w-360 w-full bg-slate-900">
       <SidePlots simulationData={data}/>
+      <FlywheelSlider min={1000} max={4200}
+        value={input.flywheelVelocity}
+        onChange={(value) => setInput({...input, flywheelVelocity: value})}
+      />
     </main>
   );
 }

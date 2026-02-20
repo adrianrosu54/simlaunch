@@ -1,0 +1,118 @@
+import { useState, useRef, useEffect, useCallback } from 'react';
+
+type RadialSliderProps = {
+  min: number;
+  max: number;
+  value: number;
+  onChange: (value: number) => void;
+  label?: string;
+}
+
+export default function FlywheelSlider({
+  min,
+  max,
+  value,
+  onChange,
+  label = "Flywheel RPM"
+}: RadialSliderProps) {
+  const svgRef = useRef<SVGSVGElement>(null);
+  const [uiValue, setUiValue] = useState(value);
+  const [isDragging, setIsDragging] = useState(false);
+
+  // const cx = 100;
+  // const cy = 100;
+  const r = 80;
+  const circumference = Math.PI * r;
+
+  const updateValue = useCallback((clientX: number, clientY: number) => {
+    if (!svgRef.current) return;
+
+    const rect = svgRef.current.getBoundingClientRect();
+    const x = clientX - (rect.left + rect.width / 2);
+    const y = clientY - (rect.top + rect.height); // center at bottom (semicircle)
+
+    const angle = Math.atan2(y, x); 
+    
+    // normalize to a percentage
+    let pct = (angle + Math.PI) / Math.PI;
+    // clamp
+    if (pct < 0) pct = (pct > -0.5) ? 1 : 0;
+    if (pct > 1) pct = (pct < 1.5) ? 1 : 0;
+
+    const newValue = Math.round(pct * (max - min) + min);
+    setUiValue(newValue);
+  }, [max, min]);
+
+  // Global listeners for dragging outside the SVG
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => isDragging && updateValue(e.clientX, e.clientY);
+    const handleTouchMove = (e: TouchEvent) => isDragging && updateValue(e.touches[0].clientX, e.touches[0].clientY);
+    const stopDragging = () => {
+      setIsDragging(false);
+      onChange(uiValue);
+    }
+
+    if (isDragging) {
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseup', stopDragging);
+      window.addEventListener('touchmove', handleTouchMove, { passive: false });
+      window.addEventListener('touchend', stopDragging);
+    }
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', stopDragging);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', stopDragging);
+    };
+  }, [isDragging, updateValue, uiValue, onChange]);
+
+  const pct = (uiValue - min) / (max - min);
+  const dashOffset = circumference * (1 - pct);
+
+  // "dynamic" colors
+  const color = pct < 0.4 ? '#84cc16' : pct < 0.7 ? '#eab308' : '#ef4444';
+
+  return (
+    <div className="absolute bottom-0 flex flex-col items-center p-6 w-80">
+      <div className="relative w-full" style={{ height: '150px' }}>
+        <svg
+          ref={svgRef}
+          viewBox="0 0 200 110"
+          className="w-full cursor-pointer touch-none"
+          onMouseDown={() => setIsDragging(true)}
+          onTouchStart={() => setIsDragging(true)}
+        >
+          {/* background arc */}
+          <path
+            d={`M 20,100 A 80,80 0 0 1 180,100`}
+            fill="none"
+            stroke="#1e293b"
+            strokeWidth="12"
+            strokeLinecap="round"
+          />
+          {/* progress arc */}
+          <path
+            d={`M 20,100 A 80,80 0 0 1 180,100`}
+            fill="none"
+            stroke={color}
+            strokeWidth="12"
+            strokeLinecap="round"
+            strokeDasharray={circumference}
+            strokeDashoffset={dashOffset}
+            className="transition-all duration-150 ease-out"
+          />
+        </svg>
+
+        {/* Value Overlay */}
+        <div className="absolute bottom-3 inset-x-0 flex flex-col items-center pointer-events-none">
+          <span className="text-4xl font-mono font-black text-white italic tracking-tighter" style={{ textShadow: `0 0 15px ${color}66` }}>
+            {uiValue}
+          </span>
+          <span className="text-[13px] text-slate-500 font-bold tracking-widest mb-1">
+            {label}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+};
