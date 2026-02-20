@@ -5,7 +5,7 @@ import type { SidePlotData } from "../utils/plotData.ts";
 
 export default function SidePlots({simulationData}: {simulationData: SidePlotData}) {
   return (
-    <section className="w-full">
+    <section className="relative grow min-h-0">
       <Plot
         data={[
           {
@@ -21,7 +21,7 @@ export default function SidePlots({simulationData}: {simulationData: SidePlotDat
             },
           }
         ]}
-        layout={ sideViewLayout } config={ plotConfig } 
+        layout={ sideViewLayout } config={ plotConfig } useResizeHandler={true}
         style={{height: "100%"}} className="max-h-200"
       />
     </section>

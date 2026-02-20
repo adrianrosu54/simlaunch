@@ -1,11 +1,11 @@
-import type { NumericalInput } from '@/utils/inputs';
+import type { SliderInput } from '@/utils/inputTypes';
 import { useState, useRef, useEffect, useCallback } from 'react';
 
 export default function FlywheelSlider({ 
   min, max, value, onChange
-}: NumericalInput) {
+}: SliderInput) {
   const svgRef = useRef<SVGSVGElement>(null);
-  const [uiValue, setUiValue] = useState(value);
+  // const [uiValue, setUiValue] = useState(value);
   const [isDragging, setIsDragging] = useState(false);
 
   // const cx = 100;
@@ -29,8 +29,8 @@ export default function FlywheelSlider({
     if (pct > 1) pct = (pct < 1.5) ? 1 : 0;
 
     const newValue = Math.round(pct * (max - min) + min);
-    setUiValue(newValue);
-  }, [max, min]);
+    onChange(newValue);
+  }, [max, min, onChange]);
 
   // Global listeners for dragging outside the SVG
   useEffect(() => {
@@ -38,7 +38,7 @@ export default function FlywheelSlider({
     const handleTouchMove = (e: TouchEvent) => isDragging && updateValue(e.touches[0].clientX, e.touches[0].clientY);
     const stopDragging = () => {
       setIsDragging(false);
-      onChange(uiValue);
+      // onChange(uiValue);
     }
 
     if (isDragging) {
@@ -53,16 +53,16 @@ export default function FlywheelSlider({
       window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchend', stopDragging);
     };
-  }, [isDragging, updateValue, uiValue, onChange]);
+  }, [isDragging, updateValue]);
 
-  const pct = (uiValue - min) / (max - min);
+  const pct = (value - min) / (max - min);
   const dashOffset = circumference * (1 - pct);
 
   // "dynamic" colors
   const color = pct < 0.4 ? '#84cc16' : pct < 0.7 ? '#eab308' : '#ef4444';
 
   return (
-    <div className="flex flex-col items-center p-6 w-80">
+    <div className="flex flex-col items-center p-2 h-60">
       <div className="relative w-full" style={{ height: '150px' }}>
         <svg
           ref={svgRef}
@@ -88,14 +88,14 @@ export default function FlywheelSlider({
             strokeLinecap="round"
             strokeDasharray={circumference}
             strokeDashoffset={dashOffset}
-            className="transition-all duration-150 ease-out"
+            className="transition-all duration-75 ease-out"
           />
         </svg>
 
         {/* Value Overlay */}
         <div className="absolute bottom-3 inset-x-0 flex flex-col items-center pointer-events-none">
           <span className="text-4xl font-mono font-black text-white italic tracking-tighter" style={{ textShadow: `0 0 15px ${color}66` }}>
-            {uiValue}
+            {value}
           </span>
           <span className="text-[13px] text-slate-500 font-bold tracking-widest mb-1 tabular-nums">
             Flywheel RPM
