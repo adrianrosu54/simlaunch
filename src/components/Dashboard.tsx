@@ -1,10 +1,9 @@
 import { useMemo, useState } from "react";
 
 import type { LauncherConfig, ControlInput, SimulationSetup, RobotState } from "../physics/simulationTypes.ts";
-import type { SimulationLogger } from "../physics/logger.ts";
-import type { SidePlotData } from "./plotData.ts";
-import BallisticModel from "@/physics/BallisticModel";
-import SidePlots from "./sidePlots.tsx";
+import { sidePlotLogger, type SidePlotData } from "../utils/plotData.ts";
+import BallisticModel from "../physics/BallisticModel.ts";
+import SidePlots from "./SidePlots.tsx";
 import { rockyPreset } from "../physics/presets.ts";
 
 export default function Dashboard() {
@@ -13,25 +12,18 @@ export default function Dashboard() {
   const [robotState, setRobotState] = useState<RobotState>(rockyPreset.state);
   const [input, setInput]           = useState<ControlInput>({turretAngle: 0, flywheelVelocity: 1800});
 
-  const data: SidePlotData = useMemo(() => {
+  const data = useMemo(() => {
       const model = new BallisticModel({config, sim, state: robotState});
+      const data: SidePlotData = [];
 
-      const data: {distance: number, height: number}[] = [];
-      const log: SimulationLogger = (state) => {
-        data.push({
-          distance: Math.sqrt(state.x*state.x + state.y*state.y),
-          height: state.z,
-        });
-      }
-
-      model.simulate(input, log);
+      model.simulate(input, sidePlotLogger(robotState, data));
 
       return data;
   }, [config, sim, robotState, input]);
 
   return (
     <main className="max-w-360 bg-slate-900">
-      <SidePlots simData={data}/>
+      <SidePlots simulationData={data}/>
     </main>
   );
 }

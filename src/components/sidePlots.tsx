@@ -1,16 +1,16 @@
 import Plot from "react-plotly.js";
 
-import { sideViewLayout, plotConfig } from "./layouts.ts";
-import type { SidePlotData } from "./plotData.ts";
+import { sideViewLayout, plotConfig } from "../utils/layouts.ts";
+import type { SidePlotData } from "../utils/plotData.ts";
 
-export default function SidePlots({simData}: {simData: SidePlotData}) {
+export default function SidePlots({simulationData}: {simulationData: SidePlotData}) {
   return (
     <div>
       <Plot
         data={[
           {
-            x: simData.map(p => p.distance),
-            y: simData.map(p => p.height),
+            x: simulationData.map(p => p.distance),
+            y: simulationData.map(p => p.height),
             type: "scatter",
             mode: "lines",
             name: "Predicted trajectory",
