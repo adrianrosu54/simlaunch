@@ -9,3 +9,9 @@ export type NumericalInput = {
   value: number;
   onChange: (value: number) => void;
 };
+
+export type ErrorBarData = {
+  error: number;
+  maxError: number;
+  threshold: number;
+}

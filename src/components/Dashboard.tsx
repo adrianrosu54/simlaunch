@@ -1,8 +1,9 @@
 import { useMemo, useState } from "react";
 
 import type { LauncherConfig, ControlInput, SimulationSetup, RobotState } from "../physics/simulationTypes.ts";
-import type { NumericalInput, SliderInput } from "../utils/inputTypes.ts";
-import { sidePlotLogger, type SidePlotData } from "../utils/plotData.ts";
+import type { ErrorBarData, NumericalInput, SliderInput } from "../utils/inputTypes.ts";
+import { calculateError, RedGoal, type Pose } from "../utils/fieldPositions.ts";
+import { sidePlotLogger, type SidePlotData } from "../utils/plotLogging.ts";
 import BallisticModel from "../physics/BallisticModel.ts";
 import { rockyPreset } from "../physics/presets.ts";
 
@@ -13,23 +14,31 @@ export default function Dashboard() {
   const [config, setConfig]         = useState<LauncherConfig>(rockyPreset.config);
   const [sim, setSim]               = useState<SimulationSetup>(rockyPreset.sim);
   const [robotState, setRobotState] = useState<RobotState>(rockyPreset.state);
-  const [input, setInput]           = useState<ControlInput>({turretAngle: 45*Math.PI/180, flywheelVelocity: 1800});
 
-  const data = useMemo(() => {
-      const model = new BallisticModel({config, sim, state: robotState});
-      const data: SidePlotData = [];
+  const [input, setInput] = useState<ControlInput>({turretAngle: 45*Math.PI/180, flywheelVelocity: 1800});
 
-      model.simulate(input, sidePlotLogger(robotState, data));
-      // console.log(impact);
-      return data;
+  const {data, error} = useMemo(() => {
+    const model = new BallisticModel({config, sim, state: robotState});
+    const data: SidePlotData = [];
+
+    const impact: Pose = model.simulate(input, sidePlotLogger(robotState, data));
+    const error = calculateError(impact, RedGoal);
+
+    return {data, error};
   }, [config, sim, robotState, input]);
 
+  // components data setup
   const flywheelInput: SliderInput = {
     min: 1000,
     max: 4200,
     value: input.flywheelVelocity,
     onChange: (value) => setInput({...input, flywheelVelocity: value})
   };
+  const errorInput: ErrorBarData = {
+    error: error,
+    maxError: 2,
+    threshold: 0.1,
+  }
   const compassInput: NumericalInput = {
     value: input.turretAngle, 
     onChange: (value) => setInput({...input, turretAngle: value})
@@ -38,7 +47,7 @@ export default function Dashboard() {
   return (
     <main className="flex flex-col h-full max-w-360 w-full bg-slate-900">
       <SidePlots simulationData={data}/>
-      <Controls flywheelInput={flywheelInput} compassInput={compassInput}/>
+      <Controls flywheelInput={flywheelInput} errorInput={errorInput} compassInput={compassInput}/>
     </main>
   );
 }

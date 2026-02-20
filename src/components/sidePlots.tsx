@@ -1,7 +1,7 @@
 import Plot from "react-plotly.js";
 
 import { sideViewLayout, plotConfig, velocityLayout, accelerationLayout } from "../utils/layouts.ts";
-import type { SidePlotData } from "../utils/plotData.ts";
+import type { SidePlotData } from "../utils/plotLogging.ts";
 
 export default function SidePlots({simulationData}: {simulationData: SidePlotData}) {
   return (
