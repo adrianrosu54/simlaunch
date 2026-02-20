@@ -7,6 +7,8 @@ import { rockyPreset } from "../physics/presets.ts";
 
 import SidePlots from "./SidePlots.tsx";
 import FlywheelSlider from "./FlywheelSlider.tsx";
+import Controls from "./Controls.tsx";
+import type { NumericalInput } from "../utils/inputs.ts";
 
 export default function Dashboard() {
   const [config, setConfig]         = useState<LauncherConfig>(rockyPreset.config);
@@ -23,13 +25,17 @@ export default function Dashboard() {
       return data;
   }, [config, sim, robotState, input]);
 
+  const flywheelInput: NumericalInput = {
+    min: 1000,
+    max: 4200,
+    value: input.flywheelVelocity,
+    onChange: (value) => setInput({...input, flywheelVelocity: value})
+  };
+
   return (
-    <main className="relative max-w-360 w-full bg-slate-900">
+    <main className="flex flex-col max-w-360 w-full bg-slate-900">
       <SidePlots simulationData={data}/>
-      <FlywheelSlider min={1000} max={4200}
-        value={input.flywheelVelocity}
-        onChange={(value) => setInput({...input, flywheelVelocity: value})}
-      />
+      <Controls flywheelInput={flywheelInput}/>
     </main>
   );
 }

@@ -1,20 +1,9 @@
+import type { NumericalInput } from '@/utils/inputs';
 import { useState, useRef, useEffect, useCallback } from 'react';
 
-type RadialSliderProps = {
-  min: number;
-  max: number;
-  value: number;
-  onChange: (value: number) => void;
-  label?: string;
-}
-
-export default function FlywheelSlider({
-  min,
-  max,
-  value,
-  onChange,
-  label = "Flywheel RPM"
-}: RadialSliderProps) {
+export default function FlywheelSlider({ 
+  min, max, value, onChange
+}: NumericalInput) {
   const svgRef = useRef<SVGSVGElement>(null);
   const [uiValue, setUiValue] = useState(value);
   const [isDragging, setIsDragging] = useState(false);
@@ -73,7 +62,7 @@ export default function FlywheelSlider({
   const color = pct < 0.4 ? '#84cc16' : pct < 0.7 ? '#eab308' : '#ef4444';
 
   return (
-    <div className="absolute bottom-0 flex flex-col items-center p-6 w-80">
+    <div className="flex flex-col items-center p-6 w-80">
       <div className="relative w-full" style={{ height: '150px' }}>
         <svg
           ref={svgRef}
@@ -108,8 +97,8 @@ export default function FlywheelSlider({
           <span className="text-4xl font-mono font-black text-white italic tracking-tighter" style={{ textShadow: `0 0 15px ${color}66` }}>
             {uiValue}
           </span>
-          <span className="text-[13px] text-slate-500 font-bold tracking-widest mb-1">
-            {label}
+          <span className="text-[13px] text-slate-500 font-bold tracking-widest mb-1 tabular-nums">
+            Flywheel RPM
           </span>
         </div>
       </div>

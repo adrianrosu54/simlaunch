@@ -5,7 +5,7 @@ import type { SidePlotData } from "../utils/plotData.ts";
 
 export default function SidePlots({simulationData}: {simulationData: SidePlotData}) {
   return (
-    <div>
+    <section className="w-full">
       <Plot
         data={[
           {
@@ -24,6 +24,6 @@ export default function SidePlots({simulationData}: {simulationData: SidePlotDat
         layout={ sideViewLayout } config={ plotConfig } 
         style={{height: "100%"}} className="max-h-200"
       />
-    </div>
+    </section>
   );
 }
