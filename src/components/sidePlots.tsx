@@ -5,7 +5,7 @@ import type { SidePlotData } from "../utils/plotData.ts";
 
 export default function SidePlots({simulationData}: {simulationData: SidePlotData}) {
   return (
-    <section className="relative grow grid grid-cols-4 gap-4 p-2">
+    <section className="relative grow grid grid-cols-1 md:grid-cols-4 gap-4 p-2">
       <Plot
         data={[
           {
@@ -15,7 +15,7 @@ export default function SidePlots({simulationData}: {simulationData: SidePlotDat
             mode: "lines",
             name: "Predicted trajectory",
             line: {
-              color: "#2563eb",
+              color: "#0891b2",
               width: 2,
               shape: "spline",
             },
@@ -23,9 +23,9 @@ export default function SidePlots({simulationData}: {simulationData: SidePlotDat
         ]}
         layout={ sideViewLayout } config={ plotConfig } useResizeHandler={true}
         style={{height: "100%"}} 
-        className="col-span-3 min-w-0 min-h-0 relative border-2 border-slate-800"
+        className="md:col-span-3 min-w-0 min-h-0 relative border-2 border-slate-800"
       />
-      <div className="col-span-1 flex flex-col gap-4 min-h-0">
+      <div className="md:col-span-1 flex flex-row md:flex-col gap-4 min-h-0">
         <Plot
           data={[
             {
@@ -35,7 +35,7 @@ export default function SidePlots({simulationData}: {simulationData: SidePlotDat
               mode: "lines",
               name: "Velocity magnitude",
               line: {
-                color: "#22c55e",
+                color: "#ca8a04",
                 width: 2,
                 shape: "spline",
               }
@@ -54,7 +54,7 @@ export default function SidePlots({simulationData}: {simulationData: SidePlotDat
               mode: "lines",
               name: "Acceleration magnitude",
               line: {
-                color: "#22c55e",
+                color: "#7c3aed",
                 width: 2,
                 shape: "spline",
               }

@@ -59,7 +59,7 @@ export default function FlywheelSlider({
   const dashOffset = circumference * (1 - pct);
 
   // dynamic colors
-  const hue = 120 - (pct * 120);
+  const hue = 200 - (pct * 200);
   const dynamicColor = `hsl(${hue}, 80%, 50%)`;
 
   return (

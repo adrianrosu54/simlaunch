@@ -66,9 +66,12 @@ export default function CompassSlider({ value, onChange }: NumericalInput) {
       </svg>
 
       {/* Center Readout */}
-      <div className="absolute pointer-events-none flex flex-col items-center">
-        <span className="text-2xl font-mono font-bold leading-none">
+      <div className="absolute top-[40%] pointer-events-none flex flex-col items-center">
+        <span className="text-4xl font-mono font-black italic">
           {Math.round(value*180/Math.PI)}°
+        </span>
+        <span className="text-[13px] text-slate-500 font-bold tracking-widest mb-1 tabular-nums">
+          Heading angle
         </span>
       </div>
     </div>
