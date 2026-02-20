@@ -13,15 +13,41 @@ export const sideViewLayout: Partial<Layout> = {
         gridcolor: "#334155",
         zerolinecolor: "#334155",
         showgrid: true,
+        scaleanchor: "x",
+        scaleratio: 1,
     },
     yaxis: {
         title: {text: "Height (m)"},
         gridcolor: "#334155",
         zerolinecolor: "#334155",
         scaleanchor: "x",
-        scaleratio: 1
+        scaleratio: 1,
     },
     hovermode: "closest",
+}
+
+export const velocityLayout: Partial<Layout> = {
+    ...sideViewLayout,
+    xaxis: {
+        ...sideViewLayout.xaxis,
+        title: {text: "Time (s)"},
+        scaleratio: undefined,
+        scaleanchor: undefined,
+    },
+    yaxis: {
+        ...sideViewLayout.yaxis,
+        title: {text: "Velocity (m/s)"},
+        scaleratio: undefined,
+        scaleanchor: undefined,
+    }
+}
+
+export const accelerationLayout: Partial<Layout> = {
+    ...velocityLayout,
+    yaxis: {
+        ...velocityLayout.yaxis,
+        title: {text: "Acceleration (m/s^2)"}
+    }
 }
 
 export const plotConfig: Partial<Config> = {

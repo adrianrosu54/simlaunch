@@ -7,7 +7,7 @@ export default function Controls(
   {flywheelInput: SliderInput, compassInput: NumericalInput}
 ) {
   return (
-    <section className="h-48 w-full shrink flex justify-center items-center">
+    <section className="h-56 w-full shrink flex justify-center items-center">
       <FlywheelSlider min={flywheelInput.min} max={flywheelInput.max} 
         value={flywheelInput.value} onChange={flywheelInput.onChange}
       />

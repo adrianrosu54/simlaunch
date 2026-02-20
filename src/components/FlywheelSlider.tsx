@@ -58,8 +58,9 @@ export default function FlywheelSlider({
   const pct = (value - min) / (max - min);
   const dashOffset = circumference * (1 - pct);
 
-  // "dynamic" colors
-  const color = pct < 0.4 ? '#84cc16' : pct < 0.7 ? '#eab308' : '#ef4444';
+  // dynamic colors
+  const hue = 120 - (pct * 120);
+  const dynamicColor = `hsl(${hue}, 80%, 50%)`;
 
   return (
     <div className="flex flex-col items-center p-2 h-60">
@@ -83,18 +84,18 @@ export default function FlywheelSlider({
           <path
             d={`M 20,100 A 80,80 0 0 1 180,100`}
             fill="none"
-            stroke={color}
+            stroke={dynamicColor}
             strokeWidth="12"
             strokeLinecap="round"
             strokeDasharray={circumference}
             strokeDashoffset={dashOffset}
-            className="transition-all duration-75 ease-out"
+            className="transition-all duration-100 ease-out"
           />
         </svg>
 
         {/* Value Overlay */}
         <div className="absolute bottom-3 inset-x-0 flex flex-col items-center pointer-events-none">
-          <span className="text-4xl font-mono font-black text-white italic tracking-tighter" style={{ textShadow: `0 0 15px ${color}66` }}>
+          <span className="text-4xl font-mono font-black text-white italic tracking-tighter" style={{ textShadow: `0 0 15px ${dynamicColor}66` }}>
             {value}
           </span>
           <span className="text-[13px] text-slate-500 font-bold tracking-widest mb-1 tabular-nums">
