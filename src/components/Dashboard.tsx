@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { Suspense, lazy, useMemo, useState } from "react";
 
 import type { LauncherConfig, ControlInput, SimulationSetup, RobotState } from "../physics/simulationTypes.ts";
 import type { ErrorBarData, NumericalInput, SliderInput } from "../utils/inputTypes.ts";
@@ -7,7 +7,7 @@ import { sidePlotLogger, type SidePlotData } from "../utils/plotLogging.ts";
 import BallisticModel from "../physics/BallisticModel.ts";
 import { rockyPreset } from "../physics/presets.ts";
 
-import SidePlots from "./SidePlots.tsx";
+const SidePlots = lazy(() => import("./SidePlots.tsx"));
 import Controls from "./Controls.tsx";
 
 export default function Dashboard() {
@@ -46,7 +46,9 @@ export default function Dashboard() {
 
   return (
     <main className="flex flex-col h-full max-w-360 w-full bg-slate-900">
-      <SidePlots simulationData={data}/>
+      <Suspense fallback={<div className="text-2xl font-bold text-slate-600 text-center h-full">Loading Graphs...</div>}>
+        <SidePlots simulationData={data}/>
+      </Suspense>
       <Controls flywheelInput={flywheelInput} errorInput={errorInput} compassInput={compassInput}/>
     </main>
   );
