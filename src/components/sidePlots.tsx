@@ -13,7 +13,7 @@ export default function SidePlots({simulationData}: {simulationData: SidePlotDat
             y: simulationData.map(p => p.height),
             type: "scatter",
             mode: "lines",
-            name: "Predicted trajectory",
+            name: "side view",
             line: {
               color: "#0891b2",
               width: 2,
@@ -33,7 +33,7 @@ export default function SidePlots({simulationData}: {simulationData: SidePlotDat
               y: simulationData.map(p => p.velocity),
               type: "scatter",
               mode: "lines",
-              name: "Velocity magnitude",
+              name: "velocity",
               line: {
                 color: "#ca8a04",
                 width: 2,
@@ -52,7 +52,7 @@ export default function SidePlots({simulationData}: {simulationData: SidePlotDat
               y: simulationData.map(p => p.acceleration),
               type: "scatter",
               mode: "lines",
-              name: "Acceleration magnitude",
+              name: "acceleration",
               line: {
                 color: "#7c3aed",
                 width: 2,

@@ -36,22 +36,22 @@ export default function FlywheelSlider({
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => isDragging && updateValue(e.clientX, e.clientY);
     const handleTouchMove = (e: TouchEvent) => isDragging && updateValue(e.touches[0].clientX, e.touches[0].clientY);
-    const stopDragging = () => {
+    const handleUp = () => {
       setIsDragging(false);
       // onChange(uiValue);
     }
 
     if (isDragging) {
       window.addEventListener('mousemove', handleMouseMove);
-      window.addEventListener('mouseup', stopDragging);
+      window.addEventListener('mouseup', handleUp);
       window.addEventListener('touchmove', handleTouchMove, { passive: false });
-      window.addEventListener('touchend', stopDragging);
+      window.addEventListener('touchend', handleUp);
     }
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', stopDragging);
+      window.removeEventListener('mouseup', handleUp);
       window.removeEventListener('touchmove', handleTouchMove);
-      window.removeEventListener('touchend', stopDragging);
+      window.removeEventListener('touchend', handleUp);
     };
   }, [isDragging, updateValue]);
 

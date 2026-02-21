@@ -19,24 +19,30 @@ export default function CompassSlider({ value, onChange }: NumericalInput) {
   }, [onChange]);
 
   useEffect(() => {
-    const handleMove = (e: MouseEvent) => isDragging && updateHeading(e.clientX, e.clientY);
+    const handleMouseMove = (e: MouseEvent) => isDragging && updateHeading(e.clientX, e.clientY);
+    const handleTouchMove = (e: TouchEvent) => isDragging && updateHeading(e.touches[0].clientX, e.touches[0].clientY);
     const handleUp = () => setIsDragging(false);
     
     if (isDragging) {
-      window.addEventListener('mousemove', handleMove);
+      window.addEventListener('mousemove', handleMouseMove);
       window.addEventListener('mouseup', handleUp);
+      window.addEventListener('touchmove', handleTouchMove, { passive: false });
+      window.addEventListener('touchend', handleUp);
     }
     return () => {
-      window.removeEventListener('mousemove', handleMove);
+      window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleUp);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleUp);
     };
   }, [isDragging, updateHeading]);
 
   return (
     <div 
       ref={containerRef}
-      className="relative w-60 h-60 bg-slate-900 rounded-full flex items-center justify-center select-none cursor-crosshair"
+      className="relative w-60 h-60 bg-slate-900 rounded-full flex items-center justify-center select-none cursor-crosshair touch-none"
       onMouseDown={() => setIsDragging(true)}
+      onTouchStart={() => setIsDragging(true)}
     >
       <svg viewBox="0 0 200 200" className="w-full h-full transform rotate-0">
         {/* Outer Ring */}

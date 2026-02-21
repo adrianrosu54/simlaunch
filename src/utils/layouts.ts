@@ -7,6 +7,7 @@ export const sideViewLayout: Partial<Layout> = {
     plot_bgcolor: "transparent",
 
     font: { family: 'Inter, sans-serif', color: '#64748b' },
+    title: {text: "Predicted Trajectory"},
 
     xaxis: {
         title: {text: "Distance (m)"},
@@ -15,6 +16,7 @@ export const sideViewLayout: Partial<Layout> = {
         showgrid: true,
         scaleanchor: "x",
         scaleratio: 1,
+        fixedrange: true,
     },
     yaxis: {
         title: {text: "Height (m)"},
@@ -22,12 +24,14 @@ export const sideViewLayout: Partial<Layout> = {
         zerolinecolor: "#334155",
         scaleanchor: "x",
         scaleratio: 1,
+        fixedrange: true,
     },
     hovermode: "closest",
 }
 
 export const velocityLayout: Partial<Layout> = {
     ...sideViewLayout,
+    title: undefined,
     xaxis: {
         ...sideViewLayout.xaxis,
         title: {text: "Time (s)"},
@@ -44,6 +48,7 @@ export const velocityLayout: Partial<Layout> = {
 
 export const accelerationLayout: Partial<Layout> = {
     ...velocityLayout,
+    title: undefined,
     yaxis: {
         ...velocityLayout.yaxis,
         title: {text: "Acceleration (m/s^2)"}
@@ -52,5 +57,5 @@ export const accelerationLayout: Partial<Layout> = {
 
 export const plotConfig: Partial<Config> = {
     responsive: true, 
-    displayModeBar: false
+    displayModeBar: false,
 };
