@@ -61,9 +61,10 @@ export default function CompassSlider({ value, onChange }: NumericalInput) {
         ))}
 
         {/* Target Heading Needle (Interactive) */}
-        <g style={{ transform: `rotate(${-value}rad)`, transformOrigin: 'center' }} className="transition-transform duration-75">
-          <line x1="100" y1="100" x2="185" y2="100" stroke="#f59e0b" strokeWidth="4" strokeLinecap="round" />
-          <circle cx="185" cy="100" r="4" fill="#f59e0b" className="animate-pulse" />
+        <g style={{ transform: `rotate(${-value}rad)`, transformOrigin: 'center' }} 
+            className="transition-transform duration-75 animate-pulse">
+          <line x1="100" y1="100" x2="185" y2="100" stroke="#ea580c" strokeWidth="4" strokeLinecap="round" />
+          <circle cx="185" cy="100" r="4" fill="#ea580c" />
         </g>
         <circle cx="100" cy="100" r="4" fill="#3b82f6" opacity="0.5" />
 

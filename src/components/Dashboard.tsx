@@ -1,55 +1,56 @@
-import { Suspense, lazy, useMemo, useState } from "react";
+import { Suspense, useMemo, useReducer } from "react";
 
-import type { LauncherConfig, ControlInput, SimulationSetup, RobotState } from "../physics/simulationTypes.ts";
 import type { ErrorBarData, NumericalInput, SliderInput } from "../utils/inputTypes.ts";
-import { calculateError, redGoal, type Pose } from "../utils/fieldPositions.ts";
+import { calculateError, redGoal } from "../utils/fieldPositions.ts";
 import { sidePlotLogger, type SidePlotData } from "../utils/plotLogging.ts";
 import BallisticModel from "../physics/BallisticModel.ts";
-import { rockyPreset } from "../physics/presets.ts";
+import { presetReducer, rockyPreset } from "../physics/presets.ts";
 
-const SidePlots = lazy(() => import("./SidePlots.tsx"));
-import Controls from "./Controls.tsx";
+import SidePlots from "./SidePlots.tsx";
+import ControlPanel from "./Controls.tsx";
 
 export default function Dashboard() {
-  const [config]      = useState<LauncherConfig>(rockyPreset.config);
-  const [sim]         = useState<SimulationSetup>(rockyPreset.sim);
-  const [robotState]  = useState<RobotState>(rockyPreset.state);
+  const [preset, presetDispatch] = useReducer(presetReducer, rockyPreset);
 
-  const [input, setInput] = useState<ControlInput>({turretAngle: 45*Math.PI/180, flywheelVelocity: 1800});
+  // model update  
+  const model = useMemo(() => {
+    return new BallisticModel(preset.config, preset.sim);
+  }, [preset.config, preset.sim]);
 
-  const {data, error} = useMemo(() => {
-    const model = new BallisticModel({config, sim, state: robotState});
+  // simulation data update
+  const { data, error } = useMemo(() => {
     const data: SidePlotData = [];
+    const impact = model.simulate(preset.control, preset.state, sidePlotLogger(preset.state, data));
 
-    const impact: Pose = model.simulate(input, sidePlotLogger(robotState, data));
-    const error = calculateError(impact, redGoal);
+    const error = calculateError(redGoal, impact);
 
     return {data, error};
-  }, [config, sim, robotState, input]);
+  }, [model, preset.state, preset.control]);
 
   // components data setup
+
   const flywheelInput: SliderInput = {
-    min: 1000,
-    max: 4200,
-    value: input.flywheelVelocity,
-    onChange: (value) => setInput({...input, flywheelVelocity: value})
+    min: 1000, max: 4200, value: preset.control.flywheelVelocity,
+    onChange: (value) => presetDispatch({type: "control", payload: {flywheelVelocity: value}}),
   };
   const errorInput: ErrorBarData = {
-    error: error,
-    maxError: 2,
-    threshold: 0.1,
-  }
+    error: error, maxError: 2, threshold: 0.1
+  };
   const compassInput: NumericalInput = {
-    value: input.turretAngle, 
-    onChange: (value) => setInput({...input, turretAngle: value})
+    value: preset.control.turretAngle, 
+    onChange: (value) => presetDispatch({type: "control", payload: {turretAngle: value}}),
   };
 
   return (
     <main className="flex flex-col h-full max-w-360 w-full bg-slate-900">
-      <Suspense fallback={<div className="text-2xl font-bold text-slate-600 text-center h-full">Loading Graphs...</div>}>
+      <Suspense fallback={
+        <div className="text-2xl font-bold text-slate-600 text-center h-full">
+          Loading Graphs...
+        </div>
+      }>
         <SidePlots simulationData={data}/>
       </Suspense>
-      <Controls flywheelInput={flywheelInput} errorInput={errorInput} compassInput={compassInput}/>
+      <ControlPanel flywheelInput={flywheelInput} errorInput={errorInput} compassInput={compassInput}/>
     </main>
   );
 }

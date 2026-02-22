@@ -1,4 +1,5 @@
-import Plot from "react-plotly.js";
+import { lazy } from "react";
+const Plot = lazy(() => import("react-plotly.js"));
 
 import { sideViewLayout, plotConfig, velocityLayout, accelerationLayout } from "../utils/layouts.ts";
 import type { SidePlotData } from "../utils/plotLogging.ts";
@@ -23,7 +24,7 @@ export default function SidePlots({simulationData}: {simulationData: SidePlotDat
         ]}
         layout={ sideViewLayout } config={ plotConfig } useResizeHandler={true}
         style={{height: "100%"}} 
-        className="md:col-span-3 min-w-0 min-h-0 relative border-2 border-slate-800"
+        className="md:col-span-3 min-w-0 min-h-0 relative border-2 border-slate-800 rounded-xl"
       />
       <div className="md:col-span-1 flex flex-row md:flex-col gap-4 min-h-0">
         <Plot
@@ -43,7 +44,7 @@ export default function SidePlots({simulationData}: {simulationData: SidePlotDat
           ]}
           layout={ velocityLayout } config={ plotConfig } useResizeHandler={true}
           style={{height: "100%"}}
-          className="flex-1 max-h-100 relative border-2 border-slate-800"
+          className="flex-1 max-h-100 relative border-2 border-slate-800 rounded-xl"
         />
         <Plot
           data={[
@@ -62,7 +63,7 @@ export default function SidePlots({simulationData}: {simulationData: SidePlotDat
           ]}
           layout={ accelerationLayout } config={ plotConfig } useResizeHandler={true}
           style={{height: "100%"}}
-          className="flex-1 max-h-100 relative border-2 border-slate-800"
+          className="flex-1 max-h-100 relative border-2 border-slate-800 rounded-xl"
         />
       </div>
     </section>

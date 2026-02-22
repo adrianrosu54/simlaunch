@@ -1,45 +1,44 @@
-import * as ty from "./simulationTypes.ts";
-import { rockyPreset, type Preset } from "./presets.ts";
+import type { ControlInput, LauncherConfig, RobotState, SimulationSetup } from "./simulationTypes.ts";
 import type { SimulationLogger } from "./logger.ts";
 
 const GRAVITY: number = 9.81;
 
 export default class BallisticModel {
-    public config: ty.LauncherConfig;
-    public sim: ty.SimulationSetup;
-    public state: ty.RobotState;
+    public config: LauncherConfig;
+    public sim: SimulationSetup;
 
-    constructor(preset: Preset = rockyPreset) {
-        this.config = preset.config;
-        this.sim = preset.sim;
-        this.state = preset.state;
+    constructor(config: LauncherConfig, sim: SimulationSetup) {
+        this.config = config;
+        this.sim = sim;
     }
 
     /**
      * Simulate the projectile trajectory
      * 
      * @param input control parameters of turret heading and flywheel velocity
+     * @param state robot state parameters of position and velocity
      * @param logger optional logging function for projectile state
      * @returns impact position in meters
      */
     public simulate(
-        input: ty.ControlInput,
+        input: ControlInput,
+        state: RobotState,
         logger?: SimulationLogger
     ): {x: number, y: number} {
         const ts = this.sim.timeStep;
         const drag = this.config.dragFactor * this.config.dragCoefficient;
 
-        let x = this.state.x;
-        let y = this.state.y;
+        let x = state.x;
+        let y = state.y;
         let z = this.sim.launchHeight;
 
         let vel = input.flywheelVelocity * this.config.launchFactor
                 * this.config.launchEfficiency;
 
         let velX = vel * Math.cos(this.config.launchPitchAngle) * Math.cos(input.turretAngle) 
-                + this.state.velocityX;
+                + state.velocityX;
         let velY = vel * Math.cos(this.config.launchPitchAngle) * Math.sin(input.turretAngle) 
-                + this.state.velocityY;
+                + state.velocityY;
         let velZ = vel * Math.sin(this.config.launchPitchAngle);
 
         let accX = -vel*velX * drag;
