@@ -27,13 +27,14 @@ export default class BallisticModel {
         logger?: SimulationLogger
     ): {x: number, y: number} {
         const ts = this.sim.timeStep;
-        const drag = this.config.dragFactor;
+        const drag = this.config.dragFactor * this.config.dragCoefficient;
 
         let x = this.state.x;
         let y = this.state.y;
         let z = this.sim.launchHeight;
 
-        let vel = input.flywheelVelocity * this.config.launchFactor;
+        let vel = input.flywheelVelocity * this.config.launchFactor
+                * this.config.launchEfficiency;
 
         let velX = vel * Math.cos(this.config.launchPitchAngle) * Math.cos(input.turretAngle) 
                 + this.state.velocityX;

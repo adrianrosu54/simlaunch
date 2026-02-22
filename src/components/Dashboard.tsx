@@ -2,7 +2,7 @@ import { Suspense, lazy, useMemo, useState } from "react";
 
 import type { LauncherConfig, ControlInput, SimulationSetup, RobotState } from "../physics/simulationTypes.ts";
 import type { ErrorBarData, NumericalInput, SliderInput } from "../utils/inputTypes.ts";
-import { calculateError, RedGoal, type Pose } from "../utils/fieldPositions.ts";
+import { calculateError, redGoal, type Pose } from "../utils/fieldPositions.ts";
 import { sidePlotLogger, type SidePlotData } from "../utils/plotLogging.ts";
 import BallisticModel from "../physics/BallisticModel.ts";
 import { rockyPreset } from "../physics/presets.ts";
@@ -22,7 +22,7 @@ export default function Dashboard() {
     const data: SidePlotData = [];
 
     const impact: Pose = model.simulate(input, sidePlotLogger(robotState, data));
-    const error = calculateError(impact, RedGoal);
+    const error = calculateError(impact, redGoal);
 
     return {data, error};
   }, [config, sim, robotState, input]);

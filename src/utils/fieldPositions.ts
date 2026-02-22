@@ -3,11 +3,11 @@ export type Pose = {
     y: number;
 }
 
-export const RedGoal: Pose = {
+export const redGoal: Pose = {
     x: 134 * 0.0254,
     y: 134 * 0.0254,
 };
-export const BlueGoal: Pose = {
+export const blueGoal: Pose = {
     x: 10  * 0.0254,
     y: 134 * 0.0254,
 };
