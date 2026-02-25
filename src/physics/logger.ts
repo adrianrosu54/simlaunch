@@ -3,9 +3,7 @@ export type ProjectileState = {
     x: number;      // position
     y: number;
     z: number;
-    velX: number;   // velocity
-    velY: number;
-    velZ: number;
+    vel: number;    // velocity
     accX: number;   // acceleration
     accY: number;
     accZ: number;

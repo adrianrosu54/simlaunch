@@ -18,5 +18,5 @@ describe("Ballistic simulation performance", () => {
 
     bench("Log trajectory, velocity and acceleration", () => {
         model.simulate(preset.control, preset.state, logger);
-    }, {time: 1000, warmupTime: 100} );
+    }, {time: 2000, warmupTime: 100} );
 });

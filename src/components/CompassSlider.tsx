@@ -40,13 +40,15 @@ export default function CompassSlider({ value, onChange }: NumericalInput) {
   return (
     <div 
       ref={containerRef}
-      className="relative w-60 h-60 bg-slate-900 rounded-full flex items-center justify-center select-none cursor-crosshair touch-none"
+      className="relative w-60 h-60 bg-slate-900 rounded-full flex items-center 
+                justify-center select-none cursor-crosshair touch-none"
       onMouseDown={() => setIsDragging(true)}
       onTouchStart={() => setIsDragging(true)}
     >
       <svg viewBox="0 0 200 200" className="w-full h-full transform rotate-0">
         {/* Outer Ring */}
-        <circle cx="100" cy="100" r="85" fill="none" stroke="#1e293b" strokeWidth="2" strokeDasharray="4 4" />
+        <circle cx="100" cy="100" r="85" fill="none" stroke="#1e293b" 
+                strokeWidth="2" strokeDasharray="4 4" />
 
         {/* Cardinal Spikes */}
         {[0, 90, 180, 270].map(deg => (
@@ -62,7 +64,7 @@ export default function CompassSlider({ value, onChange }: NumericalInput) {
 
         {/* Target Heading Needle (Interactive) */}
         <g style={{ transform: `rotate(${-value}rad)`, transformOrigin: 'center' }} 
-            className="transition-transform duration-75 animate-pulse">
+            className="transition-transform duration-60 transform-gpu will-change-transform">
           <line x1="100" y1="100" x2="185" y2="100" stroke="#ea580c" strokeWidth="4" strokeLinecap="round" />
           <circle cx="185" cy="100" r="4" fill="#ea580c" />
         </g>

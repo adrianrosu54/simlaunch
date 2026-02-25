@@ -49,7 +49,7 @@ export default class BallisticModel {
         if (logger)
             logger({
                 time, x, y, z, 
-                velX, velY, velZ, 
+                vel,
                 accX, accY, accZ
             });
 
@@ -72,8 +72,7 @@ export default class BallisticModel {
                 time += ts;
                 logger({
                     time, x, y, z,
-                    velX, velY, velZ,
-                    accX, accY, accZ
+                    vel, accX, accY, accZ
                 });
             }
         }

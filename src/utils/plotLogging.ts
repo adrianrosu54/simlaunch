@@ -13,19 +13,10 @@ export function sidePlotLogger(robotState: RobotState, data: SidePlotData): Simu
     return (state) => {
         data.push({
             time: state.time,
-            distance: Math.sqrt(
-                Math.pow(state.x-robotState.x, 2) + 
-                Math.pow(state.y-robotState.y, 2)
-            ),
+            distance: Math.sqrt((state.x-robotState.x)**2 + (state.y-robotState.y)**2),
             height: state.z,
-            velocity: Math.sqrt(Math.pow(state.velX, 2) +
-                Math.pow(state.velY, 2) +
-                Math.pow(state.velZ, 2)
-            ),
-            acceleration: Math.sqrt(Math.pow(state.accX, 2) +
-                Math.pow(state.accY, 2) + 
-                Math.pow(state.accZ, 2)
-            ),
+            velocity: state.vel,
+            acceleration: Math.sqrt(state.accX**2 + state.accY**2 + state.accZ**2),
         });
     };
 }

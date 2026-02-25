@@ -36,7 +36,7 @@ export const rockyPreset: Preset = {
     config: {
         launchPitchAngle: 60 * Math.PI / 180,
         launchFactor: (0.1016 / 2) / 60 * 2 * Math.PI,
-        dragFactor: 1.2 * (Math.pow(0.127 / 2, 2) * Math.PI) / (2 * 0.075),
+        dragFactor: 1.2 * ((0.127 / 2)**2 * Math.PI) / (2 * 0.075),
         launchEfficiency: 0.52,
         dragCoefficient: 0.47 + 0.04,
         ticksToRPM: (tps) => tps * 60 / 43.008,

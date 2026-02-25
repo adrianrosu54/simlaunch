@@ -89,7 +89,7 @@ export default function FlywheelSlider({
             strokeLinecap="round"
             strokeDasharray={circumference}
             strokeDashoffset={dashOffset}
-            className="transition-all duration-100 ease-out"
+            className="transition-all duration-60 ease-out transform-gpu will-change-transform"
           />
         </svg>
 
