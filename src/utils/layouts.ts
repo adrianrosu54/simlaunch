@@ -2,7 +2,7 @@ import type { Layout, Config } from "plotly.js";
 
 export const sideViewLayout: Partial<Layout> = {
     autosize: true,
-    margin: {t: 40, b: 60, l: 60, r: 20},
+    margin: {t: 35, b: 60, l: 60, r: 20},
     paper_bgcolor: "transparent",
     plot_bgcolor: "transparent",
 
@@ -13,10 +13,10 @@ export const sideViewLayout: Partial<Layout> = {
         title: {text: "Distance (m)"},
         gridcolor: "#334155",
         zerolinecolor: "#334155",
-        showgrid: true,
         scaleanchor: "x",
         scaleratio: 1,
         fixedrange: true,
+        dtick: 0.25,
     },
     yaxis: {
         title: {text: "Height (m)"},
@@ -25,6 +25,7 @@ export const sideViewLayout: Partial<Layout> = {
         scaleanchor: "x",
         scaleratio: 1,
         fixedrange: true,
+        dtick: 0.25,
     },
     hovermode: "closest",
 }
@@ -37,12 +38,14 @@ export const velocityLayout: Partial<Layout> = {
         title: {text: "Time (s)"},
         scaleratio: undefined,
         scaleanchor: undefined,
+        dtick: undefined,
     },
     yaxis: {
         ...sideViewLayout.yaxis,
         title: {text: "Velocity (m/s)"},
         scaleratio: undefined,
         scaleanchor: undefined,
+        dtick: undefined,
     }
 }
 

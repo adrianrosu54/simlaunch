@@ -63,7 +63,7 @@ export default function FlywheelSlider({
   const dynamicColor = `hsl(${hue}, 80%, 50%)`;
 
   return (
-    <div className="flex flex-col items-center justify-start p-2 h-50">
+    <div className="flex flex-col items-center justify-start h-50">
       <div className="relative w-full" style={{ height: '150px' }}>
         <svg
           ref={svgRef}
@@ -89,16 +89,19 @@ export default function FlywheelSlider({
             strokeLinecap="round"
             strokeDasharray={circumference}
             strokeDashoffset={dashOffset}
-            className="transition-all duration-60 ease-out transform-gpu will-change-transform"
+            className="transition-all duration-60 ease-out transform-gpu 
+                      will-change-transform"
           />
         </svg>
 
         {/* Value Overlay */}
         <div className="absolute bottom-3 inset-x-0 flex flex-col items-center pointer-events-none">
-          <span className="text-4xl font-mono font-black text-clk-text-primary italic tracking-tighter" style={{ textShadow: `0 0 15px ${dynamicColor}66` }}>
+          <span className="text-4xl font-mono font-black text-clk-text-primary italic tracking-tighter" 
+                style={{ textShadow: `0 0 15px ${dynamicColor}66` }}>
             {value}
           </span>
-          <span className="text-[13px] text-clk-text-secondary font-bold tracking-widest mb-1 tabular-nums">
+          <span className="text-[13px] text-clk-text-secondary font-bold 
+                          tracking-widest mb-1 tabular-nums">
             Flywheel RPM
           </span>
         </div>

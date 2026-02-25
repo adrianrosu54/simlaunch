@@ -1,4 +1,4 @@
-import { Suspense, useMemo, useReducer } from "react";
+import { useMemo, useReducer } from "react";
 
 import type { ErrorBarData, NumericalInput, SliderInput } from "../utils/inputTypes.ts";
 import { calculateError, redGoal } from "../utils/fieldPositions.ts";
@@ -42,14 +42,8 @@ export default function Dashboard() {
   };
 
   return (
-    <main className="flex flex-col h-full max-w-360 w-full bg-clk-background">
-      <Suspense fallback={
-        <div className="text-2xl font-bold text-clk-text-secondary text-center h-full">
-          <span>Loading Graphs...</span>
-        </div>
-      }>
-        <SidePlots simulationData={data}/>
-      </Suspense>
+    <main className="flex flex-col h-full max-w-360 w-full">
+      <SidePlots simulationData={data}/>
       <ControlPanel flywheelInput={flywheelInput} errorInput={errorInput} compassInput={compassInput}/>
     </main>
   );
