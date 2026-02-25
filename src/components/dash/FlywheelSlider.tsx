@@ -1,4 +1,4 @@
-import type { SliderInput } from '@/utils/inputTypes';
+import type { SliderInput } from '../../utils/inputTypes.ts';
 import { useState, useRef, useEffect, useCallback } from 'react';
 
 export default function FlywheelSlider({ 
@@ -95,10 +95,10 @@ export default function FlywheelSlider({
 
         {/* Value Overlay */}
         <div className="absolute bottom-3 inset-x-0 flex flex-col items-center pointer-events-none">
-          <span className="text-4xl font-mono font-black text-white italic tracking-tighter" style={{ textShadow: `0 0 15px ${dynamicColor}66` }}>
+          <span className="text-4xl font-mono font-black text-clk-text-primary italic tracking-tighter" style={{ textShadow: `0 0 15px ${dynamicColor}66` }}>
             {value}
           </span>
-          <span className="text-[13px] text-slate-500 font-bold tracking-widest mb-1 tabular-nums">
+          <span className="text-[13px] text-clk-text-secondary font-bold tracking-widest mb-1 tabular-nums">
             Flywheel RPM
           </span>
         </div>

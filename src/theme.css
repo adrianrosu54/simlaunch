@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@theme inline {
+    --color-clk-accent: var(--color-orange-600);
+    --color-clk-primary: var(--color-slate-900);
+    --color-clk-secondary: var(--color-slate-800);
+    --color-clk-background: var(--color-slate-950);
+
+    --color-clk-text-primary: var(--color-slate-200);
+    --color-clk-text-secondary: var(--color-slate-500);
+}

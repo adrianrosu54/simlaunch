@@ -40,7 +40,7 @@ export default function CompassSlider({ value, onChange }: NumericalInput) {
   return (
     <div 
       ref={containerRef}
-      className="relative w-60 h-60 bg-slate-900 rounded-full flex items-center 
+      className="relative w-60 h-60 bg-clk-background rounded-full flex items-center 
                 justify-center select-none cursor-crosshair touch-none"
       onMouseDown={() => setIsDragging(true)}
       onTouchStart={() => setIsDragging(true)}
@@ -79,7 +79,7 @@ export default function CompassSlider({ value, onChange }: NumericalInput) {
         <span className="text-4xl font-mono font-black italic">
           {Math.round(value*180/Math.PI)}°
         </span>
-        <span className="text-[13px] text-slate-500 font-bold tracking-widest mb-1 tabular-nums">
+        <span className="text-[13px] text-clk-text-secondary font-bold tracking-widest mb-1 tabular-nums">
           Heading angle
         </span>
       </div>

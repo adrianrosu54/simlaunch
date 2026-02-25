@@ -6,8 +6,8 @@ import { sidePlotLogger, type SidePlotData } from "../utils/plotLogging.ts";
 import BallisticModel from "../physics/BallisticModel.ts";
 import { presetReducer, rockyPreset } from "../physics/presets.ts";
 
-import SidePlots from "./SidePlots.tsx";
-import ControlPanel from "./Controls.tsx";
+import SidePlots from "./dash/SidePlots.tsx";
+import ControlPanel from "./dash/Controls.tsx";
 
 export default function Dashboard() {
   const [preset, presetDispatch] = useReducer(presetReducer, rockyPreset);
@@ -42,10 +42,10 @@ export default function Dashboard() {
   };
 
   return (
-    <main className="flex flex-col h-full max-w-360 w-full bg-slate-900">
+    <main className="flex flex-col h-full max-w-360 w-full bg-clk-background">
       <Suspense fallback={
-        <div className="text-2xl font-bold text-slate-600 text-center h-full">
-          Loading Graphs...
+        <div className="text-2xl font-bold text-clk-text-secondary text-center h-full">
+          <span>Loading Graphs...</span>
         </div>
       }>
         <SidePlots simulationData={data}/>

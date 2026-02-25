@@ -1,4 +1,4 @@
-import type { ErrorBarData } from '../utils/inputTypes.ts';
+import type { ErrorBarData } from '../../utils/inputTypes.ts';
 
 export default function ErrorBar({ 
   error, maxError, threshold,
@@ -46,7 +46,7 @@ export default function ErrorBar({
 
       {/* Digital Readout */}
       <div className="mt-4 flex flex-col items-center">
-        <span className={`text-xl font-mono font-bold italic ${absoluteError > threshold ? 'text-rose-600' : 'text-slate-100'}`}>
+        <span className={`text-xl font-mono font-bold italic ${absoluteError > threshold ? 'text-rose-600' : 'text-clk-text-primary'}`}>
           {error.toFixed(2)}
         </span>
       </div>
