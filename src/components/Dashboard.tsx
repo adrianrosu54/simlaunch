@@ -1,6 +1,6 @@
 import { useMemo, useReducer } from "react";
 
-import type { ErrorBarData, NumericalInput, SliderInput } from "../utils/inputTypes.ts";
+import type { ErrorBarData, CompassAngle, FlywheelSliderInput } from "../utils/inputTypes.ts";
 import { calculateError, redGoal } from "../utils/fieldPositions.ts";
 import { sidePlotLogger, type SidePlotData } from "../utils/plotLogging.ts";
 import BallisticModel from "../physics/BallisticModel.ts";
@@ -29,17 +29,17 @@ export default function Dashboard() {
 
   // components data setup
 
-  const flywheelInput: SliderInput = {
+  const flywheelInput: FlywheelSliderInput = useMemo(() => ({
     min: 1000, max: 4200, value: preset.control.flywheelVelocity,
     onChange: (value) => presetDispatch({type: "control", payload: {flywheelVelocity: value}}),
-  };
-  const errorInput: ErrorBarData = {
-    error: error, maxError: 2, threshold: 0.1
-  };
-  const compassInput: NumericalInput = {
+  }), [preset.control.flywheelVelocity]);
+  const errorInput: ErrorBarData = useMemo(() => ({ 
+    error: error, maxError: 2, threshold: 0.1 
+  }), [error]);
+  const compassInput: CompassAngle = useMemo(() => ({
     value: preset.control.turretAngle, 
     onChange: (value) => presetDispatch({type: "control", payload: {turretAngle: value}}),
-  };
+  }), [preset.control.turretAngle]);
 
   return (
     <main className="flex flex-col h-full max-w-360 w-full">

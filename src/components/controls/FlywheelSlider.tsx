@@ -1,10 +1,10 @@
 import { useApp } from '@/context/AppProvider.tsx';
-import type { SliderInput } from '../../utils/inputTypes.ts';
+import type { FlywheelSliderInput } from '../../utils/inputTypes.ts';
 import { useState, useRef, useEffect, useCallback } from 'react';
 
 export default function FlywheelSlider({ 
   min, max, value, onChange
-}: SliderInput) {
+}: FlywheelSliderInput) {
   // handle value/ui decouping
   const { perfMode } = useApp();
   const [uiValue, setUiValue] = useState(value);

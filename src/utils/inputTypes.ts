@@ -1,11 +1,11 @@
-export type SliderInput = {
+export type FlywheelSliderInput = {
   min: number;
   max: number;
   value: number;
   onChange: (value: number) => void;
 };
 
-export type NumericalInput = {
+export type CompassAngle = {
   value: number;
   onChange: (value: number) => void;
 };

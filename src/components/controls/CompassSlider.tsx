@@ -1,8 +1,8 @@
 import { useApp } from '@/context/AppProvider.tsx';
-import type { NumericalInput } from '@/utils/inputTypes';
+import type { CompassAngle } from '@/utils/inputTypes';
 import { useState, useRef, useEffect, useCallback } from 'react';
 
-export default function CompassSlider({ value, onChange }: NumericalInput) {
+export default function CompassSlider({ value, onChange }: CompassAngle) {
   const {perfMode} = useApp();
   const [uiValue, setUiValue] = useState(value);
 
