@@ -1,8 +1,11 @@
+import { usePerformanceSetting } from '@/context/PerfSettingContext.tsx';
 import type { ErrorBarData } from '../../utils/inputTypes.ts';
 
 export default function ErrorBar({ 
   error, maxError, threshold,
 }: ErrorBarData) {
+  const { perfSetting } = usePerformanceSetting();
+
   const totalSegments = 20;
   
   // Calculate how many segments should be "active"
@@ -28,11 +31,12 @@ export default function ErrorBar({
           return (
             <div
               key={i}
-              className={`h-1 w-full rounded-sm transition-all duration-120 transform-gpu ${
-                isActive
+              className={`h-1 w-full rounded-sm
+                  transition-all transform-gpu ${perfSetting ? "duration-500" : "duration-120"}
+                ${isActive
                   ? 'bg-rose-600 shadow-[0_0_6px_rgba(239,68,68,0.6)]' 
                   : 'bg-slate-800'
-              }`}
+                }`}
             />
           );
         })}

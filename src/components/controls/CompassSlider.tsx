@@ -1,7 +1,11 @@
+import { usePerformanceSetting } from '@/context/PerfSettingContext';
 import type { NumericalInput } from '@/utils/inputTypes';
 import { useState, useRef, useEffect, useCallback } from 'react';
 
 export default function CompassSlider({ value, onChange }: NumericalInput) {
+  const {perfSetting} = usePerformanceSetting();
+  const [uiValue, setUiValue] = useState(value);
+
   const containerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
 
@@ -15,14 +19,19 @@ export default function CompassSlider({ value, onChange }: NumericalInput) {
     // normalize
     if (angle < 0) angle += Math.PI*2;
     
-    onChange(angle);
-  }, [onChange]);
+    setUiValue(angle);
+    if (!perfSetting)
+        onChange(angle);
+  }, [onChange, perfSetting]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => isDragging && updateHeading(e.clientX, e.clientY);
     const handleTouchMove = (e: TouchEvent) => isDragging && updateHeading(e.touches[0].clientX, e.touches[0].clientY);
-    const handleUp = () => setIsDragging(false);
-    
+    const handleUp = () => {
+      setIsDragging(false);
+      if (perfSetting) onChange(uiValue);
+    };
+
     if (isDragging) {
       window.addEventListener('mousemove', handleMouseMove);
       window.addEventListener('mouseup', handleUp);
@@ -35,7 +44,7 @@ export default function CompassSlider({ value, onChange }: NumericalInput) {
       window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchend', handleUp);
     };
-  }, [isDragging, updateHeading]);
+  }, [isDragging, onChange, perfSetting, uiValue, updateHeading]);
 
   return (
     <div 
@@ -63,21 +72,24 @@ export default function CompassSlider({ value, onChange }: NumericalInput) {
         ))}
 
         {/* Target Heading Needle (Interactive) */}
-        <g style={{ transform: `rotate(${-value}rad)`, transformOrigin: 'center' }} 
-            className="transition-all duration-75 transform-gpu will-change-transform animate-pulse">
+        <g style={{ transform: `rotate(${-uiValue}rad)`, transformOrigin: 'center' }} 
+            className={perfSetting
+              ? "transition-none"
+              : "transition-all duration-75 transform-gpu will-change-transform animate-pulse"}>
           <line x1="100" y1="100" x2="185" y2="100" stroke="#ea580c" strokeWidth="4" strokeLinecap="round" />
           <circle cx="185" cy="100" r="4" fill="#ea580c" />
         </g>
         <circle cx="100" cy="100" r="4" fill="#3b82f6" opacity="0.5" />
 
         {/* Center Cap */}
-        <circle cx="100" cy="100" r="10" fill="#0f172a" stroke="#1e293b" strokeWidth="2" className="animate-pulse"/>
+        <circle cx="100" cy="100" r="10" fill="#0f172a" stroke="#1e293b" strokeWidth="2" 
+                className={perfSetting ? "" : "animate-pulse"}/>
       </svg>
 
       {/* Center Readout */}
       <div className="absolute top-[40%] pointer-events-none flex flex-col items-center">
         <span className="text-4xl font-mono font-black italic">
-          {Math.round(value*180/Math.PI)}°
+          {Math.round(uiValue*180/Math.PI)}°
         </span>
         <span className="text-[13px] text-clk-text-secondary font-bold tracking-widest mb-1 tabular-nums">
           Heading angle

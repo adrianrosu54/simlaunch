@@ -1,11 +1,14 @@
+import { usePerformanceSetting } from '@/context/PerfSettingContext.tsx';
 import type { SliderInput } from '../../utils/inputTypes.ts';
 import { useState, useRef, useEffect, useCallback } from 'react';
 
 export default function FlywheelSlider({ 
   min, max, value, onChange
 }: SliderInput) {
+  const { perfSetting } = usePerformanceSetting();
+  const [uiValue, setUiValue] = useState(value);
+
   const svgRef = useRef<SVGSVGElement>(null);
-  // const [uiValue, setUiValue] = useState(value);
   const [isDragging, setIsDragging] = useState(false);
 
   // const cx = 100;
@@ -29,8 +32,11 @@ export default function FlywheelSlider({
     if (pct > 1) pct = (pct < 1.5) ? 1 : 0;
 
     const newValue = Math.round(pct * (max - min) + min);
-    onChange(newValue);
-  }, [max, min, onChange]);
+      
+    setUiValue(newValue);
+    if (!perfSetting)
+      onChange(newValue);
+  }, [max, min, onChange, perfSetting]);
 
   // Global listeners for dragging outside the SVG
   useEffect(() => {
@@ -38,7 +44,8 @@ export default function FlywheelSlider({
     const handleTouchMove = (e: TouchEvent) => isDragging && updateValue(e.touches[0].clientX, e.touches[0].clientY);
     const handleUp = () => {
       setIsDragging(false);
-      // onChange(uiValue);
+      if (perfSetting)
+        onChange(uiValue);
     }
 
     if (isDragging) {
@@ -53,9 +60,9 @@ export default function FlywheelSlider({
       window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchend', handleUp);
     };
-  }, [isDragging, updateValue]);
+  }, [isDragging, updateValue, perfSetting, uiValue, onChange]);
 
-  const pct = (value - min) / (max - min);
+  const pct = (uiValue - min) / (max - min);
   const dashOffset = circumference * (1 - pct);
 
   // dynamic colors
@@ -89,8 +96,9 @@ export default function FlywheelSlider({
             strokeLinecap="round"
             strokeDasharray={circumference}
             strokeDashoffset={dashOffset}
-            className="transition-all ease-out transform-gpu 
-                      will-change-transform"
+            className={perfSetting 
+              ? "transition-none"
+              : "transition-all ease-out transform-gpu will-change-transform"}
           />
         </svg>
 
@@ -98,7 +106,7 @@ export default function FlywheelSlider({
         <div className="absolute bottom-3 inset-x-0 flex flex-col items-center pointer-events-none">
           <span className="text-4xl font-mono font-black text-clk-text-primary italic tracking-tighter" 
                 style={{ textShadow: `0 0 15px ${dynamicColor}66` }}>
-            {value}
+            {uiValue}
           </span>
           <span className="text-[13px] text-clk-text-secondary font-bold 
                           tracking-widest mb-1 tabular-nums">
