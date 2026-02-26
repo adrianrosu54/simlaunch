@@ -1,11 +1,12 @@
-import { usePerformanceSetting } from '@/context/PerfSettingContext.tsx';
+import { useApp } from '@/context/AppProvider.tsx';
 import type { SliderInput } from '../../utils/inputTypes.ts';
 import { useState, useRef, useEffect, useCallback } from 'react';
 
 export default function FlywheelSlider({ 
   min, max, value, onChange
 }: SliderInput) {
-  const { perfSetting } = usePerformanceSetting();
+  // handle value/ui decouping
+  const { perfMode } = useApp();
   const [uiValue, setUiValue] = useState(value);
 
   const svgRef = useRef<SVGSVGElement>(null);
@@ -34,9 +35,9 @@ export default function FlywheelSlider({
     const newValue = Math.round(pct * (max - min) + min);
       
     setUiValue(newValue);
-    if (!perfSetting)
+    if (!perfMode)
       onChange(newValue);
-  }, [max, min, onChange, perfSetting]);
+  }, [max, min, onChange, perfMode]);
 
   // Global listeners for dragging outside the SVG
   useEffect(() => {
@@ -44,7 +45,7 @@ export default function FlywheelSlider({
     const handleTouchMove = (e: TouchEvent) => isDragging && updateValue(e.touches[0].clientX, e.touches[0].clientY);
     const handleUp = () => {
       setIsDragging(false);
-      if (perfSetting)
+      if (perfMode)
         onChange(uiValue);
     }
 
@@ -60,7 +61,7 @@ export default function FlywheelSlider({
       window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchend', handleUp);
     };
-  }, [isDragging, updateValue, perfSetting, uiValue, onChange]);
+  }, [isDragging, updateValue, perfMode, uiValue, onChange]);
 
   const pct = (uiValue - min) / (max - min);
   const dashOffset = circumference * (1 - pct);
@@ -96,7 +97,7 @@ export default function FlywheelSlider({
             strokeLinecap="round"
             strokeDasharray={circumference}
             strokeDashoffset={dashOffset}
-            className={perfSetting 
+            className={perfMode 
               ? "transition-none"
               : "transition-all ease-out transform-gpu will-change-transform"}
           />

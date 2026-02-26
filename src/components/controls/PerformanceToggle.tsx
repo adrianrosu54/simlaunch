@@ -1,27 +1,26 @@
-import { usePerformanceSetting } from "@/context/PerfSettingContext";
+import { useApp } from "@/context/AppProvider.tsx";
 
 export default function PerformanceToggle() {
-  const {perfSetting, setPerfSetting} = usePerformanceSetting();
+  const {perfMode, setPerfMode} = useApp();
 
   return (
-    <div className="flex flex-row items-center gap-2 p-1 w-fit
-                    bg-clk-primary
-                    border-2 border-clk-secondary rounded-full">
-      <span className="text-xs font-bold text-clk-text-secondary">Performance Mode</span>
+    <div className="flex flex-row items-center gap-4 p-1 w-fit
+                    bg-clk-primary border-2 border-clk-secondary rounded-full">
+      <span className="text-sm font-semibold text-clk-text-secondary">Performance Mode</span>
       <button
-        onClick={() => setPerfSetting(!perfSetting)}
+        onClick={() => setPerfMode(!perfMode)}
         className={`
           relative inline-flex h-6 w-11 items-center rounded-full 
-          transition-colors duration-250 focus:outline-none focus:ring-2 focus:ring-clk-accent
-          ${perfSetting ? 'bg-clk-accent' : 'bg-clk-background'}
+          transition-colors duration-250 focus:outline-none focus:ring-2 focus:ring-clk-secondary
+          ${perfMode ? 'bg-clk-accent' : 'bg-clk-background'}
         `}
         role="switch"
-        aria-checked={perfSetting}
+        aria-checked={perfMode}
       >
         <span
           className={`inline-block h-4 w-4 transform rounded-full 
             bg-white transition-transform duration-200
-            ${perfSetting ? 'translate-x-6' : 'translate-x-1'}`}
+            ${perfMode ? 'translate-x-6' : 'translate-x-1'}`}
         />
       </button>
     </div>

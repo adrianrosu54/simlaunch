@@ -1,10 +1,10 @@
-import { usePerformanceSetting } from '@/context/PerfSettingContext.tsx';
+import { useApp } from '@/context/AppProvider.tsx';
 import type { ErrorBarData } from '../../utils/inputTypes.ts';
 
 export default function ErrorBar({ 
   error, maxError, threshold,
 }: ErrorBarData) {
-  const { perfSetting } = usePerformanceSetting();
+  const { perfMode } = useApp();
 
   const totalSegments = 20;
   
@@ -32,7 +32,7 @@ export default function ErrorBar({
             <div
               key={i}
               className={`h-1 w-full rounded-sm
-                  transition-all transform-gpu ${perfSetting ? "duration-500" : "duration-120"}
+                  transition-all transform-gpu ${perfMode ? "duration-500" : "duration-120"}
                 ${isActive
                   ? 'bg-rose-600 shadow-[0_0_6px_rgba(239,68,68,0.6)]' 
                   : 'bg-slate-800'

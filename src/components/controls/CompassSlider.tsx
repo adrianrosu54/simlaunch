@@ -1,9 +1,9 @@
-import { usePerformanceSetting } from '@/context/PerfSettingContext';
+import { useApp } from '@/context/AppProvider.tsx';
 import type { NumericalInput } from '@/utils/inputTypes';
 import { useState, useRef, useEffect, useCallback } from 'react';
 
 export default function CompassSlider({ value, onChange }: NumericalInput) {
-  const {perfSetting} = usePerformanceSetting();
+  const {perfMode} = useApp();
   const [uiValue, setUiValue] = useState(value);
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -20,16 +20,16 @@ export default function CompassSlider({ value, onChange }: NumericalInput) {
     if (angle < 0) angle += Math.PI*2;
     
     setUiValue(angle);
-    if (!perfSetting)
+    if (!perfMode)
         onChange(angle);
-  }, [onChange, perfSetting]);
+  }, [onChange, perfMode]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => isDragging && updateHeading(e.clientX, e.clientY);
     const handleTouchMove = (e: TouchEvent) => isDragging && updateHeading(e.touches[0].clientX, e.touches[0].clientY);
     const handleUp = () => {
       setIsDragging(false);
-      if (perfSetting) onChange(uiValue);
+      if (perfMode) onChange(uiValue);
     };
 
     if (isDragging) {
@@ -44,7 +44,7 @@ export default function CompassSlider({ value, onChange }: NumericalInput) {
       window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchend', handleUp);
     };
-  }, [isDragging, onChange, perfSetting, uiValue, updateHeading]);
+  }, [isDragging, onChange, perfMode, uiValue, updateHeading]);
 
   return (
     <div 
@@ -73,7 +73,7 @@ export default function CompassSlider({ value, onChange }: NumericalInput) {
 
         {/* Target Heading Needle (Interactive) */}
         <g style={{ transform: `rotate(${-uiValue}rad)`, transformOrigin: 'center' }} 
-            className={perfSetting
+            className={perfMode
               ? "transition-none"
               : "transition-all duration-75 transform-gpu will-change-transform animate-pulse"}>
           <line x1="100" y1="100" x2="185" y2="100" stroke="#ea580c" strokeWidth="4" strokeLinecap="round" />
@@ -83,7 +83,7 @@ export default function CompassSlider({ value, onChange }: NumericalInput) {
 
         {/* Center Cap */}
         <circle cx="100" cy="100" r="10" fill="#0f172a" stroke="#1e293b" strokeWidth="2" 
-                className={perfSetting ? "" : "animate-pulse"}/>
+                className={perfMode ? "" : "animate-pulse"}/>
       </svg>
 
       {/* Center Readout */}

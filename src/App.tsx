@@ -2,13 +2,13 @@ import { Suspense } from 'react';
 import Dashboard from './components/Dashboard.tsx';
 import Footer from './components/Footer.tsx';
 import Header from './components/Header.tsx';
-import { PerformanceSettingProvider } from './context/PerfSettingContext.tsx';
+import { AppProvider } from './context/AppProvider.tsx';
 
 function App() {
 
   return (
     <>
-      <PerformanceSettingProvider>
+      <AppProvider>
         <div className="flex flex-col h-screen w-screen m-0 p-0
               bg-clk-background text-clk-text-primary" id="background">
           <Header/>
@@ -28,7 +28,7 @@ function App() {
 
           <Footer/>
         </div>
-      </PerformanceSettingProvider>
+      </AppProvider>
     </>
   )
 }

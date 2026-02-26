@@ -8,4 +8,5 @@
 
     --color-clk-text-primary: var(--color-slate-200);
     --color-clk-text-secondary: var(--color-slate-500);
+    --color-clk-text-tertiary: var(--color-slate-600);
 }
