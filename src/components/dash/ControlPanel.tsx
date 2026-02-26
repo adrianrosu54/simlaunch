@@ -1,9 +1,9 @@
 import type { ErrorBarData, NumericalInput, SliderInput } from "../../utils/inputTypes";
-import FlywheelSlider from "./FlywheelSlider";
-import CompassSlider from "./CompassSlider";
+import FlywheelSlider from "../controls/FlywheelSlider";
+import CompassSlider from "../controls/CompassSlider";
 import ErrorBar from "./ErrorBar";
 
-export default function Controls(
+export default function ControlPanel(
   {flywheelInput, errorInput, compassInput}: 
   {flywheelInput: SliderInput, errorInput: ErrorBarData, compassInput: NumericalInput}
 ) {

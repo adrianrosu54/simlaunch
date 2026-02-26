@@ -7,7 +7,7 @@ import BallisticModel from "../physics/BallisticModel.ts";
 import { presetReducer, rockyPreset } from "../physics/presets.ts";
 
 import SidePlots from "./dash/SidePlots.tsx";
-import ControlPanel from "./dash/Controls.tsx";
+import ControlPanel from "./dash/ControlPanel.tsx";
 
 export default function Dashboard() {
   const [preset, presetDispatch] = useReducer(presetReducer, rockyPreset);

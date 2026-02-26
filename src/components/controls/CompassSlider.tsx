@@ -64,14 +64,14 @@ export default function CompassSlider({ value, onChange }: NumericalInput) {
 
         {/* Target Heading Needle (Interactive) */}
         <g style={{ transform: `rotate(${-value}rad)`, transformOrigin: 'center' }} 
-            className="transition-transform duration-60 transform-gpu will-change-transform">
+            className="transition-all duration-75 transform-gpu will-change-transform animate-pulse">
           <line x1="100" y1="100" x2="185" y2="100" stroke="#ea580c" strokeWidth="4" strokeLinecap="round" />
           <circle cx="185" cy="100" r="4" fill="#ea580c" />
         </g>
         <circle cx="100" cy="100" r="4" fill="#3b82f6" opacity="0.5" />
 
         {/* Center Cap */}
-        <circle cx="100" cy="100" r="10" fill="#0f172a" stroke="#1e293b" strokeWidth="2" />
+        <circle cx="100" cy="100" r="10" fill="#0f172a" stroke="#1e293b" strokeWidth="2" className="animate-pulse"/>
       </svg>
 
       {/* Center Readout */}
