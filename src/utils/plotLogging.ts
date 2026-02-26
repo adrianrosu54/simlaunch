@@ -3,6 +3,8 @@ import type { SimulationLogger } from "../physics/logger.ts";
 
 export type SidePlotData = {
     time: number,
+    x: number,
+    y: number,
     distance: number;
     height: number;
     velocity: number;
@@ -13,6 +15,8 @@ export function sidePlotLogger(robotState: RobotState, data: SidePlotData): Simu
     return (state) => {
         data.push({
             time: state.time,
+            x: state.x,
+            y: state.y,
             distance: Math.sqrt((state.x-robotState.x)**2 + (state.y-robotState.y)**2),
             height: state.z,
             velocity: state.vel,

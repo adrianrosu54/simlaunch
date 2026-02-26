@@ -10,7 +10,7 @@ export default function ViewSelector() {
       {views.map((value, index, array) =>
       <button
         onClick={() => setView(value)}
-        className={`px-5 py-1 text-md font-medium
+        className={`px-5 py-1 text-md font-medium cursor-pointer
           ${index === 0 ? "rounded-l-0" : "rounded-r-xl"}
           ${index === array.length-1 ? "rounded-l-0" : "rounded-l-xl"}
           border border-clk-secondary transition-all ${

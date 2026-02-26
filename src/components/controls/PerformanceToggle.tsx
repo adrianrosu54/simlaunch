@@ -10,7 +10,7 @@ export default function PerformanceToggle() {
       <button
         onClick={() => setPerfMode(!perfMode)}
         className={`
-          relative inline-flex h-6 w-11 items-center rounded-full 
+          relative inline-flex h-6 w-11 items-center rounded-full cursor-pointer
           transition-colors duration-250 focus:outline-none focus:ring-2 focus:ring-clk-secondary
           ${perfMode ? 'bg-clk-accent' : 'bg-clk-background'}
         `}
@@ -18,7 +18,7 @@ export default function PerformanceToggle() {
         aria-checked={perfMode}
       >
         <span
-          className={`inline-block h-4 w-4 transform rounded-full 
+          className={`inline-block h-4 w-4 transform rounded-full
             bg-white transition-transform duration-200
             ${perfMode ? 'translate-x-6' : 'translate-x-1'}`}
         />

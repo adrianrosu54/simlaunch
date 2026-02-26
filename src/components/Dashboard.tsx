@@ -6,10 +6,13 @@ import { sidePlotLogger, type SidePlotData } from "../utils/plotLogging.ts";
 import BallisticModel from "../physics/BallisticModel.ts";
 import { presetReducer, rockyPreset } from "../physics/presets.ts";
 
-import SidePlots from "./dash/SidePlots.tsx";
 import ControlPanel from "./dash/ControlPanel.tsx";
+import { useApp } from "@/context/AppProvider.tsx";
+import SidePlots from "./dash/SidePlots.tsx";
+import FieldView from "./dash/FieldPlots.tsx";
 
 export default function Dashboard() {
+  const { view } = useApp();
   const [preset, presetDispatch] = useReducer(presetReducer, rockyPreset);
 
   // model update  
@@ -33,9 +36,11 @@ export default function Dashboard() {
     min: 1000, max: 4200, value: preset.control.flywheelVelocity,
     onChange: (value) => presetDispatch({type: "control", payload: {flywheelVelocity: value}}),
   }), [preset.control.flywheelVelocity]);
+
   const errorInput: ErrorBarData = useMemo(() => ({ 
     error: error, maxError: 2, threshold: 0.1 
   }), [error]);
+
   const compassInput: CompassAngle = useMemo(() => ({
     value: preset.control.turretAngle, 
     onChange: (value) => presetDispatch({type: "control", payload: {turretAngle: value}}),
@@ -43,7 +48,9 @@ export default function Dashboard() {
 
   return (
     <main className="flex flex-col h-full max-w-360 w-full">
-      <SidePlots simulationData={data}/>
+      {view === "Side View" && <SidePlots simulationData={data}/>}
+      {view === "Top View" && <FieldView simulationData={data}/>}
+      
       <ControlPanel flywheelInput={flywheelInput} errorInput={errorInput} compassInput={compassInput}/>
     </main>
   );
