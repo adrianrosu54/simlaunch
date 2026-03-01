@@ -1,8 +1,11 @@
-import type { ErrorBarData } from '../../utils/inputTypes.ts';
+import { useStore } from "@nanostores/react";
+import { $impactError } from "../stores/target";
 
-export default function ErrorBar({ 
-  error, maxError, threshold,
-}: ErrorBarData) {
+export default function ErrorBar() {
+  const threshold = 0.2;
+  const maxError = 2.0;
+  const error = useStore($impactError);
+
   const totalSegments = 20;
   
   // Calculate how many segments should be "active"

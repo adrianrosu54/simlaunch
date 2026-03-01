@@ -1,10 +1,13 @@
 import { lazy } from "react";
+import { useStore } from "@nanostores/react";
 const Plot = lazy(() => import("react-plotly.js"));
 
-import { FieldLayout, plotConfig } from "../../utils/layouts";
-import type { PlotLogs } from "../../physics/plotLogging";
+import { $simLogs } from "../stores/physics";
+import { FieldLayout, plotConfig } from "../utils/layouts";
 
-export default function FieldView({simulationData}: {simulationData: PlotLogs}) {
+export default function FieldView() {
+  const simulationData = useStore($simLogs);
+  
   return (
     <section className="relative grow">
       <Plot

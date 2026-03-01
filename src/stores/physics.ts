@@ -1,15 +1,14 @@
 import { atom, map } from "nanostores";
 
 import type { LauncherConfig, SimulationSetup, RobotState, ControlInput } from "../physics/simulationTypes";
-import type { Pose } from "../physics/fieldPositions";
 import { rockyPreset, type Preset } from "../physics/presets";
 import { plotLogger, type PlotLogs } from "../physics/plotLogging";
 import BallisticModel from "../physics/BallisticModel";
+import { $simImpact } from "./target";
 
 // physics state
 export const $preset = map(rockyPreset);
 export const $simLogs = atom<PlotLogs>([]);
-export const $simImpact = atom<Pose>({x: 0, y: 0});
 let model = new BallisticModel(rockyPreset.config, rockyPreset.sim);
 
 export type PresetAction =
