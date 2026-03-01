@@ -46,12 +46,14 @@ export default function CompassSlider() {
   return (
     <div 
       ref={containerRef}
-      className="relative w-60 h-60 bg-clk-background rounded-full flex items-center 
-                justify-center select-none cursor-crosshair touch-none"
+      className="relative h-full flex flex-col items-center justify-center
+                select-none cursor-crosshair touch-none overflow-hidden"
       onMouseDown={() => setIsDragging(true)}
       onTouchStart={() => setIsDragging(true)}
     >
-      <svg viewBox="0 0 200 200" className="w-full h-full transform rotate-0">
+      <div className="relative aspect-square h-full max-w-full max-h-full
+                      flex items-center justify-center overflow-hidden">
+      <svg viewBox="0 0 200 200" className="aspect-square block bg-clk-background rounded-full transform overflow-hidden">
         {/* Outer Ring */}
         <circle cx="100" cy="100" r="85" fill="none" stroke="#1e293b" 
                 strokeWidth="2" strokeDasharray="4 4" />
@@ -81,9 +83,10 @@ export default function CompassSlider() {
         <circle cx="100" cy="100" r="10" fill="#0f172a" stroke="#1e293b" strokeWidth="2" 
                 className="animate-pulse"/>
       </svg>
+      </div>
 
       {/* Center Readout */}
-      <div className="absolute top-[40%] pointer-events-none flex flex-col items-center">
+      <div className="absolute inset-0 flex flex-col justify-center pointer-events-none text-center">
         <span className="text-4xl font-mono font-black italic">
           {Math.round(value*180/Math.PI)}°
         </span>

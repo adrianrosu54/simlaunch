@@ -3,23 +3,34 @@ import Layout from '../layouts/Layout.astro';
 import "../styles/global.css";
 
 import Header from '../components/Header';
+import Card from '../components/Card';
+
 import SidePlots from "../components/SidePlots";
+import FieldPlots from '../components/FieldPlots';
 import FlywheelSlider from "../components/FlywheelSlider";
 import CompassSlider from "../components/CompassSlider";
 import ErrorBar from '../components/ErrorBar';
 ---
 
 <Layout>
-    <div class="flex flex-col h-screen w-screen m-0 p-0 bg-clk-background text-clk-text-primary" id="app">
+    <div class="flex flex-col h-full w-full m-0 p-0 bg-clk-background text-clk-text-primary" id="app">
         <Header/>
         <div class="flex flex-row justify-center h-full w-full" id="main-container">
-            <main class="flex flex-col justify-center h-full max-w-360 w-full" id="content">
+            <main class="grid grid-cols-4 grid-rows-3 max-w-360 w-full gap-0" id="content">
                 <SidePlots client:only/>
-                <section class="h-60 w-full flex justify-center items-center">
-                    <FlywheelSlider client:load/>
+                <Card className="col-span-2 row-span-2">
+                    <FieldPlots client:only/>
+                </Card>
+
+                <Card className="col-span-1 row-span-1">
                     <ErrorBar client:load/>
+                </Card>
+                <Card className="col-span-1 row-span-1">
+                    <FlywheelSlider client:load/>
+                </Card>
+                <Card className="col-span-1 row-span-1">
                     <CompassSlider client:load/>
-                </section>
+                </Card>
             </main>
         </div>
     </div>

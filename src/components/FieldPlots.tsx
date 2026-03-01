@@ -5,11 +5,11 @@ const Plot = lazy(() => import("react-plotly.js"));
 import { $simLogs } from "../stores/physics";
 import { FieldLayout, plotConfig } from "../utils/layouts";
 
-export default function FieldView() {
+export default function FieldPlots() {
   const simulationData = useStore($simLogs);
   
   return (
-    <section className="relative grow">
+    <section className="relative grow h-full w-full">
       <Plot
         data={[
           {
@@ -25,6 +25,7 @@ export default function FieldView() {
         ]}
         layout={FieldLayout} config={plotConfig}
         style={{height: "100%"}}
+        className="relative"
       />
     </section>
   );

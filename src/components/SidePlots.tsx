@@ -4,12 +4,14 @@ import { useStore } from "@nanostores/react";
 
 import { sideViewLayout, plotConfig, velocityLayout, accelerationLayout } from "../utils/layouts.ts";
 import { $simLogs } from "../stores/physics.ts";
+import Card from "./Card.tsx";
 
 export default function SidePlots() {
   const simulationData = useStore($simLogs);
 
   return (
-    <section className="relative grow grid grid-cols-1 md:grid-cols-4 grid-rows-3 gap-4 p-2">
+    <section className="relative col-span-2 row-span-2 grow grid grid-cols-2 grid-rows-3 gap-2">
+      <Card className="order-3 col-span-2 row-span-2">
       <Plot
         data={[
           {
@@ -27,51 +29,50 @@ export default function SidePlots() {
         ]}
         layout={ sideViewLayout } config={ plotConfig } useResizeHandler={true}
         style={{height: "100%"}} 
-        className="md:col-span-3 row-span-2 md:row-span-3 min-w-0 min-h-0 relative bg-clk-primary
-                  border-2 border-clk-secondary rounded-xl"
+        className="min-w-0 min-h-0 relative"/>
+      </Card>
+      <Card>
+      <Plot
+        data={[
+          {
+            x: simulationData.map(p => p.time),
+            y: simulationData.map(p => p.velocity),
+            type: "scatter",
+            mode: "lines",
+            name: "velocity",
+            line: {
+              color: "#ca8a04",
+              width: 2,
+              shape: "spline",
+            }
+          }
+        ]}
+        layout={ velocityLayout } config={ plotConfig } useResizeHandler={true}
+        style={{height: "100%"}}
+        className="max-h-100 relative"
       />
-      <div className="md:col-span-1 row-span-1 md:row-span-3 flex flex-row md:flex-col gap-4 min-h-0">
-        <Plot
-          data={[
-            {
-              x: simulationData.map(p => p.time),
-              y: simulationData.map(p => p.velocity),
-              type: "scatter",
-              mode: "lines",
-              name: "velocity",
-              line: {
-                color: "#ca8a04",
-                width: 2,
-                shape: "spline",
-              }
+      </Card>
+      <Card>
+      <Plot
+        data={[
+          {
+            x: simulationData.map(p => p.time),
+            y: simulationData.map(p => p.acceleration),
+            type: "scatter",
+            mode: "lines",
+            name: "acceleration",
+            line: {
+              color: "#7c3aed",
+              width: 2,
+              shape: "spline",
             }
-          ]}
-          layout={ velocityLayout } config={ plotConfig } useResizeHandler={true}
-          style={{height: "100%"}}
-          className="flex-1 max-h-100 relative bg-clk-primary
-                    border-2 border-clk-secondary rounded-xl"
-        />
-        <Plot
-          data={[
-            {
-              x: simulationData.map(p => p.time),
-              y: simulationData.map(p => p.acceleration),
-              type: "scatter",
-              mode: "lines",
-              name: "acceleration",
-              line: {
-                color: "#7c3aed",
-                width: 2,
-                shape: "spline",
-              }
-            }
-          ]}
-          layout={ accelerationLayout } config={ plotConfig } useResizeHandler={true}
-          style={{height: "100%"}}
-          className="flex-1 max-h-100 relative bg-clk-primary
-                    border-2 border-clk-secondary rounded-xl"
-        />
-      </div>
+          }
+        ]}
+        layout={ accelerationLayout } config={ plotConfig } useResizeHandler={true}
+        style={{height: "100%"}}
+        className="max-h-100 relative"
+      />
+      </Card>
     </section>
   );
 }

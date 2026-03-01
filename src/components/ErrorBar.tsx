@@ -22,7 +22,7 @@ export default function ErrorBar() {
       </span>
 
       {/* The Bar Container */}
-      <div className="grow flex flex-col-reverse justify-between w-full px-1 gap-1 relative">
+      <div className="grow flex flex-col-reverse justify-between w-full h-full px-1 relative">
         
         {/* Render Segments */}
         {Array.from({ length: totalSegments }).map((_, i) => {
@@ -31,7 +31,7 @@ export default function ErrorBar() {
           return (
             <div
               key={i}
-              className={`h-1 w-full rounded-sm
+              className={`h-0.5 w-full rounded-sm
                   transition-all transform-gpu duration-120
                 ${isActive
                   ? 'bg-rose-600 shadow-[0_0_6px_rgba(239,68,68,0.6)]' 
@@ -49,7 +49,7 @@ export default function ErrorBar() {
       </div>
 
       {/* Digital Readout */}
-      <div className="mt-4 flex flex-col items-center">
+      <div className="pt-4 flex flex-col items-center">
         <span className={`text-xl font-mono font-bold italic ${absoluteError > threshold ? 'text-rose-600' : 'text-clk-text-primary'}`}>
           {error.toFixed(2)}
         </span>

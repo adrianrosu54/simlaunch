@@ -66,8 +66,8 @@ export default function FlywheelSlider() {
   const dynamicColor = `hsl(${hue}, 80%, 50%)`;
 
   return (
-    <div className="flex flex-col items-center justify-start h-50">
-      <div className="relative w-full" style={{ height: '150px' }}>
+    <div className="flex flex-col items-center justify-start h-full min-h-50 w-full">
+      <div className="relative w-full">
         <svg
           ref={svgRef}
           viewBox="0 0 200 110"
@@ -97,7 +97,7 @@ export default function FlywheelSlider() {
         </svg>
 
         {/* Value Overlay */}
-        <div className="absolute bottom-3 inset-x-0 flex flex-col items-center pointer-events-none">
+        <div className="absolute top-[50%] inset-x-0 flex flex-col items-center pointer-events-none">
           <span className="text-4xl font-mono font-black text-clk-text-primary italic tracking-tighter" 
                 style={{ textShadow: `0 0 15px ${dynamicColor}66` }}>
             {value}
