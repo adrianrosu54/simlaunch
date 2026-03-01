@@ -11,10 +11,10 @@ export default function FieldPlots() {
   const isMobile = useMediaQuery("(max-width: 784px)");
   const view = useStore($view);
 
+  const simulationData = useStore($simLogs);
+
   if (isMobile && view !== "field")
     return null;
-
-  const simulationData = useStore($simLogs);
   
   return (
     <section className="relative grow size-full">

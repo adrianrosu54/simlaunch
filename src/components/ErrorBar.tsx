@@ -16,7 +16,7 @@ export default function ErrorBar() {
   const thresholdIndex = Math.round((threshold / maxError) * totalSegments);
 
   return (
-    <div className="flex flex-col items-center p-1 rounded-xl w-20 h-full min-h-40">
+    <div className="flex flex-col items-center p-1 rounded-xl w-20 h-full min-h-36">
       <span className="text-[13px] text-slate-500 font-bold tracking-tight mb-2 text-center">
         Error (m)
       </span>

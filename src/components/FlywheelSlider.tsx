@@ -66,7 +66,7 @@ export default function FlywheelSlider() {
   const dynamicColor = `hsl(${hue}, 80%, 50%)`;
 
   return (
-    <div className="flex flex-col items-center justify-center h-full min-h-40 w-full">
+    <div className="flex flex-col items-center justify-center h-full min-h-33 w-full">
       <div className="relative w-full">
         <svg
           ref={svgRef}

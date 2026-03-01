@@ -7,9 +7,27 @@ import BallisticModel from "../physics/BallisticModel";
 import { $simImpact } from "./target";
 
 // physics state
-export const $preset = map(rockyPreset);
+export const $preset = map<Preset>(rockyPreset);
 export const $simLogs = atom<PlotLogs>([]);
 let model = new BallisticModel(rockyPreset.config, rockyPreset.sim);
+
+$preset.listen((value, _, key) => {
+    switch (key) {
+        case "config": 
+        case "sim":
+            model = new BallisticModel(value.config, value.sim);
+            break;
+    }
+
+    const data: PlotLogs = [];
+    const impact = model.simulate(value.control, value.state, plotLogger(value.state, data));
+
+    $simLogs.set(data);
+    $simImpact.set(impact);
+});
+
+// initialise all
+updatePreset({type: "control", payload: rockyPreset.control});
 
 export type PresetAction =
     | { type: "all", payload: Preset }
@@ -37,18 +55,3 @@ export function updatePreset(action: PresetAction) {
             break;
     }
 }
-
-$preset.listen((value, _, key) => {
-    switch (key) {
-        case "config": 
-        case "sim":
-            model = new BallisticModel(value.config, value.sim);
-            break;
-    }
-
-    const data: PlotLogs = [];
-    const impact = model.simulate(value.control, value.state, plotLogger(value.state, data));
-
-    $simLogs.set(data);
-    $simImpact.set(impact);
-});

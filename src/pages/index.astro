@@ -22,8 +22,7 @@ import ErrorBar from '../components/ErrorBar';
                 </Card>
                 <SidePlots client:only/>
                 
-                
-                <Card className="col-span-1 row-span-1">
+                <Card className="not-md:order-last col-span-1 row-span-1">
                     <ErrorBar client:load/>
                 </Card>
                 <Card className="col-span-1 row-span-1">
@@ -31,9 +30,6 @@ import ErrorBar from '../components/ErrorBar';
                 </Card>
                 <Card className="col-span-1 row-span-1">
                     <CompassSlider client:load/>
-                </Card>
-                <Card className="col-span-1 row-span-1">
-                    <div/>
                 </Card>
             </main>
         </div>

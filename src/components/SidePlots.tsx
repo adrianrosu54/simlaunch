@@ -12,10 +12,11 @@ export default function SidePlots() {
   const isMobile = useMediaQuery("(max-width: 784px)");
   const view = useStore($view);
 
-  if (isMobile && view !== "side")
-    return (<div/>);
-
   const simulationData = useStore($simLogs);
+
+  if (isMobile && view !== "side")
+    return null;
+
 
   return (
     <section className="relative col-span-2 row-span-2 hidden md:grid grid-cols-2 grid-rows-3 gap-2">
