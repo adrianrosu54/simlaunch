@@ -66,7 +66,7 @@ export default function FlywheelSlider() {
   const dynamicColor = `hsl(${hue}, 80%, 50%)`;
 
   return (
-    <div className="flex flex-col items-center justify-start h-full min-h-50 w-full">
+    <div className="flex flex-col items-center justify-center h-full min-h-40 w-full">
       <div className="relative w-full">
         <svg
           ref={svgRef}
@@ -92,7 +92,6 @@ export default function FlywheelSlider() {
             strokeLinecap="round"
             strokeDasharray={circumference}
             strokeDashoffset={dashOffset}
-            className="transition-all ease-out transform-gpu will-change-transform"
           />
         </svg>
 

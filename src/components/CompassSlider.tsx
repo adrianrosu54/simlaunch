@@ -1,6 +1,6 @@
 import { useStore } from '@nanostores/react';
 import { $preset, updatePreset } from '../stores/physics';
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback, memo } from 'react';
 
 export default function CompassSlider() {
   const value = useStore($preset).control.turretAngle;
@@ -43,17 +43,8 @@ export default function CompassSlider() {
     };
   }, [isDragging, onChange, updateHeading]);
 
-  return (
-    <div 
-      ref={containerRef}
-      className="relative h-full flex flex-col items-center justify-center
-                select-none cursor-crosshair touch-none overflow-hidden"
-      onMouseDown={() => setIsDragging(true)}
-      onTouchStart={() => setIsDragging(true)}
-    >
-      <div className="relative aspect-square h-full max-w-full max-h-full
-                      flex items-center justify-center overflow-hidden">
-      <svg viewBox="0 0 200 200" className="aspect-square block bg-clk-background rounded-full transform overflow-hidden">
+  const StaticParts = memo(() => (
+      <g>
         {/* Outer Ring */}
         <circle cx="100" cy="100" r="85" fill="none" stroke="#1e293b" 
                 strokeWidth="2" strokeDasharray="4 4" />
@@ -69,19 +60,31 @@ export default function CompassSlider() {
             transform={`rotate(${deg + 90} 100 100)`} // +90 to align spikes to cardinal points
           />
         ))}
+      </g>
+  ));
+
+  return (
+    <div 
+      ref={containerRef}
+      className="relative h-full flex flex-col items-center justify-center
+                select-none cursor-crosshair touch-none overflow-hidden"
+      onMouseDown={() => setIsDragging(true)}
+      onTouchStart={() => setIsDragging(true)}
+    >
+      <div className="relative aspect-square h-full max-w-full max-h-full
+                      flex items-center justify-center overflow-hidden">
+      <svg viewBox="0 0 200 200" className="aspect-square block bg-clk-background rounded-full transform overflow-hidden">
+        <StaticParts />
 
         {/* Target Heading Needle (Interactive) */}
-        <g style={{ transform: `rotate(${-value}rad)`, transformOrigin: 'center' }} 
-            className=
-              "transition-all duration-75 transform-gpu will-change-transform animate-pulse">
+        <g style={{ transform: `rotate(${-value}rad)`, transformOrigin: 'center' }}>
           <line x1="100" y1="100" x2="185" y2="100" stroke="#ea580c" strokeWidth="4" strokeLinecap="round" />
           <circle cx="185" cy="100" r="4" fill="#ea580c" />
         </g>
         <circle cx="100" cy="100" r="4" fill="#3b82f6" opacity="0.5" />
 
         {/* Center Cap */}
-        <circle cx="100" cy="100" r="10" fill="#0f172a" stroke="#1e293b" strokeWidth="2" 
-                className="animate-pulse"/>
+        <circle cx="100" cy="100" r="10" fill="#0f172a" stroke="#1e293b" strokeWidth="2"/>
       </svg>
       </div>
 

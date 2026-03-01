@@ -16,12 +16,13 @@ import ErrorBar from '../components/ErrorBar';
     <div class="flex flex-col h-full w-full m-0 p-0 bg-clk-background text-clk-text-primary" id="app">
         <Header/>
         <div class="flex flex-row justify-center h-full w-full" id="main-container">
-            <main class="grid grid-cols-4 grid-rows-3 max-w-360 w-full gap-0" id="content">
-                <SidePlots client:only/>
+            <main class="grid grid-cols-2 grid-rows-4 md:grid-cols-4 md:grid-rows-3 max-w-320 w-full h-full gap-0" id="content">
                 <Card className="col-span-2 row-span-2">
                     <FieldPlots client:only/>
                 </Card>
-
+                <SidePlots client:only/>
+                
+                
                 <Card className="col-span-1 row-span-1">
                     <ErrorBar client:load/>
                 </Card>
@@ -30,6 +31,9 @@ import ErrorBar from '../components/ErrorBar';
                 </Card>
                 <Card className="col-span-1 row-span-1">
                     <CompassSlider client:load/>
+                </Card>
+                <Card className="col-span-1 row-span-1">
+                    <div/>
                 </Card>
             </main>
         </div>

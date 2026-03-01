@@ -5,12 +5,20 @@ import { useStore } from "@nanostores/react";
 import { sideViewLayout, plotConfig, velocityLayout, accelerationLayout } from "../utils/layouts.ts";
 import { $simLogs } from "../stores/physics.ts";
 import Card from "./Card.tsx";
+import { useMediaQuery } from "../hooks/useMediaQuery.ts";
+import { $view } from "../stores/settings.ts";
 
 export default function SidePlots() {
+  const isMobile = useMediaQuery("(max-width: 784px)");
+  const view = useStore($view);
+
+  if (isMobile && view !== "side")
+    return (<div/>);
+
   const simulationData = useStore($simLogs);
 
   return (
-    <section className="relative col-span-2 row-span-2 grow grid grid-cols-2 grid-rows-3 gap-2">
+    <section className="relative col-span-2 row-span-2 hidden md:grid grid-cols-2 grid-rows-3 gap-2">
       <Card className="order-3 col-span-2 row-span-2">
       <Plot
         data={[

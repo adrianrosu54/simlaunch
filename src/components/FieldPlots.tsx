@@ -4,12 +4,20 @@ const Plot = lazy(() => import("react-plotly.js"));
 
 import { $simLogs } from "../stores/physics";
 import { FieldLayout, plotConfig } from "../utils/layouts";
+import { $view } from "../stores/settings";
+import { useMediaQuery } from "../hooks/useMediaQuery";
 
 export default function FieldPlots() {
+  const isMobile = useMediaQuery("(max-width: 784px)");
+  const view = useStore($view);
+
+  if (isMobile && view !== "field")
+    return null;
+
   const simulationData = useStore($simLogs);
   
   return (
-    <section className="relative grow h-full w-full">
+    <section className="relative grow size-full">
       <Plot
         data={[
           {
@@ -25,7 +33,7 @@ export default function FieldPlots() {
         ]}
         layout={FieldLayout} config={plotConfig}
         style={{height: "100%"}}
-        className="relative"
+        className="relative size-full"
       />
     </section>
   );
