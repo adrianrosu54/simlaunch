@@ -1,13 +1,12 @@
-import { useApp } from '../../context/AppProvider.tsx';
-import type { FlywheelSliderInput } from '../../utils/inputTypes.ts';
+import { useStore } from '@nanostores/react';
 import { useState, useRef, useEffect, useCallback } from 'react';
+import { $preset, updatePreset } from '../stores/physics.ts';
 
-export default function FlywheelSlider({ 
-  min, max, value, onChange
-}: FlywheelSliderInput) {
-  // handle value/ui decouping
-  const { perfMode } = useApp();
-  const [uiValue, setUiValue] = useState(value);
+export default function FlywheelSlider() {
+  const min = 1000;
+  const max = 4200;
+  const value = useStore($preset).control.flywheelVelocity;
+  const onChange = (value: number) => updatePreset({type: "control", payload: {flywheelVelocity: value}});
 
   const svgRef = useRef<SVGSVGElement>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -34,10 +33,8 @@ export default function FlywheelSlider({
 
     const newValue = Math.round(pct * (max - min) + min);
       
-    setUiValue(newValue);
-    if (!perfMode)
-      onChange(newValue);
-  }, [max, min, onChange, perfMode]);
+    onChange(newValue);
+  }, [max, min, onChange]);
 
   // Global listeners for dragging outside the SVG
   useEffect(() => {
@@ -45,8 +42,6 @@ export default function FlywheelSlider({
     const handleTouchMove = (e: TouchEvent) => isDragging && updateValue(e.touches[0].clientX, e.touches[0].clientY);
     const handleUp = () => {
       setIsDragging(false);
-      if (perfMode)
-        onChange(uiValue);
     }
 
     if (isDragging) {
@@ -61,9 +56,9 @@ export default function FlywheelSlider({
       window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchend', handleUp);
     };
-  }, [isDragging, updateValue, perfMode, uiValue, onChange]);
+  }, [isDragging, updateValue, onChange]);
 
-  const pct = (uiValue - min) / (max - min);
+  const pct = (value - min) / (max - min);
   const dashOffset = circumference * (1 - pct);
 
   // dynamic colors
@@ -97,9 +92,7 @@ export default function FlywheelSlider({
             strokeLinecap="round"
             strokeDasharray={circumference}
             strokeDashoffset={dashOffset}
-            className={perfMode 
-              ? "transition-none"
-              : "transition-all ease-out transform-gpu will-change-transform"}
+            className="transition-all ease-out transform-gpu will-change-transform"
           />
         </svg>
 
@@ -107,7 +100,7 @@ export default function FlywheelSlider({
         <div className="absolute bottom-3 inset-x-0 flex flex-col items-center pointer-events-none">
           <span className="text-4xl font-mono font-black text-clk-text-primary italic tracking-tighter" 
                 style={{ textShadow: `0 0 15px ${dynamicColor}66` }}>
-            {uiValue}
+            {value}
           </span>
           <span className="text-[13px] text-clk-text-secondary font-bold 
                           tracking-widest mb-1 tabular-nums">

@@ -1,10 +1,13 @@
 import { lazy } from "react";
 const Plot = lazy(() => import("react-plotly.js"));
+import { useStore } from "@nanostores/react";
 
-import { sideViewLayout, plotConfig, velocityLayout, accelerationLayout } from "../../utils/layouts.ts";
-import type { PlotLogs } from "../../physics/plotLogging.ts";
+import { sideViewLayout, plotConfig, velocityLayout, accelerationLayout } from "../utils/layouts.ts";
+import { $simLogs } from "../stores/physics.ts";
 
-export default function SidePlots({simulationData}: {simulationData: PlotLogs}) {
+export default function SidePlots() {
+  const simulationData = useStore($simLogs);
+
   return (
     <section className="relative grow grid grid-cols-1 md:grid-cols-4 grid-rows-3 gap-4 p-2">
       <Plot

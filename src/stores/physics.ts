@@ -1,9 +1,10 @@
 import { atom, map } from "nanostores";
-import { rockyPreset, type Preset } from "../physics/presets";
+
 import type { LauncherConfig, SimulationSetup, RobotState, ControlInput } from "../physics/simulationTypes";
-import BallisticModel from "../physics/BallisticModel";
-import { plotLogger, type PlotLogs } from "../physics/plotLogging";
 import type { Pose } from "../physics/fieldPositions";
+import { rockyPreset, type Preset } from "../physics/presets";
+import { plotLogger, type PlotLogs } from "../physics/plotLogging";
+import BallisticModel from "../physics/BallisticModel";
 
 // physics state
 export const $preset = map(rockyPreset);

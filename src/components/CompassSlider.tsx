@@ -1,10 +1,10 @@
-import { useApp } from '../../context/AppProvider.tsx';
-import type { CompassAngle } from '../../utils/inputTypes';
+import { useStore } from '@nanostores/react';
+import { $preset, updatePreset } from '../stores/physics';
 import { useState, useRef, useEffect, useCallback } from 'react';
 
-export default function CompassSlider({ value, onChange }: CompassAngle) {
-  const {perfMode} = useApp();
-  const [uiValue, setUiValue] = useState(value);
+export default function CompassSlider() {
+  const value = useStore($preset).control.turretAngle;
+  const onChange = (value: number) => updatePreset({type: "control", payload: {turretAngle: value}});
 
   const containerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -19,17 +19,14 @@ export default function CompassSlider({ value, onChange }: CompassAngle) {
     // normalize
     if (angle < 0) angle += Math.PI*2;
     
-    setUiValue(angle);
-    if (!perfMode)
-        onChange(angle);
-  }, [onChange, perfMode]);
+    onChange(angle);
+  }, [onChange]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => isDragging && updateHeading(e.clientX, e.clientY);
     const handleTouchMove = (e: TouchEvent) => isDragging && updateHeading(e.touches[0].clientX, e.touches[0].clientY);
     const handleUp = () => {
       setIsDragging(false);
-      if (perfMode) onChange(uiValue);
     };
 
     if (isDragging) {
@@ -44,7 +41,7 @@ export default function CompassSlider({ value, onChange }: CompassAngle) {
       window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchend', handleUp);
     };
-  }, [isDragging, onChange, perfMode, uiValue, updateHeading]);
+  }, [isDragging, onChange, updateHeading]);
 
   return (
     <div 
@@ -72,10 +69,9 @@ export default function CompassSlider({ value, onChange }: CompassAngle) {
         ))}
 
         {/* Target Heading Needle (Interactive) */}
-        <g style={{ transform: `rotate(${-uiValue}rad)`, transformOrigin: 'center' }} 
-            className={perfMode
-              ? "transition-none"
-              : "transition-all duration-75 transform-gpu will-change-transform animate-pulse"}>
+        <g style={{ transform: `rotate(${-value}rad)`, transformOrigin: 'center' }} 
+            className=
+              "transition-all duration-75 transform-gpu will-change-transform animate-pulse">
           <line x1="100" y1="100" x2="185" y2="100" stroke="#ea580c" strokeWidth="4" strokeLinecap="round" />
           <circle cx="185" cy="100" r="4" fill="#ea580c" />
         </g>
@@ -83,13 +79,13 @@ export default function CompassSlider({ value, onChange }: CompassAngle) {
 
         {/* Center Cap */}
         <circle cx="100" cy="100" r="10" fill="#0f172a" stroke="#1e293b" strokeWidth="2" 
-                className={perfMode ? "" : "animate-pulse"}/>
+                className="animate-pulse"/>
       </svg>
 
       {/* Center Readout */}
       <div className="absolute top-[40%] pointer-events-none flex flex-col items-center">
         <span className="text-4xl font-mono font-black italic">
-          {Math.round(uiValue*180/Math.PI)}°
+          {Math.round(value*180/Math.PI)}°
         </span>
         <span className="text-[13px] text-clk-text-secondary font-bold tracking-widest mb-1 tabular-nums">
           Heading angle
