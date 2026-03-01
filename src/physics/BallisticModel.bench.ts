@@ -2,7 +2,7 @@ import { bench, describe } from "vitest";
 
 import BallisticModel from "./BallisticModel.ts";
 import { rockyPreset } from "./presets.ts";
-import { sidePlotLogger, type SidePlotData } from "../utils/plotLogging.ts";
+import { plotLogger, type PlotLogs } from "./plotLogging.ts";
 
 describe("Ballistic simulation performance", () => {
     const preset = rockyPreset;
@@ -13,8 +13,8 @@ describe("Ballistic simulation performance", () => {
         model.simulate(preset.control, preset.state);
     }, {time: 1000, warmupTime: 100});
 
-    const data: SidePlotData = [];
-    const logger = sidePlotLogger(preset.state, data);
+    const data: PlotLogs = [];
+    const logger = plotLogger(preset.state, data);
 
     bench("Log trajectory, velocity and acceleration", () => {
         model.simulate(preset.control, preset.state, logger);

@@ -1,5 +1,6 @@
 import type { ControlInput, LauncherConfig, RobotState, SimulationSetup } from "./simulationTypes.ts";
 import type { SimulationLogger } from "./logger.ts";
+import type { Pose } from "./fieldPositions.ts";
 
 const GRAVITY: number = 9.81;
 
@@ -24,7 +25,7 @@ export default class BallisticModel {
         input: ControlInput,
         state: RobotState,
         logger?: SimulationLogger
-    ): {x: number, y: number} {
+    ): Pose {
         const ts = this.sim.timeStep;
         const drag = this.config.dragFactor * this.config.dragCoefficient;
 

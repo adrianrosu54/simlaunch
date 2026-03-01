@@ -1,7 +1,7 @@
-import type { RobotState } from "../physics/simulationTypes.ts";
-import type { SimulationLogger } from "../physics/logger.ts";
+import type { RobotState } from "./simulationTypes.ts";
+import type { SimulationLogger } from "./logger.ts";
 
-export type SidePlotData = {
+export type PlotLogs = {
     time: number,
     x: number,
     y: number,
@@ -11,7 +11,7 @@ export type SidePlotData = {
     acceleration: number;
 }[];
 
-export function sidePlotLogger(robotState: RobotState, data: SidePlotData): SimulationLogger {
+export function plotLogger(robotState: RobotState, data: PlotLogs): SimulationLogger {
     return (state) => {
         data.push({
             time: state.time,

@@ -11,26 +11,6 @@ export type Preset = {
     state: RobotState;
     control: ControlInput;
 }
-export type PresetAction = 
-    | { type: "config", payload: Partial<LauncherConfig> }
-    | { type: "sim", payload: Partial<SimulationSetup> }
-    | { type: "state", payload: Partial<RobotState> }
-    | { type: "control", payload: Partial<ControlInput> };
-
-export function presetReducer(state: Preset, action: PresetAction): Preset {
-    switch (action.type) {
-        case "config": 
-            return {...state, config: {...state.config, ...action.payload}};
-        case "sim":
-            return {...state, sim: {...state.sim, ...action.payload}};
-        case "state":
-            return {...state, state: {...state.state, ...action.payload}};
-        case "control":
-            return {...state, control: {...state.control, ...action.payload}};
-        default:
-            return state;
-    }
-}
 
 export const rockyPreset: Preset = {
     config: {

@@ -2,9 +2,9 @@ import { lazy } from "react";
 const Plot = lazy(() => import("react-plotly.js"));
 
 import { sideViewLayout, plotConfig, velocityLayout, accelerationLayout } from "../../utils/layouts.ts";
-import type { SidePlotData } from "../../utils/plotLogging.ts";
+import type { PlotLogs } from "../../physics/plotLogging.ts";
 
-export default function SidePlots({simulationData}: {simulationData: SidePlotData}) {
+export default function SidePlots({simulationData}: {simulationData: PlotLogs}) {
   return (
     <section className="relative grow grid grid-cols-1 md:grid-cols-4 grid-rows-3 gap-4 p-2">
       <Plot

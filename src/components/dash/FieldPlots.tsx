@@ -2,9 +2,9 @@ import { lazy } from "react";
 const Plot = lazy(() => import("react-plotly.js"));
 
 import { FieldLayout, plotConfig } from "../../utils/layouts";
-import type { SidePlotData } from "../../utils/plotLogging";
+import type { PlotLogs } from "../../physics/plotLogging";
 
-export default function FieldView({simulationData}: {simulationData: SidePlotData}) {
+export default function FieldView({simulationData}: {simulationData: PlotLogs}) {
   return (
     <section className="relative grow">
       <Plot
