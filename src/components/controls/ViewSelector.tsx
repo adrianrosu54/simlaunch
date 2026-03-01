@@ -1,4 +1,4 @@
-import { useApp, type View } from "@/context/AppProvider";
+import { useApp, type View } from "../../context/AppProvider";
 
 const views: View[] = ["Side View", "Top View"];
 

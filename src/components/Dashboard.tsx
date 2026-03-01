@@ -7,7 +7,7 @@ import BallisticModel from "../physics/BallisticModel.ts";
 import { presetReducer, rockyPreset } from "../physics/presets.ts";
 
 import ControlPanel from "./dash/ControlPanel.tsx";
-import { useApp } from "@/context/AppProvider.tsx";
+import { useApp } from "../context/AppProvider.tsx";
 import SidePlots from "./dash/SidePlots.tsx";
 import FieldView from "./dash/FieldPlots.tsx";
 

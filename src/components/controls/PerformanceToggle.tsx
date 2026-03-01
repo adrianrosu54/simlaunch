@@ -1,4 +1,4 @@
-import { useApp } from "@/context/AppProvider.tsx";
+import { useApp } from "../../context/AppProvider.tsx";
 
 export default function PerformanceToggle() {
   const {perfMode, setPerfMode} = useApp();

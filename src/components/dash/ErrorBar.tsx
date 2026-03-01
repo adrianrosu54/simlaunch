@@ -1,4 +1,4 @@
-import { useApp } from '@/context/AppProvider.tsx';
+import { useApp } from '../../context/AppProvider.tsx';
 import type { ErrorBarData } from '../../utils/inputTypes.ts';
 
 export default function ErrorBar({ 

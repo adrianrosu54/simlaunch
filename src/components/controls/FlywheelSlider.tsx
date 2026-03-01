@@ -1,4 +1,4 @@
-import { useApp } from '@/context/AppProvider.tsx';
+import { useApp } from '../../context/AppProvider.tsx';
 import type { FlywheelSliderInput } from '../../utils/inputTypes.ts';
 import { useState, useRef, useEffect, useCallback } from 'react';
 

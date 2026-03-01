@@ -1,8 +1,8 @@
 import { lazy } from "react";
 const Plot = lazy(() => import("react-plotly.js"));
 
-import { FieldLayout, plotConfig } from "@/utils/layouts";
-import type { SidePlotData } from "@/utils/plotLogging";
+import { FieldLayout, plotConfig } from "../../utils/layouts";
+import type { SidePlotData } from "../../utils/plotLogging";
 
 export default function FieldView({simulationData}: {simulationData: SidePlotData}) {
   return (

@@ -1,5 +1,5 @@
-import { useApp } from '@/context/AppProvider.tsx';
-import type { CompassAngle } from '@/utils/inputTypes';
+import { useApp } from '../../context/AppProvider.tsx';
+import type { CompassAngle } from '../../utils/inputTypes';
 import { useState, useRef, useEffect, useCallback } from 'react';
 
 export default function CompassSlider({ value, onChange }: CompassAngle) {
