@@ -6,6 +6,7 @@ import { $simLogs } from "../stores/physics";
 import { FieldLayout, plotConfig } from "../utils/layouts";
 import { $view } from "../stores/settings";
 import { useMediaQuery } from "../hooks/useMediaQuery";
+import Card from "./Card";
 
 export default function FieldPlots() {
   const isMobile = useMediaQuery("(max-width: 784px)");
@@ -17,7 +18,7 @@ export default function FieldPlots() {
     return null;
   
   return (
-    <section className="relative grow size-full">
+    <Card className="relative grow col-span-2 row-span-2">
       <Plot
         data={[
           {
@@ -35,6 +36,6 @@ export default function FieldPlots() {
         style={{height: "100%"}}
         className="relative size-full"
       />
-    </section>
+    </Card>
   );
 }

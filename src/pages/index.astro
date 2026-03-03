@@ -10,6 +10,7 @@ import FieldPlots from '../components/FieldPlots';
 import FlywheelSlider from "../components/FlywheelSlider";
 import CompassSlider from "../components/CompassSlider";
 import ErrorBar from '../components/ErrorBar';
+import ImpactReading from '../components/ImpactCard';
 ---
 
 <Layout>
@@ -17,19 +18,20 @@ import ErrorBar from '../components/ErrorBar';
         <Header/>
         <div class="flex flex-row justify-center h-full w-full" id="main-container">
             <main class="grid grid-cols-2 grid-rows-4 md:grid-cols-4 md:grid-rows-3 max-w-320 w-full h-full gap-0" id="content">
-                <Card className="col-span-2 row-span-2">
-                    <FieldPlots client:only/>
-                </Card>
+                <FieldPlots client:only/>
                 <SidePlots client:only/>
                 
                 <Card className="not-md:order-last col-span-1 row-span-1">
-                    <ErrorBar client:load/>
+                    <div class="flex flex-row justify-between size-full">
+                        <ImpactReading client:visible/>
+                        <ErrorBar client:visible/>
+                    </div>
                 </Card>
-                <Card className="col-span-1 row-span-1">
-                    <FlywheelSlider client:load/>
-                </Card>
-                <Card className="col-span-1 row-span-1">
-                    <CompassSlider client:load/>
+                <Card className="col-span-2 row-span-1">
+                    <div class="h-full w-full grid grid-cols-2 grid-rows-1 overflow-hidden">
+                        <FlywheelSlider client:visible/>
+                        <CompassSlider client:visible/>
+                    </div>
                 </Card>
             </main>
         </div>

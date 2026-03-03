@@ -19,7 +19,7 @@ export default function SidePlots() {
 
 
   return (
-    <section className="relative col-span-2 row-span-2 hidden md:grid grid-cols-2 grid-rows-3 gap-2">
+    <section className="relative col-span-2 row-span-2 grid grid-cols-2 grid-rows-3 gap-2">
       <Card className="order-3 col-span-2 row-span-2">
       <Plot
         data={[

@@ -66,18 +66,18 @@ export default function FlywheelSlider() {
   const dynamicColor = `hsl(${hue}, 80%, 50%)`;
 
   return (
-    <div className="flex flex-col items-center justify-center h-full min-h-33 w-full">
+    <div className="flex flex-col items-center justify-start h-full min-h-33 w-full">
       <div className="relative w-full">
         <svg
           ref={svgRef}
-          viewBox="0 0 200 110"
+          viewBox="0 0 180 110"
           className="w-full cursor-pointer touch-none"
           onMouseDown={() => setIsDragging(true)}
           onTouchStart={() => setIsDragging(true)}
         >
           {/* background arc */}
           <path
-            d={`M 20,100 A 80,80 0 0 1 180,100`}
+            d={`M 10,100 A 80,80 0 0 1 170,100`}
             fill="none"
             stroke="#1e293b"
             strokeWidth="12"
@@ -85,7 +85,7 @@ export default function FlywheelSlider() {
           />
           {/* progress arc */}
           <path
-            d={`M 20,100 A 80,80 0 0 1 180,100`}
+            d={`M 10,100 A 80,80 0 0 1 170,100`}
             fill="none"
             stroke={dynamicColor}
             strokeWidth="12"
