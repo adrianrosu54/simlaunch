@@ -6,6 +6,7 @@ import Card from "../components/Card";
 
 import SideBarToggle from "../components/SideBarToggle";
 import ViewToggle from "../components/ViewToggle";
+
 import FieldPlots from "../components/FieldPlots";
 import SidePlots from "../components/SidePlots";
 import FlywheelSlider from "../components/FlywheelSlider";
@@ -20,14 +21,14 @@ import ImpactReading from '../components/ImpactCard';
                 bg-clk-secondary flex flex-col justify-start overflow-hidden" 
                 id="sidebar">
             <div class="flex flex-row justify-end p-2">
-                <SideBarToggle client:only type="close"/>
+                <SideBarToggle client:load type="close"/>
             </div>
         </aside>
 
         <div class="flex flex-col size-full m-0 p-0 bg-clk-background" id="contents">
             <header class="flex flex-row justify-between p-1 bg-clk-primary border-b-2 border-clk-accent">
                 <div class="p-2">
-                    <SideBarToggle client:only type="open" />
+                    <SideBarToggle client:load type="open" />
                 </div>
                 <h1 class="text-2xl font-bold text-center">SimLaunch</h1>
                 <div class="p-2">
@@ -57,4 +58,20 @@ import ImpactReading from '../components/ImpactCard';
             </div>
         </div>
     </div>
+    <script>
+        import { $isSidebarOpen } from "../stores/settings";
+        const sidebar = document.getElementById("sidebar");
+
+        $isSidebarOpen.subscribe((isOpen) => {
+            if (isOpen) {
+                sidebar?.classList.toggle("md:w-64", true);
+                sidebar?.classList.toggle("w-full", true);
+                sidebar?.classList.toggle("w-0", false);
+            } else {
+                sidebar?.classList.toggle("md:w-64", false);
+                sidebar?.classList.toggle("w-full", false);
+                sidebar?.classList.toggle("w-0", true);
+            }
+        })
+    </script>
 </Layout>
