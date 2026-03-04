@@ -1,9 +1,5 @@
-import type { 
-    ControlInput,
-    LauncherConfig, 
-    RobotState, 
-    SimulationSetup 
-} from "./simulationTypes.ts";
+import type { ControlInput, LauncherConfig, 
+    RobotState, SimulationSetup } from "./simulationTypes.ts";
 
 export type Preset = {
     config: LauncherConfig;
@@ -19,7 +15,7 @@ export const rockyPreset: Preset = {
         dragFactor: 1.2 * ((0.127 / 2)**2 * Math.PI) / (2 * 0.075),
         launchEfficiency: 0.52,
         dragCoefficient: 0.47 + 0.04,
-        ticksToRPM: (tps) => tps * 60 / 43.008,
+        ticksToRPM: 60 / 43.008,
     },
     sim: {
         launchHeight: 0.26,

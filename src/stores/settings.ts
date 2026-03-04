@@ -1,4 +1,4 @@
-import { atom } from "nanostores";
+import { atom, map } from "nanostores";
 
 export type View = "side" | "field";
 export const $view = atom<View>("field");

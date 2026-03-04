@@ -4,7 +4,7 @@ export type LauncherConfig = {
     dragFactor: number;
     launchEfficiency: number;
     dragCoefficient: number;
-    ticksToRPM: (tps: number) => number;
+    ticksToRPM: number;
 }
 
 export type SimulationSetup = {

@@ -6,6 +6,7 @@ import Card from "../components/Card";
 
 import SideBarToggle from "../components/SideBarToggle";
 import ViewToggle from "../components/ViewToggle";
+import ConfigSettings from "../components/ConfigSettings";
 
 import FieldPlots from "../components/FieldPlots";
 import SidePlots from "../components/SidePlots";
@@ -13,20 +14,27 @@ import FlywheelSlider from "../components/FlywheelSlider";
 import CompassSlider from "../components/CompassSlider";
 import ErrorBar from '../components/ErrorBar';
 import ImpactReading from '../components/ImpactCard';
+
 ---
 
 <Layout>
     <div class="flex flex-row h-full w-full m-0 p-0 text-clk-text-primary overflow-hidden">
         <aside class="fixed lg:relative left-0 z-50 w-0 min-w-0 h-full transition-all duration-300 ease-in-out
-                bg-clk-secondary flex flex-col justify-start overflow-hidden" 
+                flex flex-col justify-start overflow-hidden" 
                 id="sidebar">
-            <div class="flex flex-row justify-end p-2">
-                <SideBarToggle client:load type="close"/>
+            <div class="absolute top-0 right-0 h-full w-screen md:w-full
+                    flex flex-col justify-start bg-clk-secondary overflow-hidden"
+                    id="sidebar-inner">
+                <div class="flex flex-row justify-end py-2 max-h-14">
+                    <SideBarToggle client:load type="close"/>
+                </div>
+                
+                <ConfigSettings client:load />
             </div>
         </aside>
 
         <div class="flex flex-col size-full m-0 p-0 bg-clk-background" id="contents">
-            <header class="flex flex-row justify-between p-1 bg-clk-primary border-b-2 border-clk-accent">
+            <header class="flex flex-row justify-between max-h-14 p-1 bg-clk-primary border-b-2 border-clk-accent">
                 <div class="p-2">
                     <SideBarToggle client:load type="open" />
                 </div>
