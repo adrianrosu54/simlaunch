@@ -2,11 +2,15 @@
 
 @theme inline {
     --color-clk-accent: var(--color-orange-600);
-    --color-clk-primary: var(--color-slate-900);
-    --color-clk-secondary: var(--color-slate-800);
-    --color-clk-background: var(--color-slate-950);
+    --color-clk-background: var(--color-zinc-950);
+    --color-clk-primary: var(--color-zinc-900);
+    --color-clk-secondary: var(--color-zinc-800);
 
-    --color-clk-text-primary: var(--color-slate-200);
-    --color-clk-text-secondary: var(--color-slate-500);
-    --color-clk-text-tertiary: var(--color-slate-600);
+    --color-red: var(--color-rose-600);
+
+    --color-clk-text-primary: var(--color-zinc-100);
+    --color-clk-text-secondary: var(--color-zinc-400);
+    --color-clk-text-graph: var(--color-zinc-500);
+
+    --chart-bg: var(--color-zinc-800);
 }

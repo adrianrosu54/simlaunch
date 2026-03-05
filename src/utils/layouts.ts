@@ -1,4 +1,5 @@
 import type { Layout, Config } from "plotly.js";
+import { graphText as graphTextColor } from "./theme";
 
 export const plotConfig: Partial<Config> = {
     responsive: true, 
@@ -7,39 +8,43 @@ export const plotConfig: Partial<Config> = {
 
 export const sideViewLayout: Partial<Layout> = {
     autosize: true,
-    margin: {t: 35, b: 60, l: 60, r: 20},
+    margin: {t: 30, b: 20, l: 20, r: 20},
     paper_bgcolor: "transparent",
     plot_bgcolor: "transparent",
 
-    font: { family: 'Inter, sans-serif', color: '#64748b' },
+    font: { family: 'Inter, sans-serif', color: graphTextColor },
     title: {text: "Predicted Trajectory"},
 
     xaxis: {
         title: {text: "Distance (m)"},
-        gridcolor: "#334155",
-        zerolinecolor: "#334155",
+        showgrid: false,
+        zeroline: false,
         scaleratio: 1,
         fixedrange: true,
         dtick: 0.25,
+        ticklabelposition: "inside",
+        color: graphTextColor,
     },
     yaxis: {
         title: {text: "Height (m)"},
-        gridcolor: "#334155",
-        zerolinecolor: "#334155",
+        showgrid: false,
+        zeroline: false,
         scaleanchor: "x",
         scaleratio: 1,
-        fixedrange: true,
         dtick: 0.25,
+        ticklabelposition: "inside",
+        color: graphTextColor,
     },
     hovermode: "closest",
 }
 
 export const velocityLayout: Partial<Layout> = {
     ...sideViewLayout,
+    margin: {t: 5, b: 5, l: 12, r: 12},
     title: undefined,
     xaxis: {
         ...sideViewLayout.xaxis,
-        title: {text: "Time (s)"},
+        title: undefined,
         scaleratio: undefined,
         scaleanchor: undefined,
         dtick: undefined,
@@ -69,30 +74,30 @@ const lineType = {
 
 export const FieldLayout: Partial<Layout> = {
     autosize: true,
-    margin: {t: 35, b: 60, l: 60, r: 20},
+    margin: {t: 30, b: 40, l: 45, r: 45},
     paper_bgcolor: "transparent",
     plot_bgcolor: "transparent",
 
-    font: { family: 'Inter, sans-serif', color: '#64748b' },
+    font: { family: 'Inter, sans-serif', color: graphTextColor },
     title: {text: "Field view"},
 
     xaxis: {
-        title: {text: "x (m)"},
-        gridcolor: "#334155",
-        zerolinecolor: "#334155",
+        showgrid: false,
+        zeroline: false,
         scaleratio: 1,
         fixedrange: true,
         dtick: 0.6096,
+        ticklabelposition: "outside",
     },
     yaxis: {
-        title: {text: "y (m)"},
-        gridcolor: "#334155",
-        zerolinecolor: "#334155",
+        showgrid: false,
+        zeroline: false,
         scaleanchor: "x",
         scaleratio: 1,
         fixedrange: true,
         dtick: 0.6096,
         tick0: 0,
+        ticklabelposition: "outside",
     },
     hovermode: "closest",
 

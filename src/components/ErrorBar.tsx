@@ -22,8 +22,8 @@ export default function ErrorBar() {
               key={i}
               className={`h-1 md:h-2 w-full\
                 ${isActive
-                  ? 'bg-rose-600' 
-                  : 'bg-slate-800'
+                  ? 'bg-red' 
+                  : 'bg-clk-secondary'
                 }`}
             />
           );

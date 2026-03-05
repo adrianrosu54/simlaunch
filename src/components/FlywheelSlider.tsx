@@ -79,7 +79,7 @@ export default function FlywheelSlider() {
           <path
             d={`M 10,100 A 80,80 0 0 1 170,100`}
             fill="none"
-            stroke="#1e293b"
+            className="stroke-clk-secondary"
             strokeWidth="12"
             strokeLinecap="round"
           />
@@ -97,8 +97,7 @@ export default function FlywheelSlider() {
 
         {/* Value Overlay */}
         <div className="absolute top-[50%] inset-x-0 flex flex-col items-center pointer-events-none">
-          <span className="text-4xl font-mono font-black text-clk-text-primary italic tracking-tighter" 
-                style={{ textShadow: `0 0 15px ${dynamicColor}66` }}>
+          <span className="text-4xl font-mono font-black text-clk-text-primary italic tracking-tighter">
             {value}
           </span>
           <span className="text-[13px] text-clk-text-secondary font-bold 

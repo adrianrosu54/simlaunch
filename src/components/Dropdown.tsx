@@ -11,11 +11,11 @@ export default function Dropdown({title, children}: {
     <section className="w-full">
       <button onClick={() => setIsOpen(!isOpen)}
           className="flex flex-row w-full items-center justify-between px-2 py-2
-            hover:bg-clk-background/50 focus:bg-clk-background/50 hover:cursor-pointer">
+            hover:bg-clk-background/50 not-md:focus:bg-clk-background/50 hover:cursor-pointer">
         <span>{title}</span>
         {isOpen
-          ? <ChevronDown />
-          : <ChevronUp />
+          ? <ChevronUp />
+          : <ChevronDown />
         }
       </button>
 

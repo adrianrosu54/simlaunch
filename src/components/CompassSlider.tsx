@@ -46,7 +46,7 @@ export default function CompassSlider() {
   const StaticParts = memo(() => (
       <g>
         {/* Outer Ring */}
-        <circle cx="100" cy="100" r="85" fill="none" stroke="#1e293b" 
+        <circle cx="100" cy="100" r="85" fill="none" className='stroke-clk-secondary' 
                 strokeWidth="2" strokeDasharray="4 4" />
 
         {/* Cardinal Spikes */}
@@ -54,7 +54,7 @@ export default function CompassSlider() {
           <line
             key={deg}
             x1="100" y1="20" x2="100" y2="10"
-            stroke="#475569"
+            className='stroke-clk-secondary'
             strokeWidth="3"
             strokeLinecap="round"
             transform={`rotate(${deg + 90} 100 100)`} // +90 to align spikes to cardinal points
@@ -73,18 +73,18 @@ export default function CompassSlider() {
     >
       <div className="relative aspect-square h-full max-w-full max-h-full
                       flex items-center justify-center overflow-hidden">
-      <svg viewBox="0 0 200 200" className="aspect-square block bg-clk-background rounded-full transform overflow-hidden">
+      <svg viewBox="0 0 200 200" className="aspect-square block bg-clk-primary rounded-full transform overflow-hidden">
         <StaticParts />
 
         {/* Target Heading Needle (Interactive) */}
         <g style={{ transform: `rotate(${-value}rad)`, transformOrigin: 'center' }}>
-          <line x1="100" y1="100" x2="185" y2="100" stroke="#ea580c" strokeWidth="4" strokeLinecap="round" />
-          <circle cx="185" cy="100" r="4" fill="#ea580c" />
+          <line x1="100" y1="100" x2="185" y2="100" strokeWidth="4" strokeLinecap="round" className='stroke-clk-accent' />
+          <circle cx="185" cy="100" r="4" className='fill-clk-accent' />
         </g>
-        <circle cx="100" cy="100" r="4" fill="#3b82f6" opacity="0.5" />
+        <circle cx="100" cy="100" r="4" opacity="0.5" className="fill-clk-accent" />
 
         {/* Center Cap */}
-        <circle cx="100" cy="100" r="10" fill="#0f172a" stroke="#1e293b" strokeWidth="2"/>
+        <circle cx="100" cy="100" r="10" strokeWidth="2" className='fill-clk-background stroke-clk-secondary'/>
       </svg>
       </div>
 

@@ -51,18 +51,18 @@ export default function SettingInput({label, category, realValue, onChange, unit
         <label>{label}</label>
       </div>
 
-      <div className="flex flex-row overflow-hidden bg-slate-900 rounded-3xl p-1"
+      <div className="flex flex-row overflow-hidden bg-clk-primary rounded-3xl p-1"
           >
         <input type="number" 
           value={inputValue}
           onChange={handleChange}
           onBlur={handleBlur}
           onFocus={handleFocus}
-          className="w-full px-4 py-0.5 rounded-xl bg-slate-950 outline-none"
+          className="w-full pl-4 rounded-xl bg-clk-background outline-none"
         />
         {units && (
           units.map((value, index, array) =>
-            <button key={value} className={`px-3 py-0.5 opacity-90 hover:opacity-100 hover:cursor-pointer\
+            <button key={value} className={`px-3 w-15 opacity-90 hover:opacity-100 hover:cursor-pointer\
                 ${value === currentUnit ? "bg-clk-accent" : "bg-clk-secondary"}\
                 ${index === 0 ? "rounded-l-xl pl-4" : ""}\
                 ${index === array.length-1 ? "rounded-r-xl pr-4" : ""}`}
