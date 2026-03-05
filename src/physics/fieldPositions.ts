@@ -4,10 +4,10 @@ export type Pose = {
 }
 
 export const redGoal: Pose = {
-    x: 134 * 0.0254,
-    y: 134 * 0.0254,
+    x: 136 * 0.0254,
+    y: 136 * 0.0254,
 };
 export const blueGoal: Pose = {
-    x: 10  * 0.0254,
-    y: 134 * 0.0254,
+    x: 8  * 0.0254,
+    y: 136 * 0.0254,
 };

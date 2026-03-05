@@ -1,5 +1,5 @@
 import type { Layout, Config } from "plotly.js";
-import { graphText as graphTextColor } from "./theme";
+import { graphTextColor as graphTextColor } from "./theme";
 
 export const plotConfig: Partial<Config> = {
     responsive: true, 

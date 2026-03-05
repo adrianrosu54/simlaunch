@@ -7,6 +7,7 @@ import { $simLogs } from "../stores/physics.ts";
 import Card from "./Card.tsx";
 import { useMediaQuery } from "../hooks/useMediaQuery.ts";
 import { $view } from "../stores/settings.ts";
+import { blueColor, greenColor, yellowColor } from "../utils/theme.ts";
 
 export default function SidePlots() {
   const isMobile = useMediaQuery("(max-width: 784px)");
@@ -30,7 +31,7 @@ export default function SidePlots() {
             mode: "lines",
             name: "side view",
             line: {
-              color: "#0891b2",
+              color: blueColor,
               width: 2,
               shape: "spline",
             },
@@ -50,7 +51,7 @@ export default function SidePlots() {
             mode: "lines",
             name: "velocity",
             line: {
-              color: "#ca8a04",
+              color: greenColor,
               width: 2,
               shape: "spline",
             }
@@ -71,7 +72,7 @@ export default function SidePlots() {
             mode: "lines",
             name: "acceleration",
             line: {
-              color: "#7c3aed",
+              color: yellowColor,
               width: 2,
               shape: "spline",
             }

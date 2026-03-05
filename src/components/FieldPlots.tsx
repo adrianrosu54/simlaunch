@@ -7,6 +7,7 @@ import { FieldLayout, plotConfig } from "../utils/layouts";
 import { $view } from "../stores/settings";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import Card from "./Card";
+import { blueColor } from "../utils/theme";
 
 export default function FieldPlots() {
   const isMobile = useMediaQuery("(max-width: 784px)");
@@ -29,6 +30,7 @@ export default function FieldPlots() {
             line: {
               shape: "linear",
               width: 3,
+              color: blueColor,
             },
           }
         ]}

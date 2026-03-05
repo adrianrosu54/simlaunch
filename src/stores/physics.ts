@@ -14,8 +14,10 @@ let model = new BallisticModel(rockyPreset.config, rockyPreset.sim);
 $preset.listen((value, _, key) => {
     switch (key) {
         case "config": 
+            model.config = value.config;
+            break;
         case "sim":
-            model = new BallisticModel(value.config, value.sim);
+            model.sim = value.sim;
             break;
     }
 

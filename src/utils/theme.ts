@@ -16,4 +16,8 @@ const toRgba = (cssColor: string) => {
     return `rgba(${r}, ${g}, ${b}, ${a / 255})`;
 };
 
-export const graphText = toRgba(resolveColor("--color-clk-text-graph"));
+export const graphTextColor = toRgba(resolveColor("--color-clk-text-graph"));
+
+export const blueColor = toRgba(resolveColor("--color-blue"));
+export const yellowColor = toRgba(resolveColor("--color-yellow"));
+export const greenColor = toRgba(resolveColor("--color-green"));

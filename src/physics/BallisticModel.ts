@@ -41,11 +41,13 @@ export default class BallisticModel {
         let velY = vel * Math.cos(this.config.launchPitchAngle) * Math.sin(input.turretAngle) 
                 + state.velocityY;
         let velZ = vel * Math.sin(this.config.launchPitchAngle);
-
+        
+        // for initial logging
+        vel = Math.sqrt(velX*velX + velY*velY + velZ*velZ)
         let accX = -vel*velX * drag;
         let accY = -vel*velY * drag;
         let accZ = -GRAVITY - vel*velZ * drag;
-
+        
         let time = 0;
         if (logger)
             logger({

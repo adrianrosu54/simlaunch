@@ -62,8 +62,8 @@ export default function FlywheelSlider() {
   const dashOffset = circumference * (1 - pct);
 
   // dynamic colors
-  const hue = 200 - (pct * 200);
-  const dynamicColor = `hsl(${hue}, 80%, 50%)`;
+  const hue = 180 - (pct * 180);
+  const dynamicColor = `hsl(${hue}, 70%, 45%)`;
 
   return (
     <div className="flex flex-col items-center justify-start h-full min-h-33 w-full">
