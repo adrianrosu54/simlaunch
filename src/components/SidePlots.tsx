@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 const Plot = lazy(() => import("react-plotly.js"));
 import { useStore } from "@nanostores/react";
 
@@ -8,6 +8,7 @@ import Card from "./Card.tsx";
 import { useMediaQuery } from "../hooks/useMediaQuery.ts";
 import { $view } from "../stores/settings.ts";
 import { blueColor, greenColor, yellowColor } from "../utils/theme.ts";
+import Loading from "./Loading.tsx";
 
 export default function SidePlots() {
   const isMobile = useMediaQuery("(max-width: 784px)");
@@ -18,10 +19,10 @@ export default function SidePlots() {
   if (isMobile && view !== "side")
     return null;
 
-
   return (
     <section className="relative col-span-2 row-span-2 grid grid-cols-2 grid-rows-3 gap-2">
       <Card className="order-3 col-span-2 row-span-2">
+      <Suspense fallback={<Loading />}>
       <Plot
         data={[
           {
@@ -40,8 +41,11 @@ export default function SidePlots() {
         layout={ sideViewLayout } config={ plotConfig } useResizeHandler={true}
         style={{height: "100%"}} 
         className="min-w-0 min-h-0 relative"/>
+      </Suspense>
       </Card>
+
       <Card>
+      <Suspense fallback={<Loading />}>
       <Plot
         data={[
           {
@@ -59,10 +63,12 @@ export default function SidePlots() {
         ]}
         layout={ velocityLayout } config={ plotConfig } useResizeHandler={true}
         style={{height: "100%"}}
-        className="max-h-100 relative"
-      />
+        className="max-h-100 relative"/>
+      </Suspense>
       </Card>
+
       <Card>
+      <Suspense fallback={<Loading />}>
       <Plot
         data={[
           {
@@ -82,6 +88,7 @@ export default function SidePlots() {
         style={{height: "100%"}}
         className="max-h-100 relative"
       />
+      </Suspense>
       </Card>
     </section>
   );

@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import { useStore } from "@nanostores/react";
 const Plot = lazy(() => import("react-plotly.js"));
 
@@ -8,6 +8,7 @@ import { $view } from "../stores/settings";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import Card from "./Card";
 import { blueColor } from "../utils/theme";
+import Loading from "./Loading";
 
 export default function FieldPlots() {
   const isMobile = useMediaQuery("(max-width: 784px)");
@@ -20,6 +21,7 @@ export default function FieldPlots() {
   
   return (
     <Card className="relative grow col-span-2 row-span-2">
+      <Suspense fallback={<Loading />}>
       <Plot
         data={[
           {
@@ -38,6 +40,7 @@ export default function FieldPlots() {
         style={{height: "100%"}}
         className="relative size-full"
       />
+      </Suspense>
     </Card>
   );
 }
