@@ -11,5 +11,5 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  base: "/launcher-sim",
+  base: "/simlaunch",
 });

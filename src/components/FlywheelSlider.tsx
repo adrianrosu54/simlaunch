@@ -96,11 +96,11 @@ export default function FlywheelSlider() {
         </svg>
 
         {/* Value Overlay */}
-        <div className="absolute top-[50%] inset-x-0 flex flex-col items-center pointer-events-none">
+        <div className="absolute top-[50%] inset-x-0 flex flex-col items-center pointer-events-none font-semibold">
           <span className="text-4xl font-mono font-black text-clk-text-primary italic tracking-tighter">
             {value}
           </span>
-          <span className="text-[13px] text-clk-text-secondary font-bold 
+          <span className="text-sm md:text-md text-clk-text-secondary 
                           tracking-widest mb-1 tabular-nums">
             Flywheel RPM
           </span>

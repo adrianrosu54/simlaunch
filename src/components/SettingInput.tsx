@@ -46,19 +46,19 @@ export default function SettingInput({label, category, realValue, onChange, unit
   };
 
   return (
-    <article className="flex flex-col max-w-80 min-w-20">
-      <div className="flex justify-between items-center px-2">
+    <article className="flex flex-col min-w-20 px-1 md:text-sm">
+      <div className="flex justify-between items-center px-2 text-clk-text-primary/90">
         <label>{label}</label>
       </div>
 
-      <div className="flex flex-row overflow-hidden bg-clk-primary rounded-3xl p-1"
+      <div className="flex flex-row overflow-hidden bg-clk-background border-4 border-clk-primary rounded-3xl"
           >
         <input type="number" 
           value={inputValue}
           onChange={handleChange}
           onBlur={handleBlur}
           onFocus={handleFocus}
-          className="w-full pl-4 rounded-xl bg-clk-background outline-none"
+          className="w-full pl-4 outline-none font-mono text-clk-text-secondary"
         />
         {units && (
           units.map((value, index, array) =>

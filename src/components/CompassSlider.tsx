@@ -93,7 +93,7 @@ export default function CompassSlider() {
         <span className="text-4xl font-mono font-black italic">
           {Math.round(value*180/Math.PI)}°
         </span>
-        <span className="text-[13px] text-clk-text-secondary font-bold tracking-widest mb-1 tabular-nums">
+        <span className="text-sm md:text-md text-clk-text-secondary font-semibold tracking-widest mb-1 tabular-nums">
           Heading angle
         </span>
       </div>

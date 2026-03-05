@@ -1,3 +1,18 @@
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('simlaunch/fonts/inter-v20-latin-regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('simlaunch/fonts/jetbrains-mono-v24-latin-regular.woff2') format('woff2');
+}
+
 @import "tailwindcss";
 
 @theme inline {
@@ -11,6 +26,7 @@
     --color-clk-text-primary: var(--color-zinc-100);
     --color-clk-text-secondary: var(--color-zinc-400);
     --color-clk-text-graph: var(--color-zinc-500);
-
-    --chart-bg: var(--color-zinc-800);
+ 
+    --font-sans: "Inter", ui-sans-serif, system-ui;
+    --font-mono: "Jetbrains Mono", ui-monospace, monospace;
 }

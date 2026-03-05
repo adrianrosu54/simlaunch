@@ -12,8 +12,8 @@ export const sideViewLayout: Partial<Layout> = {
     paper_bgcolor: "transparent",
     plot_bgcolor: "transparent",
 
-    font: { family: 'Inter, sans-serif', color: graphTextColor },
-    title: {text: "Predicted Trajectory"},
+    font: { family: 'Jetbrains Mono, mono', color: graphTextColor },
+    title: {text: "Predicted Trajectory", font: {family: "Inter, sans-serif"}},
 
     xaxis: {
         title: {text: "Distance (m)"},
@@ -41,6 +41,7 @@ export const sideViewLayout: Partial<Layout> = {
 export const velocityLayout: Partial<Layout> = {
     ...sideViewLayout,
     margin: {t: 5, b: 5, l: 12, r: 12},
+    font: {...sideViewLayout.font, size: 10},
     title: undefined,
     xaxis: {
         ...sideViewLayout.xaxis,
@@ -78,8 +79,8 @@ export const FieldLayout: Partial<Layout> = {
     paper_bgcolor: "transparent",
     plot_bgcolor: "transparent",
 
-    font: { family: 'Inter, sans-serif', color: graphTextColor },
-    title: {text: "Field view"},
+    font: { family: 'Jetbrains Mono, mono', color: graphTextColor },
+    title: {text: "Field view", font: {family: "Inter, sans-serif"}},
 
     xaxis: {
         showgrid: false,
