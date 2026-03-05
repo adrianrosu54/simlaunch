@@ -1,5 +1,6 @@
 import { useStore } from "@nanostores/react";
 import { $impactError } from "../stores/target";
+import { $unitView } from "../stores/units";
 
 export default function ErrorBar() {
   const maxError = 2.0;

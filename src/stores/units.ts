@@ -1,12 +1,17 @@
 import { map } from "nanostores";
 
-export type UnitCategory = "distance" | "position" | "velocity" | "rotation" | "none";
+export type UnitCategory = 
+    "distance" | "position" | 
+    "velocity" | 
+    "rotation" | "angle" |
+    "none";
 
 export const $unitView = map<Record<UnitCategory, string>>({
     "distance": "m",
+    "position": "m",
     "velocity": "m/s",
     "rotation": "rpm",
-    "position": "m",
+    "angle": "rad",
     "none": "none",
 });
 
@@ -21,6 +26,8 @@ export const Conversions: Record<string, number> = {
     "in/s": 0.0254,
     "rpm": 1,       // rotation
     "tps": 1,
+    "rad": 1,       // angle
+    "deg": Math.PI/180,
     "none": 1,
 }
 

@@ -31,6 +31,12 @@ export default function ConfigSettings() {
           onChange={(value) => updatePreset({type: "sim", payload: {impactHeight: value}})}
           units={["m"]}/>
       </Dropdown>
+
+      <Dropdown title="Launcher configuration">
+        <SettingInput label="Pitch Angle" realValue={preset.config.launchPitchAngle} category="angle"
+          onChange={(value) => updatePreset({type: "config", payload: {launchPitchAngle: value}})}
+          units={["rad", "deg"]}/>
+      </Dropdown>
     </>
   )
 }
