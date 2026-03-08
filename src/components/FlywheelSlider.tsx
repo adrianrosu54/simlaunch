@@ -1,11 +1,13 @@
 import { useStore } from '@nanostores/react';
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { $preset, updatePreset } from '../stores/physics.ts';
+import { $unitView, Conversions, fromDisplay, toDisplay } from '../stores/units.ts';
 
 export default function FlywheelSlider() {
   const min = 1000;
   const max = 4200;
   const value = useStore($preset).control.flywheelVelocity;
+  const unit = useStore($unitView)["rotation"];
   const onChange = (value: number) => updatePreset({type: "control", payload: {flywheelVelocity: value}});
 
   const svgRef = useRef<SVGSVGElement>(null);
@@ -33,7 +35,7 @@ export default function FlywheelSlider() {
 
     const newValue = Math.round(pct * (max - min) + min);
       
-    onChange(newValue);
+    onChange(fromDisplay(newValue, unit));
   }, [max, min, onChange]);
 
   // Global listeners for dragging outside the SVG
@@ -58,7 +60,7 @@ export default function FlywheelSlider() {
     };
   }, [isDragging, updateValue, onChange]);
 
-  const pct = (value - min) / (max - min);
+  const pct = (toDisplay(value, unit) - min) / (max - min);
   const dashOffset = circumference * (1 - pct);
 
   // dynamic colors
@@ -98,7 +100,7 @@ export default function FlywheelSlider() {
         {/* Value Overlay */}
         <div className="absolute top-[50%] inset-x-0 flex flex-col items-center pointer-events-none font-semibold">
           <span className="text-4xl font-mono font-black text-clk-text-primary italic tracking-tighter">
-            {value}
+            {toDisplay(value, unit).toFixed(0)}
           </span>
           <span className="text-sm md:text-md text-clk-text-secondary 
                           tracking-widest mb-1 tabular-nums">

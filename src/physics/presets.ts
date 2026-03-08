@@ -10,17 +10,17 @@ export type Preset = {
 
 export const rockyPreset: Preset = {
     config: {
-        launchPitchAngle: 60 * Math.PI / 180,
-        launchFactor: (0.1016 / 2) / 60 * 2 * Math.PI,
-        dragFactor: 1.2 * ((0.127 / 2)**2 * Math.PI) / (2 * 0.075),
+        launchPitchAngle: 60 * Math.PI/180,
+        // flywheel_radius * RPM_to_rad/s
+        flywheelRadius: 0.1016 / 2,
+        // air_density * area / (2 * mass)
         launchEfficiency: 0.52,
-        dragCoefficient: 0.47 + 0.04,
         ticksToRPM: 60 / 43.008,
     },
     sim: {
         launchHeight: 0.26,
         impactHeight: 0.98,
-        timeStep: 2e-3,
+        timeStep: 0.002,
     },
     state: {
         x: 96 * 0.0254,
@@ -30,6 +30,6 @@ export const rockyPreset: Preset = {
     },
     control: {
         turretAngle: 45*Math.PI/180,
-        flywheelVelocity: 1770,
+        flywheelVelocity: 1770 / 60 * 2*Math.PI,
     },
 }

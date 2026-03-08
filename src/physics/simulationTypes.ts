@@ -1,9 +1,18 @@
+/**
+ * physical constant (robot-independent) parameters
+ */
+export type PhysicalConstants = {
+    dragFactor: number;
+    dragCoefficient: number;
+}
+
+/**
+ * Launcher configuration values (robot-specific)
+ */
 export type LauncherConfig = {
     launchPitchAngle: number;
-    launchFactor: number;
-    dragFactor: number;
+    flywheelRadius: number;
     launchEfficiency: number;
-    dragCoefficient: number;
     ticksToRPM: number;
 }
 

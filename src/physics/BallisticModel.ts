@@ -1,16 +1,19 @@
-import type { ControlInput, LauncherConfig, RobotState, SimulationSetup } from "./simulationTypes.ts";
+import type { ControlInput, LauncherConfig, PhysicalConstants, RobotState, SimulationSetup } from "./simulationTypes.ts";
 import type { SimulationLogger } from "./logger.ts";
 import type { Pose } from "./fieldPositions.ts";
+import { $constants } from "../stores/physics.ts";
 
 const GRAVITY: number = 9.81;
 
 export default class BallisticModel {
     public config: LauncherConfig;
     public sim: SimulationSetup;
+    public constants: PhysicalConstants;
 
     constructor(config: LauncherConfig, sim: SimulationSetup) {
         this.config = config;
         this.sim = sim;
+        this.constants = $constants.value;
     }
 
     /**
@@ -19,6 +22,7 @@ export default class BallisticModel {
      * @param input control parameters of turret heading and flywheel velocity
      * @param state robot state parameters of position and velocity
      * @param logger optional logging function for projectile state
+     * 
      * @returns impact position in meters
      */
     public simulate(
@@ -27,13 +31,13 @@ export default class BallisticModel {
         logger?: SimulationLogger
     ): Pose {
         const ts = this.sim.timeStep;
-        const drag = this.config.dragFactor * this.config.dragCoefficient;
+        const drag = this.constants.dragFactor * this.constants.dragCoefficient;
 
         let x = state.x;
         let y = state.y;
         let z = this.sim.launchHeight;
 
-        let vel = input.flywheelVelocity * this.config.launchFactor
+        let vel = input.flywheelVelocity * this.config.flywheelRadius
                 * this.config.launchEfficiency;
 
         let velX = vel * Math.cos(this.config.launchPitchAngle) * Math.cos(input.turretAngle) 

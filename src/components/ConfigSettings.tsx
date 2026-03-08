@@ -2,6 +2,7 @@ import { useStore } from "@nanostores/react";
 import { $preset, updatePreset } from "../stores/physics";
 import Dropdown from "./Dropdown";
 import SettingInput from "./SettingInput";
+import { memo } from "react";
 
 export default function ConfigSettings() {
   const preset = useStore($preset);
@@ -24,18 +25,21 @@ export default function ConfigSettings() {
       </Dropdown>
 
       <Dropdown title="Simulation setup">
-        <SettingInput label="Launch Height" realValue={preset.sim.launchHeight} category="position" 
+        <SettingInput label="Launch Height" realValue={preset.sim.launchHeight} category="length" 
           onChange={(value) => updatePreset({type: "sim", payload: {launchHeight: value}})}
-          units={["m"]}/>
-        <SettingInput label="Impact Height" realValue={preset.sim.impactHeight} category="position"
+          units={["cm", "in"]}/>
+        <SettingInput label="Impact Height" realValue={preset.sim.impactHeight} category="length"
           onChange={(value) => updatePreset({type: "sim", payload: {impactHeight: value}})}
-          units={["m"]}/>
+          units={["cm", "in"]}/>
       </Dropdown>
 
       <Dropdown title="Launcher configuration">
         <SettingInput label="Pitch Angle" realValue={preset.config.launchPitchAngle} category="angle"
           onChange={(value) => updatePreset({type: "config", payload: {launchPitchAngle: value}})}
           units={["rad", "deg"]}/>
+        <SettingInput label="Flywheel Radius" realValue={preset.config.flywheelRadius} category="length"
+          onChange={(value) => updatePreset({type: "config", payload: {flywheelRadius: value}})}
+          units={["cm", "in"]}/>
       </Dropdown>
     </>
   )

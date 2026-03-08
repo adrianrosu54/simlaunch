@@ -1,12 +1,17 @@
 import { atom, map } from "nanostores";
 
-import type { LauncherConfig, SimulationSetup, RobotState, ControlInput } from "../physics/simulationTypes";
+import type { LauncherConfig, SimulationSetup, RobotState, 
+    ControlInput, PhysicalConstants } from "../physics/simulationTypes";
 import { rockyPreset, type Preset } from "../physics/presets";
 import { plotLogger, type PlotLogs } from "../physics/plotLogging";
 import BallisticModel from "../physics/BallisticModel";
 import { $simImpact } from "./target";
 
 // physics state
+export const $constants = map<PhysicalConstants>({
+    dragFactor: 1.2 * ((0.127 / 2)**2 * Math.PI) / (2 * 0.075),
+    dragCoefficient: 0.47 + 0.04,
+});
 export const $preset = map<Preset>(rockyPreset);
 export const $simLogs = atom<PlotLogs>([]);
 let model = new BallisticModel(rockyPreset.config, rockyPreset.sim);

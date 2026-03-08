@@ -1,14 +1,14 @@
 import { map } from "nanostores";
 
 export type UnitCategory = 
-    "distance" | "position" | 
+    "distance" | "length" | 
     "velocity" | 
     "rotation" | "angle" |
     "none";
 
 export const $unitView = map<Record<UnitCategory, string>>({
     "distance": "m",
-    "position": "m",
+    "length": "cm",
     "velocity": "m/s",
     "rotation": "rpm",
     "angle": "rad",
@@ -21,10 +21,12 @@ export const setUnitView = (category: UnitCategory, unit: string) => {
 
 export const Conversions: Record<string, number> = {
     "m": 1,         // distance
+    "cm": 0.01,
     "in": 0.0254,
     "m/s": 1,       // veclocity
     "in/s": 0.0254,
-    "rpm": 1,       // rotation
+    "rad/s": 1,     // rotation
+    "rpm": Math.PI*2/60,
     "tps": 1,
     "rad": 1,       // angle
     "deg": Math.PI/180,
