@@ -3,14 +3,14 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('simlaunch/fonts/inter-v20-latin-regular.woff2') format('woff2');
+  src: url('/simlaunch/fonts/inter-v20-latin-regular.woff2') format('woff2');
 }
 @font-face {
   font-family: 'JetBrains Mono';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('simlaunch/fonts/jetbrains-mono-v24-latin-regular.woff2') format('woff2');
+  src: url('/simlaunch/fonts/jetbrains-mono-v24-latin-regular.woff2') format('woff2');
 }
 
 @import "tailwindcss";

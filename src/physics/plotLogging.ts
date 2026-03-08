@@ -2,9 +2,9 @@ import type { RobotState } from "./simulationTypes.ts";
 import type { SimulationLogger } from "./logger.ts";
 
 export type PlotLogs = {
-    time: number,
-    x: number,
-    y: number,
+    time: number;
+    x: number;
+    y: number;
     distance: number;
     height: number;
     velocity: number;
