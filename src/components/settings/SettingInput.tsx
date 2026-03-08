@@ -1,5 +1,6 @@
 import { useStore } from "@nanostores/react";
-import { $unitView, fromDisplay, setUnitView, toDisplay, type UnitCategory } from "../stores/units";
+import { $unitView, fromDisplay, setUnitView, toDisplay, 
+  type UnitCategory } from "../../stores/units";
 import { useEffect, useRef, useState, type ChangeEvent } from "react";
 
 export default function SettingInput({label, category, realValue, onChange, units}: {

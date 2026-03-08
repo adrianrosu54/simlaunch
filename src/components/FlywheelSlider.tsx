@@ -1,13 +1,14 @@
 import { useStore } from '@nanostores/react';
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { $preset, updatePreset } from '../stores/physics.ts';
-import { $unitView, Conversions, fromDisplay, toDisplay } from '../stores/units.ts';
+import { $unitView, fromDisplay, toDisplay } from '../stores/units.ts';
 
 export default function FlywheelSlider() {
-  const min = 1000;
-  const max = 4200;
   const value = useStore($preset).control.flywheelVelocity;
   const unit = useStore($unitView)["rotation"];
+  const min = toDisplay(104.719755, unit);
+  const max = toDisplay(439.822971, unit);
+
   const onChange = (value: number) => updatePreset({type: "control", payload: {flywheelVelocity: value}});
 
   const svgRef = useRef<SVGSVGElement>(null);
@@ -104,7 +105,7 @@ export default function FlywheelSlider() {
           </span>
           <span className="text-sm md:text-md text-clk-text-secondary 
                           tracking-widest mb-1 tabular-nums">
-            Flywheel RPM
+            Flywheel {unit.toUpperCase()}
           </span>
         </div>
       </div>

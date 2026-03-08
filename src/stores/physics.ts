@@ -6,6 +6,7 @@ import { rockyPreset, type Preset } from "../physics/presets";
 import { plotLogger, type PlotLogs } from "../physics/plotLogging";
 import BallisticModel from "../physics/BallisticModel";
 import { $simImpact } from "./target";
+import { Conversions, fromDisplay } from "./units";
 
 // physics state
 export const $constants = map<PhysicalConstants>({
@@ -20,6 +21,7 @@ $preset.listen((value, _, key) => {
     switch (key) {
         case "config": 
             model.config = value.config;
+            Conversions["tps"] = fromDisplay(value.config.ticksToRPM, "rpm");
             break;
         case "sim":
             model.sim = value.sim;

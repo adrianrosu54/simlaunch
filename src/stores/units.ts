@@ -11,7 +11,7 @@ export const $unitView = map<Record<UnitCategory, string>>({
     "length": "cm",
     "velocity": "m/s",
     "rotation": "rpm",
-    "angle": "rad",
+    "angle": "deg",
     "none": "none",
 });
 
@@ -27,7 +27,7 @@ export const Conversions: Record<string, number> = {
     "in/s": 0.0254,
     "rad/s": 1,     // rotation
     "rpm": Math.PI*2/60,
-    "tps": 1,
+    "tps": Math.PI*2/60 * 60/43.008,
     "rad": 1,       // angle
     "deg": Math.PI/180,
     "none": 1,

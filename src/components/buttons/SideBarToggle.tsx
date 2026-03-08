@@ -1,5 +1,5 @@
 import { MenuIcon, X } from "lucide-react"
-import { $isSidebarOpen } from "../stores/settings";
+import { $isSidebarOpen } from "../../stores/settings";
 
 export default function SideBarToggle({type}: {type: "open" | "close"}) {
   return (

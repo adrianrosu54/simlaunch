@@ -2,7 +2,7 @@ import { useStore } from "@nanostores/react";
 import { Grid2x2 } from "lucide-react";
 import { ChartLine } from "lucide-react";
 
-import { $view } from "../stores/settings";
+import { $view } from "../../stores/settings";
 import { useMemo } from "react";
 
 export default function ViewToggle() {
