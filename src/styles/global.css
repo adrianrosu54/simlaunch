@@ -37,3 +37,9 @@
 :root {
     background-color: var(--color-clk-background);
 }
+
+@layer utilities {
+  .sidebar-scrollbar {
+    scrollbar-width: none;
+  }
+}

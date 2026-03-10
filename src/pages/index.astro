@@ -29,7 +29,9 @@ import ImpactReading from '../components/ImpactCard';
                     <SideBarToggle client:load type="close"/>
                 </div>
                 
-                <ConfigSettings client:load />
+                <div class="overflow-y-auto sidebar-scrollbar">
+                    <ConfigSettings client:load />
+                </div>
             </div>
         </aside>
 
@@ -45,7 +47,8 @@ import ImpactReading from '../components/ImpactCard';
             </header>
 
             <div class="flex flex-row justify-center h-full w-full" id="main-container">
-                <main class="grid grid-cols-2 grid-rows-4 md:grid-cols-4 md:grid-rows-3 max-w-320 w-full h-full gap-0" id="content">
+                <main class="grid grid-cols-2 grid-rows-4 md:grid-cols-4 md:grid-rows-3 max-w-320 w-full h-full gap-0" 
+                        id="content">
                     <FieldPlots client:only/>
                     <SidePlots client:only/>
                     

@@ -1,11 +1,13 @@
 import { useStore } from "@nanostores/react";
-import { $preset, updatePreset } from "../../stores/physics";
+import { $constants, $preset, updatePreset } from "../../stores/physics";
 import Dropdown from "./Dropdown";
 import SettingInput from "../settings/SettingInput";
 import { memo } from "react";
 
 export default function ConfigSettings() {
   const preset = useStore($preset);
+  const constants = useStore($constants);
+
   return (
     <>
       <Dropdown title="Control Input">
@@ -42,7 +44,7 @@ export default function ConfigSettings() {
           units={["cm", "in"]}/>
       </Dropdown>
 
-      <Dropdown title="Launcher configuration">
+      <Dropdown title="Launcher Configuration">
         <SettingInput label="Pitch Angle" realValue={preset.config.launchPitchAngle} category="angle"
           onChange={(value) => updatePreset({type: "config", payload: {launchPitchAngle: value}})}
           units={["deg", "rad"]}/>
@@ -54,6 +56,12 @@ export default function ConfigSettings() {
           units={[]} />
         <SettingInput label="Ticks to RPM" realValue={preset.config.ticksToRPM} category="none"
           onChange={(value) => updatePreset({type: "config", payload: {ticksToRPM: value}})}
+          units={[]}/>
+      </Dropdown>
+
+      <Dropdown title="Physical Constants">
+        <SettingInput label="Drag Coefficient" realValue={constants.dragCoefficient} category="none" 
+          onChange={(value) => $constants.setKey("dragCoefficient", value)}
           units={[]}/>
       </Dropdown>
     </>

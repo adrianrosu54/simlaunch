@@ -1,8 +1,8 @@
 import { bench, describe } from "vitest";
 
-import BallisticModel from "./BallisticModel.ts";
-import { rockyPreset } from "./presets.ts";
-import { plotLogger, type PlotLogs } from "./plotLogging.ts";
+import BallisticModel from "./BallisticModel";
+import { rockyPreset } from "./presets";
+import { plotLogger, type PlotLogs } from "./plotLogging";
 
 describe("Ballistic simulation performance", () => {
     const preset = rockyPreset;

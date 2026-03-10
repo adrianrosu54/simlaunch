@@ -17,6 +17,11 @@ export const $preset = map<Preset>(rockyPreset);
 export const $simLogs = atom<PlotLogs>([]);
 let model = new BallisticModel(rockyPreset.config, rockyPreset.sim);
 
+$constants.listen((value) => {
+    model.constants = value;
+    $preset.notify();
+});
+
 $preset.listen((value, _, key) => {
     switch (key) {
         case "config": 

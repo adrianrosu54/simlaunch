@@ -1,6 +1,6 @@
 import { expect, test, describe } from "vitest";
-import BallisticModel from "./BallisticModel.ts";
-import { rockyPreset } from "./presets.ts";
+import BallisticModel from "./BallisticModel";
+import { rockyPreset } from "./presets";
 
 describe('Ballistic Model Logic', () => {
     test("Should reach target height", () => {
