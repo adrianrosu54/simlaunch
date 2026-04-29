@@ -1,5 +1,7 @@
-import type { ControlInput, LauncherConfig, 
-    RobotState, SimulationSetup } from "./simulationTypes.ts";
+import type {
+    ControlInput, LauncherConfig,
+    RobotState, SimulationSetup
+} from "./simulationTypes.ts";
 
 export type Preset = {
     config: LauncherConfig;
@@ -10,7 +12,7 @@ export type Preset = {
 
 export const rockyPreset: Preset = {
     config: {
-        launchPitchAngle: 60 * Math.PI/180,
+        launchPitchAngle: 60 * Math.PI / 180,
         // flywheel_radius * RPM_to_rad/s
         flywheelRadius: 0.1016 / 2,
         // air_density * area / (2 * mass)
@@ -29,7 +31,7 @@ export const rockyPreset: Preset = {
         velocityY: 0,
     },
     control: {
-        turretAngle: 45*Math.PI/180,
-        flywheelVelocity: 1770 / 60 * 2*Math.PI,
+        turretAngle: 45 * Math.PI / 180,
+        flywheelVelocity: 1770 / 60 * 2 * Math.PI,
     },
 }

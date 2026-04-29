@@ -8,6 +8,6 @@ export const redGoal: Pose = {
     y: 136 * 0.0254,
 };
 export const blueGoal: Pose = {
-    x: 8  * 0.0254,
+    x: 8 * 0.0254,
     y: 136 * 0.0254,
 };

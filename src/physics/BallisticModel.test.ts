@@ -20,19 +20,19 @@ describe('Ballistic Model Logic', () => {
         const preset = rockyPreset;
         preset.state.x = 0;
         preset.state.y = 0;
-        preset.control = {turretAngle: 45*Math.PI/180, flywheelVelocity: 1800};
+        preset.control = { turretAngle: 45 * Math.PI / 180, flywheelVelocity: 1800 };
 
         const model = new BallisticModel(preset.config, preset.sim);
-        const {x, y} = model.simulate(preset.control, preset.state);
+        const { x, y } = model.simulate(preset.control, preset.state);
 
         expect(y).toBeCloseTo(x, 6);
     });
 
-    test("Should log height information", () => {     
-        const preset = rockyPreset;   
+    test("Should log height information", () => {
+        const preset = rockyPreset;
         const model = new BallisticModel(preset.config, preset.sim);
-        preset.control = {turretAngle: 0, flywheelVelocity: 1800};
-        
+        preset.control = { turretAngle: 0, flywheelVelocity: 1800 };
+
         let maxHeight = 0;
         model.simulate(preset.control, preset.state, (state) => {
             if (state.z > maxHeight) maxHeight = state.z;

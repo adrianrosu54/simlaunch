@@ -39,7 +39,7 @@
 }
 
 @layer utilities {
-  .sidebar-scrollbar {
-    scrollbar-width: none;
-  }
+    .sidebar-scrollbar {
+        scrollbar-width: none;
+    }
 }

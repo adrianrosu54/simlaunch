@@ -38,34 +38,34 @@ export default class BallisticModel {
         let z = this.sim.launchHeight;
 
         let vel = input.flywheelVelocity * this.config.flywheelRadius
-                * this.config.launchEfficiency;
+            * this.config.launchEfficiency;
 
-        let velX = vel * Math.cos(this.config.launchPitchAngle) * Math.cos(input.turretAngle) 
-                + state.velocityX;
-        let velY = vel * Math.cos(this.config.launchPitchAngle) * Math.sin(input.turretAngle) 
-                + state.velocityY;
+        let velX = vel * Math.cos(this.config.launchPitchAngle) * Math.cos(input.turretAngle)
+            + state.velocityX;
+        let velY = vel * Math.cos(this.config.launchPitchAngle) * Math.sin(input.turretAngle)
+            + state.velocityY;
         let velZ = vel * Math.sin(this.config.launchPitchAngle);
-        
+
         // for initial logging
-        vel = Math.sqrt(velX*velX + velY*velY + velZ*velZ)
-        let accX = -vel*velX * drag;
-        let accY = -vel*velY * drag;
-        let accZ = -GRAVITY - vel*velZ * drag;
-        
+        vel = Math.sqrt(velX * velX + velY * velY + velZ * velZ)
+        let accX = -vel * velX * drag;
+        let accY = -vel * velY * drag;
+        let accZ = -GRAVITY - vel * velZ * drag;
+
         let time = 0;
         if (logger)
             logger({
-                time, x, y, z, 
+                time, x, y, z,
                 vel,
                 accX, accY, accZ
             });
 
         while (z > this.sim.impactHeight || velZ >= 0) {
-            vel = Math.sqrt(velX*velX + velY*velY + velZ*velZ);
+            vel = Math.sqrt(velX * velX + velY * velY + velZ * velZ);
 
-            accX = -vel*velX * drag;
-            accY = -vel*velY * drag;
-            accZ = -GRAVITY - vel*velZ * drag;
+            accX = -vel * velX * drag;
+            accY = -vel * velY * drag;
+            accZ = -GRAVITY - vel * velZ * drag;
 
             velX += accX * ts;
             velY += accY * ts;
@@ -84,7 +84,7 @@ export default class BallisticModel {
             }
         }
 
-        return {x, y};
+        return { x, y };
     }
 
 }

@@ -2,28 +2,28 @@ import type { Layout, Config } from "plotly.js";
 import { graphTextColor as graphTextColor } from "./theme";
 
 export const plotConfig: Partial<Config> = {
-    responsive: true, 
+    responsive: true,
     displayModeBar: false,
 };
 
 export const sideViewLayout: Partial<Layout> = {
     autosize: true,
-    margin: {t: 30, b: 30, l: 40, r: 20},
+    margin: { t: 30, b: 30, l: 40, r: 20 },
     paper_bgcolor: "transparent",
     plot_bgcolor: "transparent",
 
     font: { family: 'Jetbrains Mono, mono', color: graphTextColor },
-    title: {text: "Predicted Trajectory", font: {family: "Inter, sans-serif"}},
+    title: { text: "Predicted Trajectory", font: { family: "Inter, sans-serif" } },
 
     xaxis: {
-        title: {text: "Distance (m)"},
+        title: { text: "Distance (m)" },
         showgrid: false,
         zeroline: false,
         scaleratio: 1,
         color: graphTextColor,
     },
     yaxis: {
-        title: {text: "Height (m)"},
+        title: { text: "Height (m)" },
         showgrid: false,
         zeroline: false,
         scaleanchor: "x",
@@ -35,8 +35,8 @@ export const sideViewLayout: Partial<Layout> = {
 
 export const velocityLayout: Partial<Layout> = {
     ...sideViewLayout,
-    margin: {t: 5, b: 15, l: 30, r: 12},
-    font: {...sideViewLayout.font, size: 10},
+    margin: { t: 5, b: 15, l: 30, r: 12 },
+    font: { ...sideViewLayout.font, size: 10 },
     title: undefined,
     xaxis: {
         ...sideViewLayout.xaxis,
@@ -47,7 +47,7 @@ export const velocityLayout: Partial<Layout> = {
     },
     yaxis: {
         ...sideViewLayout.yaxis,
-        title: {text: "Velocity (m/s)"},
+        title: { text: "Velocity (m/s)" },
         scaleratio: undefined,
         scaleanchor: undefined,
         dtick: undefined,
@@ -59,7 +59,7 @@ export const accelerationLayout: Partial<Layout> = {
     title: undefined,
     yaxis: {
         ...velocityLayout.yaxis,
-        title: {text: "Acceleration (m/s^2)"}
+        title: { text: "Acceleration (m/s^2)" }
     }
 }
 
@@ -70,12 +70,12 @@ const lineType = {
 
 export const FieldLayout: Partial<Layout> = {
     autosize: true,
-    margin: {t: 30, b: 40, l: 45, r: 45},
+    margin: { t: 30, b: 40, l: 45, r: 45 },
     paper_bgcolor: "transparent",
     plot_bgcolor: "transparent",
 
     font: { family: 'Jetbrains Mono, mono', color: graphTextColor },
-    title: {text: "Field view", font: {family: "Inter, sans-serif"}},
+    title: { text: "Field view", font: { family: "Inter, sans-serif" } },
 
     xaxis: {
         showgrid: false,
@@ -101,10 +101,10 @@ export const FieldLayout: Partial<Layout> = {
         {
             type: "rect", layer: "below",
             xref: "x", yref: "y",
-            x0: 0, 
+            x0: 0,
             y0: 0,
-            x1: 0.6096*6, 
-            y1: 0.6096*6,
+            x1: 0.6096 * 6,
+            y1: 0.6096 * 6,
             line: lineType,
         },
         { type: "line", layer: "below", x0: 0, y0: 3.6576, x1: 1.8288, y1: 1.8288, line: lineType },
@@ -116,14 +116,14 @@ export const FieldLayout: Partial<Layout> = {
             xref: "x", yref: "y",
             path: "M 3.6576 1.778 V 3.6576 H 3.048 L 3.5022 3.0226 V 1.778 Z",
             fillcolor: "rgba(220, 38, 38, 0.6)",
-            line: {color: "rgb(220, 38, 38, 0.6)", width: 2}
+            line: { color: "rgb(220, 38, 38, 0.6)", width: 2 }
         },
         {
             type: "path", layer: "below",
             xref: "x", yref: "y",
             path: "M 0 1.778 V 3.6576 H 0.635 L 0.1524 3.0226 V 1.778 Z",
             fillcolor: "rgba(37, 99, 235, 0.6)",
-            line: {color: "rgb(37, 99, 235, 0.6)", width: 2}
+            line: { color: "rgb(37, 99, 235, 0.6)", width: 2 }
         },
     ]
 }

@@ -5,7 +5,7 @@
 Web visualiser application for robot launcher physics in the FTC DECODE Season
 (2025-2026) made by team **Clockworks** #19075 from Bucharest, Romania.
 
-Key features:
+## Key features
 
 * **Dynamic charts** and **indicators** for launcher parameters:
   * trajectory plots
@@ -19,8 +19,13 @@ Key features:
 * Manual drop-down inputs for fine tuning parameter values
   * Tweak-able measurement units
 
-This project was made using **Astro** and **React**, along with **Plotly.js**
-for charts.
+## Tech Stack
+
+* [**Astro**](https://astro.build/) - Server-Side-Generation (SSG) framework
+using "islands architecture" for hydration
+* [**React**](https://react.dev/) - interactivity
+* [Plotly.js](https://plotly.com/javascript/) - charting and graphs
+* [Nanostores](https://github.com/nanostores/nanostores) - state management
 
 ## Getting started
 
@@ -28,7 +33,7 @@ Prerequisites:
 
 * `Node.js` version 22 or newer
 
-Clone, move to the project directory and install using npm.
+Clone, move to the project directory and install using npm:
 
 ```bash
 npm install

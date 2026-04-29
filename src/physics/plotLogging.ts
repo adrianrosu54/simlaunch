@@ -17,10 +17,10 @@ export function plotLogger(robotState: RobotState, data: PlotLogs): SimulationLo
             time: state.time,
             x: state.x,
             y: state.y,
-            distance: Math.sqrt((state.x-robotState.x)**2 + (state.y-robotState.y)**2),
+            distance: Math.sqrt((state.x - robotState.x) ** 2 + (state.y - robotState.y) ** 2),
             height: state.z,
             velocity: state.vel,
-            acceleration: Math.sqrt(state.accX**2 + state.accY**2 + state.accZ**2),
+            acceleration: Math.sqrt(state.accX ** 2 + state.accY ** 2 + state.accZ ** 2),
         });
     };
 }

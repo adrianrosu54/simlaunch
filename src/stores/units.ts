@@ -1,8 +1,8 @@
 import { map } from "nanostores";
 
-export type UnitCategory = 
-    "distance" | "length" | 
-    "velocity" | 
+export type UnitCategory =
+    "distance" | "length" |
+    "velocity" |
     "rotation" | "angle" |
     "none";
 
@@ -26,10 +26,10 @@ export const Conversions: Record<string, number> = {
     "m/s": 1,       // veclocity
     "in/s": 0.0254,
     "rad/s": 1,     // rotation
-    "rpm": Math.PI*2/60,
-    "tps": Math.PI*2/60 * 60/43.008,
+    "rpm": Math.PI * 2 / 60,
+    "tps": Math.PI * 2 / 60 * 60 / 43.008,
     "rad": 1,       // angle
-    "deg": Math.PI/180,
+    "deg": Math.PI / 180,
     "none": 1,
 }
 

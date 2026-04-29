@@ -1,7 +1,9 @@
 import { atom, map } from "nanostores";
 
-import type { LauncherConfig, SimulationSetup, RobotState, 
-    ControlInput, PhysicalConstants } from "../physics/simulationTypes";
+import type {
+    LauncherConfig, SimulationSetup, RobotState,
+    ControlInput, PhysicalConstants
+} from "../physics/simulationTypes";
 import { rockyPreset, type Preset } from "../physics/presets";
 import { plotLogger, type PlotLogs } from "../physics/plotLogging";
 import BallisticModel from "../physics/BallisticModel";
@@ -10,7 +12,7 @@ import { Conversions, fromDisplay } from "./units";
 
 // physics state
 export const $constants = map<PhysicalConstants>({
-    dragFactor: 1.2 * ((0.127 / 2)**2 * Math.PI) / (2 * 0.075),
+    dragFactor: 1.2 * ((0.127 / 2) ** 2 * Math.PI) / (2 * 0.075),
     dragCoefficient: 0.47 + 0.04,
 });
 export const $preset = map<Preset>(rockyPreset);
@@ -24,7 +26,7 @@ $constants.listen((value) => {
 
 $preset.listen((value, _, key) => {
     switch (key) {
-        case "config": 
+        case "config":
             model.config = value.config;
             Conversions["tps"] = fromDisplay(value.config.ticksToRPM, "rpm");
             break;
@@ -41,7 +43,7 @@ $preset.listen((value, _, key) => {
 });
 
 // initialise all
-updatePreset({type: "control", payload: rockyPreset.control});
+updatePreset({ type: "control", payload: rockyPreset.control });
 
 export type PresetAction =
     | { type: "all", payload: Preset }
@@ -55,17 +57,17 @@ export function updatePreset(action: PresetAction) {
         case "all":
             $preset.set(action.payload);
             break;
-        case "config": 
-            $preset.setKey(action.type, {...$preset.value.config, ...action.payload});
+        case "config":
+            $preset.setKey(action.type, { ...$preset.value.config, ...action.payload });
             break;
         case "sim":
-            $preset.setKey(action.type, {...$preset.value.sim, ...action.payload});
+            $preset.setKey(action.type, { ...$preset.value.sim, ...action.payload });
             break;
         case "state":
-            $preset.setKey(action.type, {...$preset.value.state, ...action.payload});
+            $preset.setKey(action.type, { ...$preset.value.state, ...action.payload });
             break;
         case "control":
-            $preset.setKey(action.type, {...$preset.value.control, ...action.payload});
+            $preset.setKey(action.type, { ...$preset.value.control, ...action.payload });
             break;
     }
 }
