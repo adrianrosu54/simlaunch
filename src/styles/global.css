@@ -25,6 +25,7 @@
     --color-blue: var(--color-cyan-600);
     --color-yellow: var(--color-yellow-600);
     --color-green: var(--color-green-600);
+    --color-lime: var(--color-lime-600);
 
     --color-clk-text-primary: var(--color-zinc-100);
     --color-clk-text-secondary: var(--color-zinc-400);

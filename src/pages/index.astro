@@ -8,8 +8,9 @@ import FieldPlots from "../components/FieldPlots";
 import SidePlots from "../components/SidePlots";
 import FlywheelSlider from "../components/FlywheelSlider";
 import CompassSlider from "../components/CompassSlider";
-import ErrorBar from '../components/ErrorBar';
-import ImpactReading from '../components/ImpactCard';
+import ErrorBar from '../components/ThresholdBar';
+import ImpactReading from '../components/ImpactReading';
+import ConfidenceReading from "../components/ConfidenceReading";
 
 ---
 
@@ -21,7 +22,7 @@ import ImpactReading from '../components/ImpactCard';
 
         <Card className="not-md:order-last col-span-1 row-span-1">
             <div class="flex flex-row justify-between size-full">
-                <ErrorBar client:load/>
+                <ErrorBar type="impactError" client:only />
                 <ImpactReading client:load/>
             </div>
         </Card>
@@ -30,6 +31,13 @@ import ImpactReading from '../components/ImpactCard';
             <div class="h-full w-full grid grid-cols-2 grid-rows-1 overflow-hidden">
                 <FlywheelSlider client:load/>
                 <CompassSlider client:load/>
+            </div>
+        </Card>
+
+        <Card className="col-span-1 row-span-1">
+            <div class="flex flex-row justify-between size-full">
+                <ConfidenceReading client:load />
+                <ErrorBar type="confidence" client:only />
             </div>
         </Card>
     </main>

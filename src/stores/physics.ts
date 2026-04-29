@@ -7,8 +7,9 @@ import type {
 import { rockyPreset, type Preset } from "../physics/presets";
 import { plotLogger, type PlotLogs } from "../physics/plotLogging";
 import BallisticModel from "../physics/BallisticModel";
-import { $simImpact } from "./target";
+import { $simImpact, calculateError } from "./target";
 import { Conversions, fromDisplay } from "./units";
+import { computeConfidence, flywheelExpectedNoise } from "./confidence";
 
 // physics state
 export const $constants = map<PhysicalConstants>({
@@ -40,6 +41,17 @@ $preset.listen((value, _, key) => {
 
     $simLogs.set(data);
     $simImpact.set(impact);
+
+    const overshootImpact = model.simulate({
+        ...value.control,
+        flywheelVelocity: value.control.flywheelVelocity + flywheelExpectedNoise
+    }, value.state);
+    const undershootImpact = model.simulate({
+        ...value.control,
+        flywheelVelocity: value.control.flywheelVelocity - flywheelExpectedNoise
+    }, value.state);
+
+    computeConfidence(overshootImpact, undershootImpact);
 });
 
 // initialise all

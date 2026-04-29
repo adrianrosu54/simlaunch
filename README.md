@@ -11,6 +11,7 @@ Web visualiser application for robot launcher physics in the FTC DECODE Season
   * trajectory plots
   * field view display
   * impact error calculation
+  * shot confidence score
 * Real time trajectory simulation accounting for **gravity** and basic **drag force**
   ([linear velocity dependent drag](https://en.wikipedia.org/wiki/Drag_(physics)#The_drag_equation))
 * **Interactive controls** for launcher parameters:
@@ -24,6 +25,7 @@ Web visualiser application for robot launcher physics in the FTC DECODE Season
 * [**Astro**](https://astro.build/) - Server-Side-Generation (SSG) framework
 using "islands architecture" for hydration
 * [**React**](https://react.dev/) - interactivity
+* [**Typescript**](https://www.typescriptlang.org/) - static typing
 * [Plotly.js](https://plotly.com/javascript/) - charting and graphs
 * [Nanostores](https://github.com/nanostores/nanostores) - state management
 
@@ -31,7 +33,7 @@ using "islands architecture" for hydration
 
 Prerequisites:
 
-* `Node.js` version 22 or newer
+* **Node.js** version 22 or newer
 
 Clone, move to the project directory and install using npm:
 
