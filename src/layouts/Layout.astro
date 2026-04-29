@@ -1,3 +1,12 @@
+---
+
+import SideBar from "../components/SideBar.astro";
+import Header from "../components/Header.astro";
+
+const domain = import.meta.env.PUBLIC_WEBSITE_DOMAIN;
+
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -12,12 +21,24 @@
 		<meta property="og:type" content="website" />
 
 		<link rel="icon" href="favicon.ico" sizes="64x64">
-		<link rel="canonical" href="https://simlaunch.adrianrosu.dev" />
+        <link rel="canonical" href=`https://${domain}` />
 
 		<title>SimLaunch</title>
 	</head>
 	<body>
-		<slot />
+        <div class="flex flex-row h-full w-full m-0 p-0 text-clk-text-primary overflow-hidden">
+            <SideBar/>
+
+            <div class="flex flex-col size-full m-0 p-0 bg-clk-background" id="contents">
+                <Header/>
+
+                <div class="flex flex-row justify-center h-full w-full" id="main-container">
+
+	                <slot />
+
+                </div>
+            </div>
+        </div>
 	</body>
 </html>
 

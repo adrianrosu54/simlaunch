@@ -1,29 +1,32 @@
 {
-  "name": "simlaunch",
-  "type": "module",
-  "version": "0.4.0",
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "@astrojs/react": "^4.4.2",
-    "@nanostores/react": "^1.0.0",
-    "@tailwindcss/vite": "^4.2.1",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "@types/react-plotly.js": "^2.6.4",
-    "astro": "^5.17.1",
-    "lucide-react": "^0.576.0",
-    "nanostores": "^1.1.1",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
-    "react-plotly.js": "^2.6.0",
-    "tailwindcss": "^4.2.1"
-  },
-  "devDependencies": {
-    "vitest": "^4.0.18"
-  }
+    "name": "simlaunch",
+    "type": "module",
+    "version": "0.4.0",
+    "scripts": {
+        "dev": "astro dev",
+        "build": "astro build",
+        "preview": "astro preview",
+        "astro": "astro"
+    },
+    "dependencies": {
+        "@astrojs/react": "^5.0.4",
+        "@nanostores/react": "^1.0.0",
+        "@tailwindcss/vite": "^4.2.1",
+        "@types/react": "^19.2.14",
+        "@types/react-dom": "^19.2.3",
+        "@types/react-plotly.js": "^2.6.4",
+        "astro": "^6.1.10",
+        "lucide-react": "^0.576.0",
+        "nanostores": "^1.1.1",
+        "react": "^19.2.4",
+        "react-dom": "^19.2.4",
+        "react-plotly.js": "^2.6.0",
+        "tailwindcss": "^4.2.1"
+    },
+    "devDependencies": {
+        "vitest": "^4.0.18"
+    },
+    "overrides": {
+        "vite": "^7"
+    }
 }

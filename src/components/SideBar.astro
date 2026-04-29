@@ -1,0 +1,38 @@
+---
+
+import SideBarToggle from "./buttons/SideBarToggle"
+import ConfigSettings from "./settings/ConfigSettings"
+
+---
+
+<aside class="fixed lg:relative left-0 z-50 w-0 min-w-0 h-full transition-all duration-300 ease-in-out
+        flex flex-col justify-start overflow-hidden" 
+        id="sidebar">
+    <div class="absolute top-0 right-0 h-full w-screen md:w-full
+            flex flex-col justify-start bg-clk-secondary overflow-hidden whitespace-nowrap"
+            id="sidebar-inner">
+        <div class="flex flex-row justify-end py-2 max-h-14 border-b-2 border-clk-text-secondary/20">
+            <SideBarToggle client:load type="close"/>
+        </div>
+
+        <div class="overflow-y-auto sidebar-scrollbar">
+            <ConfigSettings client:load />
+        </div>
+    </div>
+</aside>
+<script>
+    import { $isSidebarOpen } from "../stores/settings";
+    const sidebar = document.getElementById("sidebar");
+
+    $isSidebarOpen.subscribe((isOpen) => {
+        if (isOpen) {
+            sidebar?.classList.toggle("md:w-66", true);
+            sidebar?.classList.toggle("w-full", true);
+            sidebar?.classList.toggle("w-0", false);
+        } else {
+            sidebar?.classList.toggle("md:w-66", false);
+            sidebar?.classList.toggle("w-full", false);
+            sidebar?.classList.toggle("w-0", true);
+        }
+    })
+</script>

@@ -1,0 +1,22 @@
+---
+
+import SideBarToggle from "./buttons/SideBarToggle";
+import ViewToggle from "./buttons/ViewToggle"
+
+const githubLink = import.meta.env.PUBLIC_GITHUB_LINK;
+
+---
+
+<header class="flex flex-row justify-between max-h-14 p-1 bg-clk-primary border-b-2 border-clk-accent">
+    <div class="p-2 w-20">
+        <SideBarToggle client:load type="open" />
+    </div>
+    <h1 class="text-2xl font-bold text-center">SimLaunch</h1>
+    <div class="flex flex-row-reverse p-2 w-20">
+        <ViewToggle client:load/>
+        <a href=`${githubLink}` class="px-1">
+            <img class="bg-white rounded-full border" width="26" src="github.svg" alt="github svg icon" />
+        </a>
+
+    </div>
+</header>
