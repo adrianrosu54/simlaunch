@@ -3,6 +3,9 @@
 import SideBarToggle from "./buttons/SideBarToggle"
 import ConfigSettings from "./settings/ConfigSettings"
 
+const clockLink = import.meta.env.PUBLIC_CLOCKWORKS_LINK;
+const githubLink = import.meta.env.PUBLIC_GITHUB_LINK;
+
 ---
 
 <aside class="fixed lg:relative left-0 z-50 w-0 min-w-0 h-full transition-all duration-300 ease-in-out
@@ -14,9 +17,24 @@ import ConfigSettings from "./settings/ConfigSettings"
         <div class="flex flex-row justify-end py-2 max-h-14 border-b-2 border-clk-text-secondary/20">
             <SideBarToggle client:load type="close"/>
         </div>
-
-        <div class="overflow-y-auto sidebar-scrollbar">
+    
+        <div class="overflow-y-auto h-full sidebar-scrollbar">
             <ConfigSettings client:load />
+        </div>
+
+        <div class="flex flex-col border-t-2 border-clk-text-secondary/20 font-mono">
+            <span class="flex flex-row justify-end text-right pt-1 px-2 hover:bg-clk-primary">
+                <a href={clockLink} target="_blank">
+                    FTC Team Clockworks <br>
+                    #19075
+                </a>
+            </span>
+
+            <span class="flex flex-row justify-end text-right pb-2 px-2 text-sm hover:bg-clk-primary">
+                <a href={githubLink} target="_blank">
+                    © Adrian Roșu 2026
+                </a>
+            </span>
         </div>
     </div>
 </aside>

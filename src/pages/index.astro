@@ -4,9 +4,6 @@ import "../styles/global.css";
 
 import Card from "../components/Card";
 
-import SideBar from "../components/SideBar.astro";
-import Header from "../components/Header.astro";
-
 import FieldPlots from "../components/FieldPlots";
 import SidePlots from "../components/SidePlots";
 import FlywheelSlider from "../components/FlywheelSlider";
@@ -21,7 +18,7 @@ import ImpactReading from '../components/ImpactCard';
             id="content">
         <FieldPlots client:only/>
         <SidePlots client:only/>
-        
+
         <Card className="not-md:order-last col-span-1 row-span-1">
             <div class="flex flex-row justify-between size-full">
                 <ErrorBar client:load/>
