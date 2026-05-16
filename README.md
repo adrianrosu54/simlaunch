@@ -1,5 +1,7 @@
 # SimLaunch
 
+![SimLaunch website screenshot preview](public/simlaunch_screenshot.png)
+
 ## FTC DECODE Flywheel Launcher Simulation
 
 Web visualiser application for robot launcher physics in the FTC DECODE Season

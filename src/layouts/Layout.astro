@@ -3,7 +3,7 @@
 import SideBar from "../components/SideBar.astro";
 import Header from "../components/Header.astro";
 
-const domain = import.meta.env.PUBLIC_WEBSITE_DOMAIN;
+const url = import.meta.env.PUBLIC_WEBSITE_URL;
 
 ---
 
@@ -17,11 +17,12 @@ const domain = import.meta.env.PUBLIC_WEBSITE_DOMAIN;
 
 		<meta property="og:title" content="SimLaunch" />
 		<meta property="og:description" content="Interactive flywheel launcher physics visualizer for FTC DECODE" />
-		<meta property="og:url" content="https://simlaunch.adrianrosu.dev" />
+        <meta property="og:image" content=`${url}/simlaunch_screenshot.png` />
+        <meta property="og:url" content=`${url}` />
 		<meta property="og:type" content="website" />
 
 		<link rel="icon" href="favicon.ico" sizes="64x64">
-        <link rel="canonical" href=`https://${domain}` />
+        <link rel="canonical" href=`${url}` />
 
 		<title>SimLaunch</title>
 	</head>
